@@ -86,6 +86,10 @@ function Footer() {
                                 );
                             })}
                         </div>
+
+                        <div className='mt-6'>
+                            <Link href="/market-we-serve" className='text-blue-500 hover:underline'>Markets We Serve</Link>
+                        </div>
                     </motion.div>
 
                     {/* Services */}
