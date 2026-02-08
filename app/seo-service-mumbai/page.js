@@ -148,7 +148,7 @@ export default function SEOMumbaiPage() {
                     >
                         <Link
                             href='/market-we-serve/seo'
-                            className='inline-flex items-center gap-2 text-green-200 hover:text-white mb-4 transition-colors'
+                            className='inline-flex items-center gap-2 text-green-200 hover:text-white mb-4 mr-4 transition-colors'
                         >
                             <IconArrowRight className='w-4 h-4 rotate-180' />
                             Back to All Locations

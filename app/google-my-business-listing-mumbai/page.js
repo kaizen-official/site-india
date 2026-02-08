@@ -147,7 +147,7 @@ export default function GMBMumbaiPage() {
                     >
                         <Link
                             href='/market-we-serve/gmb'
-                            className='inline-flex items-center gap-2 text-blue-200 hover:text-white mb-4 transition-colors'
+                            className='inline-flex items-center gap-2 text-blue-200 hover:text-white mb-4 mr-4 transition-colors'
                         >
                             <IconArrowRight className='w-4 h-4 rotate-180' />
                             Back to All Locations

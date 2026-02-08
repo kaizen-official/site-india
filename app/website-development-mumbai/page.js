@@ -134,7 +134,7 @@ export default function WebDevMumbaiPage() {
                     >
                         <Link
                             href='/market-we-serve/web'
-                            className='inline-flex items-center gap-2 text-purple-200 hover:text-white mb-4 transition-colors'
+                            className='inline-flex items-center gap-2 text-purple-200 hover:text-white mb-4 mr-4 transition-colors'
                         >
                             <IconArrowRight className='w-4 h-4 rotate-180' />
                             Back to All Locations
