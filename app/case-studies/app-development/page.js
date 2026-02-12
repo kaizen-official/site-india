@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import { IconChevronLeft, IconDownload, IconStar, IconUsers, IconExternalLink, IconBrandAndroid, IconBrandApple } from '@tabler/icons-react'
-import data from './data.json'
+import data from './content.json'
 
 export default function AppDevelopmentCaseStudiesPage() {
     const { apps } = data;
@@ -54,10 +54,10 @@ export default function AppDevelopmentCaseStudiesPage() {
                         >
                             <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
                                 {/* App Screenshot */}
-                                <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} lg:col-span-1 bg-linear-to-br from-indigo-500 to-purple-600 p-8 flex items-center justify-center`}>
+                                <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} lg:col-span-1 bg-linear-to-br ${app.color} p-8 flex items-center justify-center`}>
                                     <div className='relative'>
                                         <img
-                                            src={app.screenshot}
+                                            src={app.image}
                                             alt={app.name}
                                             className='rounded-3xl shadow-2xl border-8 border-white/20 max-w-xs'
                                         />
@@ -68,18 +68,14 @@ export default function AppDevelopmentCaseStudiesPage() {
 
                                 {/* App Details */}
                                 <div className='lg:col-span-2 p-8'>
-                                    <div className='flex items-start gap-4 mb-6'>
-                                        <img
-                                            src={app.icon}
-                                            alt={app.name}
-                                            className='w-16 h-16 rounded-2xl shadow-lg object-cover'
-                                        />
-                                        <div className='flex-1'>
-                                            <h3 className='text-3xl font-bold text-gray-900 mb-2'>{app.name}</h3>
-                                            <span className='inline-block bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-semibold'>
-                                                {app.category}
-                                            </span>
-                                        </div>
+                                    <div className='mb-6'>
+                                        <span className='inline-block bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-semibold mb-4'>
+                                            {app.category}
+                                        </span>
+                                        <h3 className='text-3xl font-bold text-gray-900 mb-2'>{app.name}</h3>
+                                        {app.tagline && (
+                                            <p className='text-lg text-indigo-600 font-semibold mb-4'>{app.tagline}</p>
+                                        )}
                                     </div>
 
                                     <p className='text-gray-600 leading-relaxed mb-6'>
@@ -88,13 +84,13 @@ export default function AppDevelopmentCaseStudiesPage() {
 
                                     {/* Platform Badge */}
                                     <div className='flex items-center gap-2 mb-6'>
-                                        <IconBrandAndroid className='w-5 h-5 text-green-600' />
-                                        <IconBrandApple className='w-5 h-5 text-gray-700' />
-                                        <span className='text-sm text-gray-600 font-medium'>{app.platform}</span>
+                                        {app.platforms.includes('Android') && <IconBrandAndroid className='w-5 h-5 text-green-600' />}
+                                        {app.platforms.includes('iOS') && <IconBrandApple className='w-5 h-5 text-gray-700' />}
+                                        <span className='text-sm text-gray-600 font-medium'>{app.platforms.join(' • ')}</span>
                                     </div>
 
                                     {/* Stats */}
-                                    <div className='grid grid-cols-4 gap-4 mb-6 p-6 bg-gray-50 rounded-xl'>
+                                    <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-6 bg-gray-50 rounded-xl'>
                                         <div className='text-center'>
                                             <div className='w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
                                                 <IconDownload className='w-5 h-5 text-blue-600' />
@@ -113,17 +109,31 @@ export default function AppDevelopmentCaseStudiesPage() {
                                             <div className='w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
                                                 <IconUsers className='w-5 h-5 text-purple-600' />
                                             </div>
-                                            <div className='text-lg font-bold text-gray-900'>{app.stats.reviews}</div>
-                                            <div className='text-xs text-gray-600'>Reviews</div>
+                                            <div className='text-lg font-bold text-gray-900'>{app.stats.users}</div>
+                                            <div className='text-xs text-gray-600'>Users</div>
                                         </div>
                                         <div className='text-center'>
                                             <div className='w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
                                                 <IconUsers className='w-5 h-5 text-green-600' />
                                             </div>
-                                            <div className='text-lg font-bold text-gray-900'>{app.stats.activeUsers}</div>
-                                            <div className='text-xs text-gray-600'>Active Users</div>
+                                            <div className='text-lg font-bold text-gray-900'>{Object.values(app.stats)[3] || 'N/A'}</div>
+                                            <div className='text-xs text-gray-600'>{Object.keys(app.stats)[3] ? Object.keys(app.stats)[3].replace(/([A-Z])/g, ' $1').trim() : 'Extra Stat'}</div>
                                         </div>
                                     </div>
+
+                                    {/* Technologies */}
+                                    {app.technologies && (
+                                        <div className='mb-6'>
+                                            <h4 className='text-sm font-semibold text-gray-700 mb-3'>Technologies</h4>
+                                            <div className='flex flex-wrap gap-2'>
+                                                {app.technologies.map((tech, idx) => (
+                                                    <span key={idx} className='bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg text-xs font-medium'>
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {/* Features */}
                                     <div className='mb-6'>
@@ -138,26 +148,17 @@ export default function AppDevelopmentCaseStudiesPage() {
                                         </div>
                                     </div>
 
-                                    {/* Store Buttons */}
+                                    {/* Store Button */}
                                     <div className='flex flex-wrap gap-4 pt-6 border-t border-gray-200'>
                                         <a
-                                            href={app.playStoreUrl}
+                                            href={app.appLink}
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className='inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 hover:scale-105'
                                         >
-                                            <IconBrandAndroid className='w-5 h-5' />
-                                            Google Play
-                                            <IconExternalLink className='w-4 h-4' />
-                                        </a>
-                                        <a
-                                            href={app.appStoreUrl}
-                                            target='_blank'
-                                            rel='noopener noreferrer'
-                                            className='inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 hover:scale-105'
-                                        >
-                                            <IconBrandApple className='w-5 h-5' />
-                                            App Store
+                                            {app.platforms.includes('Android') && <IconBrandAndroid className='w-5 h-5' />}
+                                            {app.platforms.includes('iOS') && <IconBrandApple className='w-5 h-5' />}
+                                            View App
                                             <IconExternalLink className='w-4 h-4' />
                                         </a>
                                     </div>

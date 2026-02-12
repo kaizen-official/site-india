@@ -1,0 +1,299 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "French Club Jammu",
+      "subtitle": "French Language Institute & Training Center",
+      "description": "French Club Jammu is a professional language institute offering structured French language courses from beginner to advanced levels. The institute focuses on practical communication, certified training, flexible timings, and both online and offline learning options for students, professionals, and language enthusiasts.",
+      "image": "/portfolio/website/frenchclubjammu.webp",
+      "tags": [
+        "French Language Institute",
+        "Language Classes Website",
+        "Education",
+        "Online Learning",
+        "Training Institute"
+      ],
+      "highlights": [
+        "Certified & Experienced French Trainers",
+        "Courses from Beginner (A1–A2) to Advanced (C1–C2)",
+        "DELF & DALF Exam Preparation",
+        "Online & Offline Classes Available",
+        "Personal Attention with Flexible Timings",
+        "Spoken French & School/College Coaching",
+        "Professional Educational Website Design",
+        "Mobile-Friendly & User-Centric Layout",
+        "Located in Jammu"
+      ],
+      "isLink": true,
+      "link": "https://www.frenchclubjammu.com/"
+    },
+    {
+      "id": 2,
+      "title": "Ceilkraft",
+      "subtitle": "False Ceiling & Interior Solutions",
+      "description": "A professional false ceiling contractor delivering high-quality ceiling installations for residential and commercial spaces with modern designs, durable materials, and expert craftsmanship.",
+      "image": "/portfolio/website/ceilkraft.webp",
+      "tags": [
+        "False Ceiling",
+        "Interior Design",
+        "Installation",
+        "Gypsum Ceilings",
+        "Acoustic Solutions"
+      ],
+      "highlights": [
+        "Premium False Ceiling Installations - Gypsum, POP & Designer ceilings for homes and offices",
+        "Armstrong Grid & Tile Ceilings - Perfect for commercial and institutional spaces",
+        "Waterproof PVC & Metal Ceilings - Moisture-resistant and easy maintenance solutions",
+        "Acoustic Ceiling Options - Noise control systems for enhanced interior comfort",
+        "Authorized Brickwood Ceiling System Contractor - Certified and quality-focused services",
+        "Customized Design Solutions - Tailored ceiling aesthetics based on client needs",
+        "Service Across Bengaluru - Including Gunjur, Nagegere, Varthur, Whitefield & Sarjapur Road"
+      ],
+      "isLink": true,
+      "link": "https://www.ceilkraft.com/"
+    },
+    {
+      "id": 3,
+      "title": "Atithi Home",
+      "subtitle": "Premium Homestay & Hospitality Website",
+      "description": "Designed and developed a modern hospitality website with a focus on comfort, trust, and seamless booking experience, ensuring responsiveness and user-friendly navigation.",
+      "image": "/portfolio/website/Atithi-Home-stay.webp",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Hospitality",
+        "SEO"
+      ],
+      "highlights": [
+        "Custom Website Design - Clean and elegant layout tailored for homestay and hospitality services",
+        "Responsive Development - Optimized for mobile, tablet, and desktop devices",
+        "Hospitality-Focused UI/UX - Warm visuals, intuitive navigation, and guest-friendly structure",
+        "Room & Property Showcase - High-quality imagery and detailed accommodation sections",
+        "SEO Optimization - Search-engine-friendly structure to improve online visibility",
+        "Inquiry & Contact Integration - Easy booking inquiries and contact forms",
+        "Performance Optimized - Fast loading pages for smooth user experience"
+      ],
+      "isLink": true,
+      "link": "https://www.atithihome.com/"
+    },
+    {
+      "id": 4,
+      "title": "Max Align Dental",
+      "subtitle": "Modern Dental Clinic Website",
+      "description": "Developed from scratch using Frontend, HTML5, CSS3, Bootstrap 5, Responsive Design, and JavaScript to ensure complete control over design and performance.",
+      "image": "/portfolio/website/maxaligndental.webp",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "Bootstrap 5",
+        "JavaScript",
+        "Responsive Design"
+      ],
+      "highlights": [
+        "Modern & Responsive Design - Clean, professional interface that looks beautiful on all devices",
+        "Fast Loading & Optimized Performance - Lightweight coding and optimized images ensure quick loading",
+        "Professional Branding - Carefully selected color palette, fonts, and icons match the clinic's image",
+        "Service Showcase - Detailed sections highlight dental treatments and orthodontic solutions",
+        "Patient-Friendly Navigation - Clear menus and call-to-action buttons guide patients effortlessly",
+        "Integrated Features - Appointment booking, contact forms, Google Maps integration, and SEO-friendly",
+        "Secure & Scalable - Built with best practices for security and future upgrades",
+        "Engaging Visuals & Animations - Professional look that enhances user experience"
+      ],
+      "isLink": true,
+      "link": "https://maxaligndental.com"
+    },
+    {
+      "id": 5,
+      "title": "Sri Poly Clinic",
+      "subtitle": "Modern Multi-Specialty Clinic Website",
+      "description": "A fully customized medical website built using Next.js, HTML5, CSS3, Tailwind CSS, JavaScript, and responsive design principles. Optimized for speed, security, and seamless user experience with Vercel hosting and Google Analytics (GA4).",
+      "image": "/portfolio/website/sripolyclinic.webp",
+      "tags": [
+        "Next.js",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "JavaScript",
+        "Responsive Design"
+      ],
+      "highlights": [
+        "Modern & Responsive Design - Clean, professional interface optimized for all screen sizes",
+        "Fast Loading & High Performance - Next.js optimization, priority hints, and lightweight assets",
+        "Professional Branding - Strategically selected colors, fonts, and icons for a trusted medical identity",
+        "Service Showcase - Dedicated sections highlighting treatments, specialties, and healthcare services",
+        "Patient-Friendly Navigation - Smooth and intuitive menus with clear call-to-action elements",
+        "Integrated Features - Appointment booking, contact forms, Google Maps, SEO-optimized, and Open Graph",
+        "Secure & Scalable - Built with HSTS, best coding practices, and Vercel’s scalable cloud platform",
+        "Enhanced User Experience - Modern animations, clean layout, and accessibility-focused design"
+      ],
+      "isLink": true,
+      "link": "https://www.sripolyclinic.com/"
+    },
+    {
+      "id": 6,
+      "title": "Andheri Dental Care",
+      "subtitle": "Modern Dental Clinic Website",
+      "description": "Developed from scratch using Frontend, HTML5, CSS3, Bootstrap 5, Responsive Design, and JavaScript to ensure complete control over design and performance.",
+      "image": "/portfolio/website/andheridentalcare.png",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "Bootstrap 5",
+        "JavaScript",
+        "Responsive Design"
+      ],
+      "highlights": [
+        "Modern & Responsive Design - Clean, professional interface that looks beautiful on all devices",
+        "Fast Loading & Optimized Performance - Lightweight coding and optimized images ensure quick loading",
+        "Professional Branding - Carefully selected color palette, fonts, and icons match the clinic's image",
+        "Service Showcase - Detailed sections highlight dental treatments and orthodontic solutions",
+        "Patient-Friendly Navigation - Clear menus and call-to-action buttons guide patients effortlessly",
+        "Integrated Features - Appointment booking, contact forms, Google Maps integration, and SEO-friendly",
+        "Secure & Scalable - Built with best practices for security and future upgrades",
+        "Engaging Visuals & Animations - Professional look that enhances user experience"
+      ],
+      "isLink": true,
+      "link": "https://andheridentalcare.com"
+    },
+    {
+      "id": 7,
+      "title": "Preesha Global",
+      "subtitle": "Corporate Business Website",
+      "description": "Built on WordPress for flexibility, easy management, and scalability tailored to corporate business needs.",
+      "image": "/portfolio/website/preeshaglobal.png",
+      "tags": [
+        "WordPress",
+        "Custom Theme",
+        "SEO",
+        "Responsive Design",
+        "Corporate"
+      ],
+      "highlights": [
+        "WordPress CMS - Flexibility, easy management, and scalability for corporate business",
+        "Custom Theme Development - Professional, corporate-style layout tailored to brand identity",
+        "Responsive Design - Fully mobile-friendly site using modern CSS and best practices",
+        "Fast & Optimized - Image compression, caching, and lightweight coding for speed",
+        "Service-Oriented Layout - Clearly highlights business services and expertise",
+        "SEO Integration - SEO-friendly permalinks, meta tags, and optimized structure",
+        "Professional Branding - Consistent typography and color palette for corporate image",
+        "Security Enhancements - WordPress security measures and regular update compatibility",
+        "Client-Friendly Admin Panel - Easy backend for content updates without coding",
+        "Lead Generation Focus - Clear calls-to-action and inquiry forms",
+        "Scalable Architecture - Ready for future expansion and additional features"
+      ],
+      "isLink": true,
+      "link": "https://preeshaglobal.com"
+    },
+    {
+      "id": 8,
+      "title": "Bliss32 Dental Care",
+      "subtitle": "Dental Clinic Website",
+      "description": "Developed from scratch using Frontend, HTML5, CSS3, Bootstrap 5, Responsive Design, Backend, Dynamic Blog Management and JavaScript to ensure complete control over design and performance.",
+      "image": "/portfolio/website/bliss32.webp",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "Bootstrap 5",
+        "JavaScript",
+        "Responsive Design"
+      ],
+      "highlights": [
+        "Modern & Responsive Design - Clean, professional interface that looks beautiful on all devices",
+        "Fast Loading & Optimized Performance - Lightweight coding and optimized images ensure quick loading",
+        "Professional Branding - Carefully selected color palette, fonts, and icons match the clinic's image",
+        "Service Showcase - Detailed sections highlight treatments and dental care solutions",
+        "Patient-Friendly Navigation - Clear menus and call-to-action buttons guide patients effortlessly",
+        "Integrated Features - Appointment booking, contact forms, Google Maps integration, and SEO-friendly",
+        "Secure & Scalable - Built with best practices for security and future upgrades",
+        "Engaging Visuals & Animations - Professional look that enhances user experience"
+      ],
+      "isLink": true,
+      "link": "https://bliss32.com"
+    },
+    {
+      "id": 9,
+      "title": "The Great Herbal",
+      "subtitle": "E-commerce Redesign",
+      "description": "Built on WordPress for flexibility, easy management, and scalability tailored to skincare & cosmetics industries.",
+      "image": "/portfolio/website/the-great-herbal.webp",
+      "tags": [
+        "WordPress",
+        "WooCommerce",
+        "Elementor",
+        "SEO",
+        "Yoast"
+      ],
+      "highlights": [
+        "WordPress CMS - Flexibility, easy management, and scalability for skincare & cosmetics",
+        "WooCommerce Integration - Customized shop pages with structured categories and variations",
+        "Elementor + Custom Add-ons - Pixel-perfect, responsive layouts with advanced widgets",
+        "SEO Optimized (Yoast) - Schema, OpenGraph tags, meta descriptions for strong visibility",
+        "Private Labeling & B2B Features - Structured pages for third-party manufacturing services",
+        "Responsive & Mobile-Friendly - Optimized for seamless browsing on all devices",
+        "Custom Branding - Tailored typography and color palette for herbal & organic niche",
+        "Fast & Secure - CDN integration, asset optimization, and SSL ensure performance",
+        "Scalable Architecture - Ready for multi-language support and advanced filters",
+        "User Engagement - Blog + WooCommerce + Contact Form 7 for complete experience"
+      ],
+      "isLink": true,
+      "link": "https://thegreatherbal.com"
+    },
+    {
+      "id": 10,
+      "title": "Prudent Business Ventures",
+      "subtitle": "Corporate Web Presence",
+      "description": "Built on WordPress for flexibility, scalability, and ease of content management without technical complexity.",
+      "image": "/portfolio/website/prudentbv.webp",
+      "tags": [
+        "WordPress",
+        "Custom Theme",
+        "SEO",
+        "Responsive Design"
+      ],
+      "highlights": [
+        "WordPress-Powered Website - Flexibility and ease of content management",
+        "Custom Theme Development - Professional, corporate-style layout tailored to brand identity",
+        "Responsive Design - Fully mobile-friendly site using modern CSS and best practices",
+        "Fast & Optimized - Image compression, caching, and lightweight coding for speed",
+        "Service-Oriented Layout - Clearly highlights business services and expertise",
+        "SEO Integration - SEO-friendly permalinks, meta tags, and optimized structure",
+        "Custom WordPress Plugins & Widgets - Dynamic content management features",
+        "Security Enhancements - WordPress security measures and regular update compatibility",
+        "Client-Friendly Admin Panel - Easy backend for content updates without coding",
+        "Future-Ready Development - Scalable framework for adding new services and features",
+        "Lead Generation Focus - Clear calls-to-action and inquiry forms"
+      ],
+      "isLink": true,
+      "link": "https://prudentbv.nl/"
+    },
+    {
+      "id": 11,
+      "title": "Raj Nursing Home",
+      "subtitle": "Local SEO Boost",
+      "description": "Developed from scratch using HTML5, CSS3, Bootstrap 5, and JavaScript to ensure complete control over design and performance.",
+      "image": "/portfolio/website/raj-nursing-home.webp",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "Bootstrap 5",
+        "JavaScript",
+        "Local SEO"
+      ],
+      "highlights": [
+        "Custom-Built Website - Complete control over design and performance",
+        "Healthcare-Oriented Design - Clean, professional interface reflecting trust and reliability",
+        "Responsive Layout - Mobile-first approach for seamless access across all devices",
+        "Performance Optimized - Minified CSS/JS and optimized images for fast loading",
+        "Dynamic Features - Sliders, carousels, and animations for engaging experience",
+        "Patient-Centric Navigation - Clear menus and emergency call buttons",
+        "SEO-Friendly Structure - Clean semantic markup and meta tags for local rankings",
+        "Brand Alignment - Consistent fonts, icons, and medical-focused color scheme",
+        "Custom Security Enhancements - Error pages, favicon, and HTTPS-ready",
+        "Scalable Framework - Built for future appointment booking and patient portals"
+      ],
+      "isLink": true,
+      "link": "https://www.rajnursinghome.com/"
+    }
+  ]
+}

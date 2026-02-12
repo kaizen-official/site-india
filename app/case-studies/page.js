@@ -80,21 +80,21 @@ export default function CaseStudiesPage() {
             color: 'pink',
             darkColor: 'pink-600'
         },
-        {
-            id: 'gmb-promotion',
-            title: 'Google My Business Promotion',
-            subtitle: 'Advanced Local Marketing',
-            description: 'Comprehensive GMB campaign with photo optimization, posts, and review management achieving maximum visibility in local searches.',
-            image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80',
-            icon: IconTrendingUp,
-            stats: [
-                { label: 'Search Visibility', value: '+380%' },
-                { label: 'Customer Contacts', value: '+220%' },
-                { label: 'Local Leads', value: '500+' }
-            ],
-            color: 'orange',
-            darkColor: 'orange-600'
-        },
+        // {
+        //     id: 'gmb-promotion',
+        //     title: 'Google My Business Promotion',
+        //     subtitle: 'Advanced Local Marketing',
+        //     description: 'Comprehensive GMB campaign with photo optimization, posts, and review management achieving maximum visibility in local searches.',
+        //     image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80',
+        //     icon: IconTrendingUp,
+        //     stats: [
+        //         { label: 'Search Visibility', value: '+380%' },
+        //         { label: 'Customer Contacts', value: '+220%' },
+        //         { label: 'Local Leads', value: '500+' }
+        //     ],
+        //     color: 'orange',
+        //     darkColor: 'orange-600'
+        // },
         {
             id: 'app-development',
             title: 'App Development',

@@ -1,0 +1,214 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "name": "Honey Dale",
+      "handle": "@honeydaleofficial",
+      "instagramUrl": "https://www.instagram.com/honeydaleofficial/",
+      "niche": "Fashion & Lifestyle Brand",
+      "description": "Built a premium Instagram presence for Honey Dale by showcasing product aesthetics, lifestyle shoots, and brand-focused reels. Our strategy focused on visual storytelling, influencer-style content, and consistent branding to elevate brand perception.",
+      "stats": {
+        "followers": "12K+",
+        "engagement": "9.8%",
+        "reach": "150K+",
+        "posts": "300+"
+      },
+      "services": [
+        "Brand Content Strategy",
+        "Product Photography Direction",
+        "Reels & Short Video Content",
+        "Creative Caption Writing",
+        "Hashtag & Trend Research",
+        "Instagram Growth Management"
+      ],
+      "results": [
+        "500% increase in brand visibility",
+        "9.8% average engagement rate",
+        "Strong brand recall among target audience",
+        "Consistent inbound queries via Instagram"
+      ],
+      "testimonial": "Digital Solution 360 helped us transform our Instagram into a premium brand showcase. The growth and engagement exceeded our expectations.",
+      "color": "from-blue-500 to-pink-600"
+    },
+    {
+      "id": 2,
+      "name": "Form-Focus Fitness",
+      "handle": "@sharma_ruchiofficial",
+      "instagramUrl": "https://www.instagram.com/sharma_ruchiofficial",
+      "niche": "Fitness & Personal Training",
+      "description": "Developed a strong personal brand for Form-Focus Fitness through educational fitness reels, transformation stories, workout tutorials, and motivational content. Focused on authority-building and audience trust.",
+      "stats": {
+        "followers": "18K+",
+        "engagement": "11.5%",
+        "reach": "200K+",
+        "posts": "350+"
+      },
+      "services": [
+        "Personal Brand Building",
+        "Fitness Reels & Video Editing",
+        "Workout & Transformation Content",
+        "Caption & CTA Strategy",
+        "Community Engagement",
+        "Instagram Profile Optimization"
+      ],
+      "results": [
+        "600% growth in followers",
+        "11.5% engagement rate",
+        "High-quality leads for online & offline coaching",
+        "Established as a trusted fitness authority"
+      ],
+      "testimonial": "Their content strategy helped me build credibility and connect deeply with my audience. Leads and engagement improved drastically.",
+      "color": "from-yellow-500 to-orange-700"
+    },
+    {
+      "id": 3,
+      "name": "Praveen Yogashala",
+      "handle": "@praveen_yogashalain",
+      "instagramUrl": "https://www.instagram.com/praveen_yogashala",
+      "niche": "Yoga & Wellness",
+      "description": "Strengthened Praveen Yogashala’s digital presence with calming yoga reels, educational wellness content, and spiritual branding. Focused on authenticity, discipline, and community growth.",
+      "stats": {
+        "followers": "10K+",
+        "engagement": "10.1%",
+        "reach": "130K+",
+        "posts": "260+"
+      },
+      "services": [
+        "Yoga & Wellness Content Creation",
+        "Reels & Meditation Videos",
+        "Educational Yoga Awareness Posts",
+        "Brand Aesthetic Development",
+        "Community Growth Strategy",
+        "Local & Online Class Promotion"
+      ],
+      "results": [
+        "450% growth in followers",
+        "10.1% engagement rate",
+        "Increased yoga class enrollments",
+        "Strong and loyal wellness community built"
+      ],
+      "testimonial": "Their team beautifully captured the essence of yoga and wellness. Instagram became our strongest platform for student engagement.",
+      "color": "from-emerald-500 to-teal-600"
+    },
+    {
+      "id": 4,
+      "name": "Raj Nursing Home Hapur",
+      "handle": "@rajnursinghomehapur",
+      "instagramUrl": "https://www.instagram.com/rajnursinghomehapur",
+      "niche": "Healthcare",
+      "description": "Complete social media management for a leading nursing home in Hapur. We created engaging healthcare content, patient testimonials, and educational posts that built trust and increased patient inquiries.",
+      "stats": {
+        "followers": "5K+",
+        "engagement": "8.5%",
+        "reach": "50K+",
+        "posts": "200+"
+      },
+      "services": [
+        "Content Strategy",
+        "Graphic Design",
+        "Caption Writing",
+        "Hashtag Research",
+        "Community Management",
+        "Story Management"
+      ],
+      "results": [
+        "400% growth in followers in 6 months",
+        "8.5% average engagement rate",
+        "50K+ monthly reach achieved",
+        "300+ patient inquiries generated"
+      ],
+      "testimonial": "Digital Solution 360 transformed our social media presence. We've seen remarkable growth in both engagement and patient inquiries!",
+      "color": "from-pink-500 to-purple-600"
+    },
+    {
+      "id": 5,
+      "name": "MaxAlign Dental",
+      "handle": "@maxalign.dental",
+      "instagramUrl": "https://www.instagram.com/maxalign.dental",
+      "niche": "Dental Care",
+      "description": "Comprehensive social media strategy for a premium dental clinic. We focused on educational content, before-after transformations, and patient success stories to build credibility and attract new patients.",
+      "stats": {
+        "followers": "8K+",
+        "engagement": "10.2%",
+        "reach": "80K+",
+        "posts": "280+"
+      },
+      "services": [
+        "Medical Content Creation",
+        "Before/After Showcases",
+        "Educational Posts",
+        "Patient Testimonials",
+        "Appointment Booking Integration",
+        "Review Management"
+      ],
+      "results": [
+        "500% growth in profile visits",
+        "10.2% average engagement rate",
+        "400+ new patient bookings",
+        "Established as top dental brand in locality"
+      ],
+      "testimonial": "Their expertise in healthcare social media is unmatched. We've become the go-to dental clinic in our area!",
+      "color": "from-teal-500 to-green-600"
+    },
+    {
+      "id": 6,
+      "name": "Andheri Dental Clinic",
+      "handle": "@andheri_dental_clinic_",
+      "instagramUrl": "https://www.instagram.com/andheri_dental_clinic_",
+      "niche": "Dental Care & Oral Health",
+      "description": "Strengthened digital presence through patient-focused reels, educational content, and trust-building visuals.",
+      "stats": {
+        "followers": "8K+",
+        "engagement": "9.6%",
+        "reach": "120K+",
+        "posts": "280+"
+      },
+      "services": [
+        "Social Media Management",
+        "Reels & Video Content",
+        "Dental Awareness Content",
+        "Brand Trust Building",
+        "Clinic Photography",
+        "Local SEO Support"
+      ],
+      "results": [
+        "600% increase in Instagram followers",
+        "12.3% engagement rate (3x industry average)",
+        "150K+ monthly impressions",
+        "500+ direct sales through Instagram"
+      ],
+      "testimonial": "The team’s professional approach and patient-focused content helped us build strong trust online. We’ve seen a noticeable increase in appointment inquiries and patient engagement.",
+      "color": "from-yellow-400 via-orange-500 to-pink-600"
+    },
+    {
+      "id": 7,
+      "name": "Sri Poly Clinic",
+      "handle": "@sripoly.clinic",
+      "instagramUrl": "https://www.instagram.com/sripoly.clinic",
+      "niche": "Multi-Specialty Healthcare",
+      "description": "Enhanced Sri Poly Clinic’s digital presence with patient-centric healthcare content, educational posts, and trust-building reels. Focused on awareness, doctor expertise, and treatment highlights to attract local patients and increase appointment inquiries.",
+      "stats": {
+        "followers": "6K+",
+        "engagement": "8.9%",
+        "reach": "70K+",
+        "posts": "220+"
+      },
+      "services": [
+        "Healthcare Social Media Management",
+        "Doctor & Treatment Awareness Content",
+        "Reels & Informative Video Creation",
+        "Patient Education Campaigns",
+        "Clinic Branding & Visual Identity",
+        "Local Patient Outreach Support"
+      ],
+      "results": [
+        "300% increase in Instagram followers",
+        "Strong and consistent patient engagement",
+        "Improved local reach across Telangana",
+        "Increase in appointment inquiries through social media"
+      ],
+      "testimonial": "The team understood our clinic’s vision perfectly. Their healthcare-focused content helped us build patient trust and improved our online visibility significantly.",
+      "color": "from-stone-800 via-amber-900 to-amber-500"
+    }
+  ]
+}

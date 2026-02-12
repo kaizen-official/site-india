@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import { IconChevronLeft, IconExternalLink, IconClock, IconCode, IconSparkles } from '@tabler/icons-react'
-import data from './data.json'
+import data from './content.json'
 
 export default function WebsiteCaseStudiesPage() {
     const { projects } = data;
@@ -57,8 +57,8 @@ export default function WebsiteCaseStudiesPage() {
                                 <div className='relative group'>
                                     <div className='border-8 border-gray-900 rounded-2xl overflow-hidden shadow-2xl'>
                                         <img
-                                            src={project.screenshot}
-                                            alt={project.name}
+                                            src={project.image}
+                                            alt={project.title}
                                             className='w-full h-auto group-hover:scale-105 transition-transform duration-500'
                                         />
                                     </div>
@@ -70,82 +70,59 @@ export default function WebsiteCaseStudiesPage() {
                             {/* Project Details */}
                             <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                                 <div className='bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300'>
-                                    <span className='inline-block bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-semibold mb-4'>
-                                        {project.category}
-                                    </span>
-
-                                    <h3 className='text-3xl font-bold text-gray-900 mb-4'>{project.name}</h3>
-
-                                    <div className='flex items-center gap-4 mb-6 text-sm text-gray-600'>
-                                        <div className='flex items-center gap-2'>
-                                            <IconClock className='w-4 h-4' />
-                                            <span>{project.duration}</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Technologies */}
                                     <div className='mb-6'>
-                                        <h4 className='text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2'>
-                                            <IconCode className='w-4 h-4' />
-                                            Technologies Used
-                                        </h4>
-                                        <div className='flex flex-wrap gap-2'>
-                                            {project.technologies.map((tech, idx) => (
-                                                <span key={idx} className='bg-gray-100 text-gray-700 px-3 py-1 rounded-lg text-sm'>
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
+                                        <h3 className='text-3xl font-bold text-gray-900 mb-2'>{project.title}</h3>
+                                        {project.subtitle && (
+                                            <p className='text-lg text-purple-600 font-semibold'>{project.subtitle}</p>
+                                        )}
                                     </div>
 
-                                    {/* Features */}
+                                    <p className='text-gray-600 mb-6 leading-relaxed'>
+                                        {project.description}
+                                    </p>
+
+                                    {/* Tags */}
+                                    {project.tags && (
+                                        <div className='mb-6'>
+                                            <h4 className='text-sm font-semibold text-gray-700 mb-3'>Technologies & Tags</h4>
+                                            <div className='flex flex-wrap gap-2'>
+                                                {project.tags.map((tag, idx) => (
+                                                    <span key={idx} className='bg-purple-50 text-purple-700 px-3 py-1 rounded-lg text-xs font-medium'>
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Highlights */}
                                     <div className='mb-6'>
                                         <h4 className='text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2'>
                                             <IconSparkles className='w-4 h-4' />
-                                            Key Features
+                                            Key Highlights
                                         </h4>
                                         <ul className='space-y-2'>
-                                            {project.features.map((feature, idx) => (
-                                                <li key={idx} className='flex items-start gap-2 text-gray-600'>
+                                            {project.highlights.map((highlight, idx) => (
+                                                <li key={idx} className='flex items-start gap-2 text-gray-600 text-sm'>
                                                     <div className='w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 shrink-0' />
-                                                    <span>{feature}</span>
+                                                    <span>{highlight}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
 
-                                    {/* Results */}
-                                    <div className='grid grid-cols-3 gap-4 mb-6 pt-6 border-t border-gray-200'>
-                                        <div className='text-center'>
-                                            <div className='text-2xl font-bold text-purple-600 mb-1'>
-                                                {project.results.pageSpeed}
-                                            </div>
-                                            <div className='text-xs text-gray-600'>Page Speed</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <div className='text-2xl font-bold text-green-600 mb-1'>
-                                                {project.results.conversionRate}
-                                            </div>
-                                            <div className='text-xs text-gray-600'>Conversions</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <div className='text-2xl font-bold text-blue-600 mb-1'>
-                                                {project.results.userEngagement}
-                                            </div>
-                                            <div className='text-xs text-gray-600'>Engagement</div>
-                                        </div>
-                                    </div>
-
                                     {/* Visit Button */}
-                                    <a
-                                        href={project.url}
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                        className='inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105'
-                                    >
-                                        Visit Website
-                                        <IconExternalLink className='w-5 h-5' />
-                                    </a>
+                                    {project.isLink && project.link && (
+                                        <a
+                                            href={project.link}
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className='inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105'
+                                        >
+                                            Visit Website
+                                            <IconExternalLink className='w-5 h-5' />
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>

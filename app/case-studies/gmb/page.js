@@ -6,10 +6,10 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import { IconChevronLeft, IconMapPin, IconStar, IconEye, IconSearch, IconClick } from '@tabler/icons-react'
-import data from './data.json'
+import data from './content.json'
 
 export default function GMBCaseStudiesPage() {
-    const { clients } = data;
+    const { projects } = data;
 
     return (
         <>
@@ -44,72 +44,71 @@ export default function GMBCaseStudiesPage() {
             <section className='py-10 px-4 md:px-8 lg:px-16'>
                 <div className='max-w-7xl mx-auto'>
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-                        {clients.map((client, index) => (
+                        {projects.map((project, index) => (
                             <motion.div
-                                key={client.id}
+                                key={project.id}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 className='bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300'
                             >
-                                {/* Dashboard Image */}
-                                <div className='h-100 overflow-hidden bg-gray-100'>
-                                    <img
-                                        src={client.dashboardImage}
-                                        alt={`${client.businessName} GMB Dashboard`}
-                                        className='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
-                                    />
+                                {/* Before/After Images */}
+                                <div className='grid grid-cols-2 h-64 overflow-hidden bg-gray-100'>
+                                    <div className='relative'>
+                                        <img
+                                            src={project.beforeImage}
+                                            alt={`${project.title} Before`}
+                                            className='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+                                        />
+                                        <div className='absolute top-2 left-2 bg-gray-900/80 text-white px-3 py-1 rounded text-xs font-semibold'>Before</div>
+                                    </div>
+                                    <div className='relative'>
+                                        <img
+                                            src={project.afterImage}
+                                            alt={`${project.title} After`}
+                                            className='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+                                        />
+                                        <div className='absolute top-2 left-2 bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold'>After</div>
+                                    </div>
                                 </div>
 
                                 {/* Content */}
                                 <div className='p-6'>
-                                    <div className='flex items-start justify-between mb-4'>
-                                        <div>
-                                            <h3 className='text-2xl font-bold text-gray-900 mb-1'>{client.businessName}</h3>
-                                            <div className='flex items-center gap-2 text-gray-600'>
-                                                <IconMapPin className='w-4 h-4' />
-                                                <span>{client.location}</span>
-                                            </div>
+                                    <div className='mb-4'>
+                                        <h3 className='text-2xl font-bold text-gray-900 mb-2'>{project.title}</h3>
+                                        <div className='flex items-center gap-2 text-gray-600'>
+                                            <IconMapPin className='w-4 h-4' />
+                                            <span>{project.location}</span>
                                         </div>
-                                        <span className='bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold'>
-                                            {client.category}
-                                        </span>
                                     </div>
 
                                     <p className='text-gray-600 mb-6 leading-relaxed'>
-                                        {client.description}
+                                        {project.description}
                                     </p>
 
-                                    {/* Stats Grid */}
-                                    <div className='grid grid-cols-4 gap-4 mb-6 pt-6 border-t border-gray-200'>
-                                        <div className='text-center'>
-                                            <div className='w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
-                                                <IconEye className='w-5 h-5 text-blue-600' />
-                                            </div>
-                                            <div className='text-lg font-bold text-gray-900'>{client.stats.views}</div>
-                                            <div className='text-xs text-gray-600'>Views</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <div className='w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
-                                                <IconSearch className='w-5 h-5 text-purple-600' />
-                                            </div>
-                                            <div className='text-lg font-bold text-gray-900'>{client.stats.searches}</div>
-                                            <div className='text-xs text-gray-600'>Searches</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <div className='w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
-                                                <IconClick className='w-5 h-5 text-green-600' />
-                                            </div>
-                                            <div className='text-lg font-bold text-gray-900'>{client.stats.actions}</div>
-                                            <div className='text-xs text-gray-600'>Actions</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <div className='w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2'>
-                                                <IconStar className='w-5 h-5 text-yellow-600' />
-                                            </div>
-                                            <div className='text-lg font-bold text-gray-900'>{client.stats.rating}</div>
-                                            <div className='text-xs text-gray-600'>Rating</div>
+                                    {/* Results */}
+                                    <div className='mb-6 pt-6 border-t border-gray-200'>
+                                        <h4 className='text-sm font-semibold text-gray-700 mb-3'>Results Achieved</h4>
+                                        <ul className='space-y-2'>
+                                            {project.results.map((result, idx) => (
+                                                <li key={idx} className='flex items-start gap-2 text-sm text-gray-600'>
+                                                    <div className='w-1.5 h-1.5 bg-green-600 rounded-full mt-2 shrink-0' />
+                                                    <span>{result}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* Services */}
+                                    <div>
+                                        <h4 className='text-sm font-semibold text-gray-700 mb-3'>Services Provided</h4>
+                                        <div className='flex flex-wrap gap-2'>
+                                            {project.services.map((service, idx) => (
+                                                <span key={idx} className='bg-green-50 text-green-700 px-3 py-1 rounded-lg text-xs font-medium'>
+                                                    {service}
+                                                </span>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
