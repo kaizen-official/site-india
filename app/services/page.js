@@ -177,7 +177,7 @@ export default function ServicesPage() {
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
-                                    <Link href={`/services/${service.id}`}>
+                                    <Link href={`/${service.id}`}>
                                         <div className={`group bg-white border-2 ${colors.border} ${colors.hover} rounded-2xl overflow-hidden transition-all duration-300 shadow-lg hover:shadow-2xl h-full flex flex-col`}>
                                             {/* Image */}
                                             <div className='relative h-48 overflow-hidden'>
