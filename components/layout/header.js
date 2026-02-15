@@ -3,530 +3,516 @@
 import Link from 'next/link'
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
-import { IconMenu2, IconX, IconChevronDown } from '@tabler/icons-react'
-import { FaTimes } from 'react-icons/fa'
+import {
+    IconMenu2, IconX, IconChevronDown, IconPhone, IconArrowRight,
+    IconTargetArrow, IconFileDescription, IconCode, IconSearch,
+    IconBrandInstagram, IconDatabase
+} from '@tabler/icons-react'
+
+/* ─── Services data for mega menu ─── */
+const navServices = [
+    { name: 'Digital Marketing', href: '/services/digital-marketing', icon: IconTargetArrow, desc: 'Data-driven campaigns for growth', bg: 'bg-blue-50', text: 'text-blue-600' },
+    { name: 'Content Marketing', href: '/services/content-marketing', icon: IconFileDescription, desc: 'Content that drives conversions', bg: 'bg-violet-50', text: 'text-violet-600' },
+    { name: 'Website Development', href: '/services/web-development', icon: IconCode, desc: 'Custom websites & applications', bg: 'bg-emerald-50', text: 'text-emerald-600' },
+    { name: 'SEO Services', href: '/services/search-engine-optimization-seo', icon: IconSearch, desc: 'Rank higher on search engines', bg: 'bg-orange-50', text: 'text-orange-600' },
+    { name: 'Social Media', href: '/services/social-media', icon: IconBrandInstagram, desc: 'Build & engage your community', bg: 'bg-pink-50', text: 'text-pink-600' },
+    { name: 'CRM Development', href: '/services/crm-development', icon: IconDatabase, desc: 'Streamline customer management', bg: 'bg-indigo-50', text: 'text-indigo-600' },
+];
 
 function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const [hovered, setHovered] = useState(null);
     const [servicesOpen, setServicesOpen] = useState(false);
-    const [visible, setVisible] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
     const ref = useRef(null);
 
-    const { scrollY } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"],
-    });
+    const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-        if (latest > 100) {
-            setVisible(true);
-        } else {
-            setVisible(false);
-        }
+        setScrolled(latest > 50);
     });
 
-    // Prevent body scroll when form is open
+    /* Prevent body scroll when overlay is open */
     useEffect(() => {
-        if (showForm || showThankYou) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'unset'
-        }
-        return () => {
-            document.body.style.overflow = 'unset'
-        }
-    }, [showForm, showThankYou])
+        document.body.style.overflow = (showForm || showThankYou || mobileOpen) ? 'hidden' : 'unset';
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [showForm, showThankYou, mobileOpen]);
 
-    // Auto close thank you modal after 5 seconds
+    /* Auto-close thank you modal */
     useEffect(() => {
         if (showThankYou) {
-            const timer = setTimeout(() => {
-                setShowThankYou(false)
-            }, 5000)
-            return () => clearTimeout(timer)
+            const t = setTimeout(() => setShowThankYou(false), 5000);
+            return () => clearTimeout(t);
         }
-    }, [showThankYou])
+    }, [showThankYou]);
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const form = e.target
-        const formData = new FormData(form)
-
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
         try {
-            // Save to database
-            // await fetch('/api/contacts', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         name: formData.get('name'),
-            //         email: formData.get('email'),
-            //         phone: formData.get('phone'),
-            //         country_code: '+91',
-            //         company: null,
-            //         website: null,
-            //         services: null,
-            //         message: null,
-            //         source: 'header_quote',
-            //         page_url: window.location.pathname
-            //     })
-            // })
-
-            // Send email notification
-            await fetch('https://formsubmit.co/globalweb3600@gmail.com', {
-                method: 'POST',
-                body: formData
-            })
-
-            setShowForm(false)
-            setShowThankYou(true)
-            form.reset()
-        } catch (error) {
-            console.error('Error:', error)
-            alert('Something went wrong. Please try again.')
+            await fetch('https://formsubmit.co/globalweb3600@gmail.com', { method: 'POST', body: formData });
+            setShowForm(false);
+            setShowThankYou(true);
+            form.reset();
+        } catch (err) {
+            console.error('Error:', err);
+            alert('Something went wrong. Please try again.');
         }
-    }
+    };
+
+    /* nav link helper */
+    const navItem = (id, label, href) => (
+        <li key={id} className="relative">
+            <Link
+                href={href}
+                onMouseEnter={() => { setHovered(id); setServicesOpen(false); }}
+                className="relative px-4 py-2 text-[15px] font-medium text-gray-600 hover:text-gray-900 transition-colors inline-block"
+            >
+                {hovered === id && (
+                    <motion.div
+                        layoutId="navPill"
+                        className="absolute inset-0 bg-gray-100/80 rounded-lg"
+                        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    />
+                )}
+                <span className="relative z-10">{label}</span>
+            </Link>
+        </li>
+    );
 
     return (
         <header ref={ref}>
-            {/* Desktop Header */}
-            <motion.div
+
+            {/* ━━━ Animated gradient accent bar ━━━ */}
+            <div className="fixed top-0 left-0 right-0 h-0.5 z-60 overflow-hidden">
+                <motion.div
+                    className="h-full w-[200%]"
+                    style={{ background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6)' }}
+                    animate={{ x: ['-50%', '0%'] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                />
+            </div>
+
+            {/* ━━━━━━━━━━━━━━━ DESKTOP NAV ━━━━━━━━━━━━━━━ */}
+            <motion.nav
                 initial={{ y: -100, opacity: 0 }}
-                animate={{
-                    y: visible ? 0 : 0,
-                    opacity: 1,
-                    backdropFilter: visible ? "blur(10px)" : "none",
-                    boxShadow: visible
-                        ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-                        : "0 10px 40px -10px rgba(0, 0, 0, 0.3)",
-                    width: visible ? "100%" : "100%",
-                    borderRadius: visible ? "0 0 1rem 1rem" : "0 0 1rem 1rem",
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 50,
-                }}
-                className='fixed top-0 left-0 right-0 hidden lg:flex flex-row justify-around mx-auto py-3  items-center rounded-b-2xl z-50 bg-white'
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 30 }}
+                className={`fixed top-0.5 left-0 right-0 z-50 hidden lg:block transition-all duration-500 ${
+                    scrolled
+                        ? 'bg-white/80 backdrop-blur-2xl shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_32px_-8px_rgba(0,0,0,0.08)]'
+                        : 'bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]'
+                }`}
             >
-                <div>
-                    <Link href="/">
-                        <img src="/logo.png" alt="Digital Solution 360 Logo" className='w-50 xl:w-60' />
-                    </Link>
-                </div>
+                <div className="max-w-[1440px] mx-auto px-6 xl:px-10">
+                    <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-16' : 'h-[72px]'}`}>
 
-                <div>
-                    <nav onMouseLeave={() => setHovered(null)}>
-                        <ul className='flex flex-row justify-between gap-5 lg:gap-3 xl:gap-7 text-lg xl:text-xl'>
-                            {/* <li className='relative hidden [@media(min-width:1130px)]:block'>
-                            <Link 
-                                href="/" 
-                                onMouseEnter={() => setHovered('home')}
-                                className='relative px-0 py-2 inline-block'
+                        {/* Logo */}
+                        <Link href="/" className="shrink-0">
+                            <motion.img
+                                src="/logo.png"
+                                alt="Digital Solution 360"
+                                className={`transition-all duration-500 ${scrolled ? 'h-9' : 'h-11'}`}
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                            />
+                        </Link>
+
+                        {/* Center Navigation */}
+                        <nav className="flex-1 flex justify-center" onMouseLeave={() => setHovered(null)}>
+                            <ul className="flex items-center gap-0.5">
+                                {navItem('about', 'About', '/about-us')}
+
+                                {/* Services with mega menu */}
+                                <li
+                                    className="relative"
+                                    onMouseEnter={() => { setHovered('services'); setServicesOpen(true); }}
+                                    onMouseLeave={() => setServicesOpen(false)}
+                                >
+                                    <button className="relative px-4 py-2 text-[15px] font-medium text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-1 cursor-pointer">
+                                        {hovered === 'services' && (
+                                            <motion.div
+                                                layoutId="navPill"
+                                                className="absolute inset-0 bg-gray-100/80 rounded-lg"
+                                                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                                            />
+                                        )}
+                                        <span className="relative z-10">Services</span>
+                                        <IconChevronDown size={14} className={`relative z-10 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+
+                                    {/* Mega Dropdown */}
+                                    <AnimatePresence>
+                                        {servicesOpen && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                                                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.04)] overflow-hidden"
+                                                onMouseEnter={() => setServicesOpen(true)}
+                                                onMouseLeave={() => setServicesOpen(false)}
+                                            >
+                                                {/* Gradient top accent */}
+                                                <div className="h-[3px] bg-linear-to-r from-blue-500 via-purple-500 to-pink-500" />
+
+                                                <div className="p-5">
+                                                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-3 px-1">Our Services</p>
+                                                    <div className="grid grid-cols-2 gap-1">
+                                                        {navServices.map((svc) => {
+                                                            const SvcIcon = svc.icon;
+                                                            return (
+                                                                <Link
+                                                                    key={svc.name}
+                                                                    href={svc.href}
+                                                                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all duration-200 group/svc"
+                                                                >
+                                                                    <div className={`${svc.bg} p-2.5 rounded-xl shrink-0 group-hover/svc:scale-110 transition-transform duration-200`}>
+                                                                        <SvcIcon size={18} className={svc.text} stroke={1.5} />
+                                                                    </div>
+                                                                    <div className="pt-0.5">
+                                                                        <p className="text-sm font-semibold text-gray-900 group-hover/svc:text-blue-600 transition-colors">{svc.name}</p>
+                                                                        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{svc.desc}</p>
+                                                                    </div>
+                                                                </Link>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+
+                                                {/* Dropdown footer */}
+                                                <div className="bg-gray-50/80 px-6 py-3 flex items-center justify-between border-t border-gray-100">
+                                                    <span className="text-xs text-gray-400">Explore all our solutions</span>
+                                                    <Link href="/services" className="text-[13px] font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 group/link">
+                                                        View All
+                                                        <IconArrowRight size={13} className="group-hover/link:translate-x-0.5 transition-transform" />
+                                                    </Link>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </li>
+
+                                {navItem('portfolio', 'Portfolio', '/case-studies')}
+                                {navItem('careers', 'Careers', '/careers')}
+                                {navItem('blogs', 'Blogs', '/blogs')}
+                                {navItem('contact', 'Contact', '/contact-us')}
+                            </ul>
+                        </nav>
+
+                        {/* Right Actions */}
+                        <div className="flex items-center gap-3 shrink-0">
+                            <Link
+                                href="tel:+919990556217"
+                                className="hidden xl:flex items-center gap-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors group/phone"
                             >
-                                {hovered === 'home' && (
-                                    <motion.div
-                                        layoutId="hovered"
-                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    />
-                                )}
-                                <span className='relative z-20'>Home</span>
+                                <div className="w-9 h-9 bg-blue-50 rounded-full flex items-center justify-center group-hover/phone:bg-blue-100 group-hover/phone:scale-105 transition-all">
+                                    <IconPhone size={16} className="text-blue-600" stroke={1.8} />
+                                </div>
+                                <span>+91 99905 56217</span>
                             </Link>
-                        </li> */}
-                            <li className='relative'>
-                                <Link
-                                    href="/about-us"
-                                    onMouseEnter={() => setHovered('about')}
-                                    className='relative px-0 py-2 inline-block'
-                                >
-                                    {hovered === 'about' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>About</span>
-                                </Link>
-                            </li>
-                            <li
-                                className='relative'
-                                onMouseEnter={() => {
-                                    setHovered('services');
-                                    setServicesOpen(true);
-                                }}
-                                onMouseLeave={() => setServicesOpen(false)}
+
+                            <div className="hidden xl:block w-px h-6 bg-gray-200" />
+
+                            <button
+                                onClick={() => setShowForm(true)}
+                                className="relative group/cta cursor-pointer bg-linear-to-r from-blue-600 to-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-px active:translate-y-0 transition-all duration-300 overflow-hidden"
                             >
-                                <button
-                                    className='relative px-0 py-2 inline-flex items-center gap-1'
-                                >
-                                    {hovered === 'services' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>Services</span>
-                                    <IconChevronDown size={18} className='relative z-20' />
-                                </button>
-
-                                {/* Services Dropdown */}
-                                <AnimatePresence>
-                                    {servicesOpen && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            className='absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl py-2 min-w-[220px]'
-                                        >
-                                            <Link href="/services/digital-marketing" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                Digital Marketing
-                                            </Link>
-                                            <Link href="/services/content-marketing" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                Content Marketing
-                                            </Link>
-                                            <Link href="/services/web-development" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                Website Development
-                                            </Link>
-                                            <Link href="/services/search-engine-optimization-seo" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                SEO Services
-                                            </Link>
-                                            <Link href="/services/social-media" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                Social Media
-                                            </Link>
-                                            <Link href="/services/crm-development" className='block px-6 py-3 hover:bg-gray-100 transition-colors cursor-pointer'>
-                                                CRM Development
-                                            </Link>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </li>
-                            <li className='relative'>
-                                <Link
-                                    href="/case-studies"
-                                    onMouseEnter={() => setHovered('portfolio')}
-                                    className='relative px-0 py-2 inline-block'
-                                >
-                                    {hovered === 'portfolio' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>Portfolio</span>
-                                </Link>
-                            </li>
-                            <li className='relative'>
-                                <Link
-                                    href="/careers"
-                                    onMouseEnter={() => setHovered('careers')}
-                                    className='relative px-0 py-2 inline-block'
-                                >
-                                    {hovered === 'careers' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>Careers</span>
-                                </Link>
-                            </li>
-                            <li className='relative'>
-                                <Link
-                                    href="/blogs"
-                                    onMouseEnter={() => setHovered('blogs')}
-                                    className='relative px-0 py-2 inline-block'
-                                >
-                                    {hovered === 'blogs' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>Blogs</span>
-                                </Link>
-                            </li>
-                            <li className='relative'>
-                                <Link
-                                    href="/contact-us"
-                                    onMouseEnter={() => setHovered('contact')}
-                                    className='relative px-0 py-2 inline-block'
-                                >
-                                    {hovered === 'contact' && (
-                                        <motion.div
-                                            layoutId="hovered"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className='relative z-20'>Contact</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
+                                <span className="relative z-10 flex items-center gap-1.5">
+                                    Get a Quote
+                                    <IconArrowRight size={15} className="group-hover/cta:translate-x-0.5 transition-transform" />
+                                </span>
+                                <motion.div
+                                    className="absolute inset-0 w-full h-full"
+                                    initial={{ x: '-100%', opacity: 0 }}
+                                    animate={{ x: ['100%', '100%', '-100%'], opacity: [0, 0.35, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
+                                    style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)', transform: 'skewX(-20deg)' }}
+                                />
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </motion.nav>
 
-                <div className='flex flex-row items-center'>
-                    <Link href="tel:+919990556217" className='text-lg hover:text-xl font-semibold text-blue-500 transition-all duration-200'>
-                        +91 99905 56217
-                    </Link>
-
-                    <button
-                        onClick={() => setShowForm(true)}
-                        className='bg-blue-600 text-white ml-4 hover:scale-110 hover:text-xl rounded-2xl px-4 py-3 text-lg inline-block relative overflow-hidden transition-all duration-200'
-                    >
-                        <span className='relative z-10'>Get a Quote</span>
-                        <motion.div
-                            className="absolute inset-0 w-full h-full"
-                            initial={{ x: '-100%', opacity: 0 }}
-                            animate={{
-                                x: ['100%', '100%', '-100%'],
-                                opacity: [0, 0.6, 0]
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                repeatDelay: 2.5,
-                                ease: "easeInOut"
-                            }}
-                            style={{
-                                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
-                                transform: 'skewX(-20deg)'
-                            }}
-                        />
-                    </button>
-                </div>
-            </motion.div>
-
-            {/* Mobile Header */}
+            {/* ━━━━━━━━━━━━━━━ MOBILE NAV BAR ━━━━━━━━━━━━━━━ */}
             <motion.div
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 50,
-                }}
-                className='fixed top-0 left-0 right-0 bg-white flex lg:hidden flex-col max-w-[calc(100vw-2rem)] mx-auto mt-4 rounded-xl shadow-2xl z-50'
+                transition={{ type: 'spring', stiffness: 260, damping: 30 }}
+                className="fixed top-2 left-3 right-3 lg:hidden z-50 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.03)]"
             >
-                <div className='flex flex-row justify-between items-center px-4 py-4'>
+                <div className="flex items-center justify-between px-4 py-3.5">
                     <Link href="/">
-                        <img src="/logo.png" alt="Digital Solution 360 Logo" className='w-55' />
+                        <img src="/logo.png" alt="Digital Solution 360" className="h-9" />
                     </Link>
-
-                    <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                        {mobileMenuOpen ? <IconX size={28} /> : <IconMenu2 size={28} />}
+                    <button
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                        aria-label="Toggle menu"
+                    >
+                        <AnimatePresence mode="wait">
+                            {mobileOpen ? (
+                                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                    <IconX size={20} />
+                                </motion.div>
+                            ) : (
+                                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                    <IconMenu2 size={20} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </button>
                 </div>
-
-                {/* Mobile Menu */}
-                <AnimatePresence>
-                    {mobileMenuOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className='overflow-hidden'
-                        >
-                            <nav className='px-4 pb-6'>
-                                <ul className='flex flex-col gap-4 text-lg'>
-                                    <li><Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
-                                    <li><Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>About</Link></li>
-                                    <li>
-                                        <button
-                                            onClick={() => setServicesOpen(!servicesOpen)}
-                                            className='flex items-center gap-2 w-full'
-                                        >
-                                            Services <IconChevronDown size={18} className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-                                        </button>
-                                        <AnimatePresence>
-                                            {servicesOpen && (
-                                                <motion.ul
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: "auto", opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    className='ml-4 mt-2 flex flex-col gap-2 overflow-hidden'
-                                                >
-                                                    <li><Link href="/digital-marketing" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>Digital Marketing</Link></li>
-                                                    <li><Link href="/content-marketing" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>Content Marketing</Link></li>
-                                                    <li><Link href="/web-development" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>Website Development</Link></li>
-                                                    <li><Link href="/search-engine-optimization-seo" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>SEO Services</Link></li>
-                                                    <li><Link href="/social-media" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>Social Media</Link></li>
-                                                    <li><Link href="/crm-development" onClick={() => setMobileMenuOpen(false)} className='text-gray-600'>CRM Development</Link></li>
-                                                </motion.ul>
-                                            )}
-                                        </AnimatePresence>
-                                    </li>
-                                    <li><Link href="/case-studies" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link></li>
-                                    <li><Link href="/careers" onClick={() => setMobileMenuOpen(false)}>Careers</Link></li>
-                                    <li><Link href="/blogs" onClick={() => setMobileMenuOpen(false)}>Blogs</Link></li>
-                                    <li><Link href="/contact-us" onClick={() => setMobileMenuOpen(false)}>Contact</Link></li>
-                                </ul>
-
-                                <div className='flex flex-col gap-3 mt-6'>
-                                    <Link href="tel:+919990556217" className='text-center border border-gray-300 rounded-md px-4 py-3 text-lg'>
-                                        +91 99905 56217
-                                    </Link>
-
-                                    <button
-                                        onClick={() => {
-                                            setMobileMenuOpen(false);
-                                            setShowForm(true);
-                                        }}
-                                        className='bg-blue-600 text-white text-center rounded-md px-4 py-3 text-lg relative overflow-hidden'
-                                    >
-                                        <span className='relative z-10'>Get a Quote</span>
-                                        <motion.div
-                                            className="absolute inset-0 w-full h-full"
-                                            initial={{ x: '-100%', opacity: 0 }}
-                                            animate={{
-                                                x: ['100%', '100%', '-100%'],
-                                                opacity: [0, 0.6, 0]
-                                            }}
-                                            transition={{
-                                                duration: 1.5,
-                                                repeat: Infinity,
-                                                repeatDelay: 3.5,
-                                                ease: "easeInOut"
-                                            }}
-                                            style={{
-                                                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
-                                                transform: 'skewX(-20deg)'
-                                            }}
-                                        />
-                                    </button>
-                                </div>
-                            </nav>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </motion.div>
 
-            {/* Popup Form */}
-            {showForm && (
-                <div className='fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4'>
-                    <div className='bg-white rounded-lg shadow-2xl w-full max-w-md relative animate-fadeIn'>
-                        {/* Close Button */}
-                        <button
-                            onClick={() => setShowForm(false)}
-                            className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors'
-                        >
-                            <FaTimes className="text-2xl" />
-                        </button>
+            {/* ━━━━━━━━━━━━━━━ MOBILE FULL-SCREEN OVERLAY ━━━━━━━━━━━━━━━ */}
+            <AnimatePresence>
+                {mobileOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="fixed inset-0 lg:hidden z-40 bg-white"
+                    >
+                        <nav className="pt-24 px-6 pb-8 h-full flex flex-col overflow-y-auto">
+                            <ul className="flex flex-col gap-1 flex-1">
+                                {[
+                                    { name: 'Home', href: '/' },
+                                    { name: 'About', href: '/about-us' },
+                                    { name: 'Services', href: '#', hasDropdown: true },
+                                    { name: 'Portfolio', href: '/case-studies' },
+                                    { name: 'Careers', href: '/careers' },
+                                    { name: 'Blogs', href: '/blogs' },
+                                    { name: 'Contact', href: '/contact-us' },
+                                ].map((item, i) => (
+                                    <motion.li
+                                        key={item.name}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.05 + 0.1 }}
+                                    >
+                                        {item.hasDropdown ? (
+                                            <>
+                                                <button
+                                                    onClick={() => setServicesOpen(!servicesOpen)}
+                                                    className="w-full flex items-center justify-between py-3.5 px-4 text-lg font-semibold text-gray-900 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer"
+                                                >
+                                                    {item.name}
+                                                    <IconChevronDown size={18} className={`text-gray-400 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
+                                                </button>
+                                                <AnimatePresence>
+                                                    {servicesOpen && (
+                                                        <motion.div
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: 'auto', opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            transition={{ duration: 0.3 }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <div className="ml-2 py-2 space-y-0.5">
+                                                                {navServices.map((svc) => {
+                                                                    const SIcon = svc.icon;
+                                                                    return (
+                                                                        <Link
+                                                                            key={svc.name}
+                                                                            href={svc.href}
+                                                                            onClick={() => setMobileOpen(false)}
+                                                                            className="flex items-center gap-3 py-2.5 px-3 rounded-xl hover:bg-gray-50 transition-colors"
+                                                                        >
+                                                                            <div className={`${svc.bg} p-2 rounded-lg`}>
+                                                                                <SIcon size={16} className={svc.text} stroke={1.5} />
+                                                                            </div>
+                                                                            <span className="text-gray-700 font-medium">{svc.name}</span>
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                href={item.href}
+                                                onClick={() => setMobileOpen(false)}
+                                                className="block py-3.5 px-4 text-lg font-semibold text-gray-900 rounded-xl hover:bg-gray-50 transition-colors"
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        )}
+                                    </motion.li>
+                                ))}
+                            </ul>
 
-                        {/* Form Content */}
-                        <div className='p-6'>
-                            <h2 className='text-2xl font-bold text-gray-900 mb-2'>Get a Quote</h2>
-                            <p className='text-gray-600 mb-6'>Fill in your details and we&apos;ll get back to you shortly.</p>
-
-                            <form
-                                onSubmit={handleSubmit}
-                                className='space-y-4'
+                            {/* Mobile Bottom Actions */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="pt-6 space-y-3 border-t border-gray-100"
                             >
-                                {/* FormSubmit Configuration */}
-                                <input type="hidden" name="_subject" value="New Quote Request - Digital Solution 360" />
-                                <input type="hidden" name="_captcha" value="false" />
-                                <input type="hidden" name="_template" value="table" />
-
-                                {/* Name Field */}
-                                <div>
-                                    <label htmlFor="name" className='block text-sm font-medium text-gray-700 mb-1'>
-                                        Full Name *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        required
-                                        className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
-                                        placeholder='Enter your name'
-                                    />
-                                </div>
-
-                                {/* Email Field */}
-                                <div>
-                                    <label htmlFor="email" className='block text-sm font-medium text-gray-700 mb-1'>
-                                        Email Address *
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        required
-                                        className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
-                                        placeholder='Enter your email'
-                                    />
-                                </div>
-
-                                {/* Phone Field */}
-                                <div>
-                                    <label htmlFor="phone" className='block text-sm font-medium text-gray-700 mb-1'>
-                                        Phone Number *
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="phone"
-                                        name="phone"
-                                        required
-                                        pattern="[0-9]{10,15}"
-                                        className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
-                                        placeholder='Enter your phone number'
-                                    />
-                                </div>
-
-                                {/* Submit Button */}
-                                <button
-                                    type="submit"
-                                    className='w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-6'
+                                <Link
+                                    href="tel:+919990556217"
+                                    className="flex items-center justify-center gap-2 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
                                 >
-                                    Submit Request
+                                    <IconPhone size={18} stroke={1.8} />
+                                    +91 99905 56217
+                                </Link>
+                                <button
+                                    onClick={() => { setMobileOpen(false); setShowForm(true); }}
+                                    className="w-full cursor-pointer bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl px-4 py-3.5 font-semibold shadow-lg shadow-blue-600/20 relative overflow-hidden"
+                                >
+                                    <span className="relative z-10">Get a Quote</span>
+                                    <motion.div
+                                        className="absolute inset-0 w-full h-full"
+                                        initial={{ x: '-100%', opacity: 0 }}
+                                        animate={{ x: ['100%', '100%', '-100%'], opacity: [0, 0.35, 0] }}
+                                        transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3.5, ease: 'easeInOut' }}
+                                        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)', transform: 'skewX(-20deg)' }}
+                                    />
                                 </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
+                            </motion.div>
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-            {/* Thank You Modal */}
-            {showThankYou && (
-                <div className='fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4'>
-                    <div className='bg-white rounded-lg shadow-2xl w-full max-w-md relative animate-fadeIn p-8 text-center'>
-                        {/* Close Button */}
-                        <button
-                            onClick={() => setShowThankYou(false)}
-                            className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors'
+            {/* ━━━━━━━━━━━━━━━ POPUP FORM ━━━━━━━━━━━━━━━ */}
+            <AnimatePresence>
+                {showForm && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-60 p-4"
+                        onClick={(e) => { if (e.target === e.currentTarget) setShowForm(false); }}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden"
                         >
-                            <FaTimes className="text-2xl" />
-                        </button>
+                            {/* Gradient accent */}
+                            <div className="h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500" />
 
-                        {/* Success Icon */}
-                        <div className='w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-                            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
+                            <button
+                                onClick={() => setShowForm(false)}
+                                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-all hover:rotate-90 duration-200 cursor-pointer"
+                            >
+                                <IconX size={15} />
+                            </button>
 
-                        <h2 className='text-3xl font-bold text-gray-900 mb-3'>Thank You!</h2>
-                        <p className='text-gray-600 text-lg mb-2'>Your request has been submitted successfully.</p>
-                        <p className='text-gray-500 text-sm'>We&apos;ll get back to you shortly.</p>
+                            <div className="p-7 pt-6">
+                                <h2 className="text-2xl font-bold text-gray-900 mb-1">Get a Quote</h2>
+                                <p className="text-gray-500 text-sm mb-7">Fill in your details and we&apos;ll get back to you shortly.</p>
 
-                        {/* Auto-close indicator */}
-                        <p className='text-gray-400 text-xs mt-6'>This window will close automatically in 5 seconds</p>
-                    </div>
-                </div>
-            )}
+                                <form onSubmit={handleSubmit} className="space-y-4">
+                                    <input type="hidden" name="_subject" value="New Quote Request - Digital Solution 360" />
+                                    <input type="hidden" name="_captcha" value="false" />
+                                    <input type="hidden" name="_template" value="table" />
+
+                                    <div>
+                                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">Full Name *</label>
+                                        <input
+                                            type="text" id="name" name="name" required placeholder="John Doe"
+                                            className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">Email Address *</label>
+                                        <input
+                                            type="email" id="email" name="email" required placeholder="john@company.com"
+                                            className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number *</label>
+                                        <input
+                                            type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}" placeholder="9876543210"
+                                            className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm"
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full cursor-pointer bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-600/25 hover:-translate-y-px active:translate-y-0 transition-all duration-300 mt-2"
+                                    >
+                                        Submit Request
+                                    </button>
+                                </form>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ━━━━━━━━━━━━━━━ THANK YOU MODAL ━━━━━━━━━━━━━━━ */}
+            <AnimatePresence>
+                {showThankYou && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-60 p-4"
+                        onClick={(e) => { if (e.target === e.currentTarget) setShowThankYou(false); }}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative p-8 text-center"
+                        >
+                            <button
+                                onClick={() => setShowThankYou(false)}
+                                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-all hover:rotate-90 duration-200 cursor-pointer"
+                            >
+                                <IconX size={15} />
+                            </button>
+
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
+                                className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5"
+                            >
+                                <svg className="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <motion.path
+                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: 0.5, delay: 0.3 }}
+                                    />
+                                </svg>
+                            </motion.div>
+
+                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h2>
+                            <p className="text-gray-600 mb-1">Your request has been submitted successfully.</p>
+                            <p className="text-gray-400 text-sm">We&apos;ll get back to you shortly.</p>
+
+                            {/* Countdown progress bar */}
+                            <div className="mt-6 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <motion.div
+                                    className="h-full bg-linear-to-r from-blue-500 to-purple-500 rounded-full"
+                                    initial={{ width: '100%' }}
+                                    animate={{ width: '0%' }}
+                                    transition={{ duration: 5, ease: 'linear' }}
+                                />
+                            </div>
+                            <p className="text-gray-400 text-xs mt-2">Closing automatically...</p>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
-    )
+    );
 }
 
 export default Header
