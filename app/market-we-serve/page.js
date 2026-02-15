@@ -20,7 +20,7 @@ import {
     IconBrandWordpress
 } from '@tabler/icons-react'
 
-const API_BASE = 'http://localhost:5001/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function MarketWeServePage() {
     const [stats, setStats] = useState({ totalStates: 0, totalCities: 0, categoryStats: {} });
