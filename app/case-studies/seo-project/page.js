@@ -5,6 +5,7 @@ import { motion } from 'motion/react'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
+import LocationStructuredData from '@/components/seo/LocationStructuredData'
 import { IconChevronLeft, IconTrendingUp, IconUsers, IconExternalLink, IconChartBar } from '@tabler/icons-react'
 import data from './content.json'
 
@@ -14,6 +15,7 @@ export default function SEOProjectsPage() {
     return (
         <>
             <Header />
+            <LocationStructuredData locationData={{ id: 25, name: 'India' }} locationType="country" serviceType="seo-service" />
 
             {/* Hero Section */}
             <section className='relative min-h-[60vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>

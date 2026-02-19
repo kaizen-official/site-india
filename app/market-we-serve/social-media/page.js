@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
+import LocationStructuredData from '@/components/seo/LocationStructuredData'
 import {
     IconMapPin,
     IconSearch,
@@ -57,6 +58,7 @@ export default function SocialMediaMarketPage() {
     return (
         <>
             <Header />
+            <LocationStructuredData locationData={{ id: 4, name: 'India' }} locationType="country" serviceType="social-media" />
 
             {loading ? (
                 <div className='min-h-screen flex items-center justify-center'>

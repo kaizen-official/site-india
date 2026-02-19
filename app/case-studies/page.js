@@ -5,6 +5,7 @@ import { motion } from 'motion/react'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
+import LocationStructuredData from '@/components/seo/LocationStructuredData'
 import {
     IconSearch,
     IconWorld,
@@ -151,6 +152,7 @@ export default function CaseStudiesPage() {
     return (
         <>
             <Header />
+            <LocationStructuredData locationData={{ id: 20, name: 'India' }} locationType="country" serviceType="digital-marketing" />
 
             {/* Hero Section */}
             <section className='relative min-h-[90vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>

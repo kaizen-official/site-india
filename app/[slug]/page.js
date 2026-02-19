@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import LocationStructuredData from '@/components/seo/LocationStructuredData';
 import {
     IconArrowLeft,
     IconArrowRight,
@@ -58,6 +59,15 @@ import {
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 /* ────────── category config ────────── */
+const CATEGORY_SERVICE_MAP = {
+    'Google Business': 'google-my-business-listing',
+    'Digital Marketing': 'digital-marketing',
+    'Web Development': 'website-development',
+    'Social Media': 'social-media-marketing',
+    'Content Writing': 'content-marketing',
+    'Wordpress Development': 'wordpress-development',
+};
+
 const CATEGORY_CONFIG = {
     'Google Business': {
         theme: {
@@ -478,6 +488,11 @@ export default function CityServicePage() {
     return (
         <>
             <Header />
+            <LocationStructuredData
+                locationData={city}
+                locationType="city"
+                serviceType={CATEGORY_SERVICE_MAP[city.category_name] || 'digital-marketing'}
+            />
 
             {/* Hero Section */}
             <section className='relative min-h-[70vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>
