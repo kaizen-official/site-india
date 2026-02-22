@@ -417,7 +417,7 @@ export default function WordpressMarketPage() {
                     </section>
 
                     {/* CTA Section */}
-                    <section className='py-16 px-4 md:px-8 lg:px-16 bg-gradient-to-r from-slate-900 to-indigo-900'>
+                    <section className='py-16 px-4 md:px-8 lg:px-16 bg-linear-to-r from-slate-900 to-indigo-900'>
                         <div className='max-w-4xl mx-auto text-center'>
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}

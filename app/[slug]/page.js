@@ -54,7 +54,12 @@ import {
     IconBookmark,
     IconBrandHtml5,
     IconPlus,
-    IconMinus
+    IconMinus,
+    IconStarFilled,
+    IconChecks,
+    IconSend,
+    IconPhone,
+    IconUser
 } from '@tabler/icons-react';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
@@ -82,9 +87,9 @@ const CATEGORY_CONFIG = {
     'Google Business': {
         theme: {
             primary: 'blue-600', light: 'blue-50', dark: 'blue-900', border: 'blue-200', accent: 'blue-100',
-            gradient: 'from-blue-900/95 via-blue-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-blue-900/70',
             button: 'bg-blue-600 hover:bg-blue-700',
-            ctaBg: 'bg-blue-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-blue-900',
             ctaText: 'text-blue-600',
             ctaLight: 'text-blue-100',
             iconText: 'text-blue-600',
@@ -92,6 +97,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-blue-100',
             badgeText: 'text-blue-800',
             statBg: 'bg-blue-50',
+            formRing: 'focus:ring-blue-500',
+            ratings: '2,540',
+            projects: '256+',
         },
         backLink: '/market-we-serve/gmb',
         backLabel: 'GMB Services',
@@ -139,9 +147,9 @@ const CATEGORY_CONFIG = {
     'Digital Marketing': {
         theme: {
             primary: 'orange-600', light: 'orange-50', dark: 'orange-900', border: 'orange-200', accent: 'orange-100',
-            gradient: 'from-orange-900/95 via-orange-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-orange-900/70',
             button: 'bg-orange-600 hover:bg-orange-700',
-            ctaBg: 'bg-orange-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-orange-900',
             ctaText: 'text-orange-600',
             ctaLight: 'text-orange-100',
             iconText: 'text-orange-600',
@@ -149,6 +157,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-orange-100',
             badgeText: 'text-orange-800',
             statBg: 'bg-orange-50',
+            formRing: 'focus:ring-orange-500',
+            ratings: '3,120',
+            projects: '340+',
         },
         backLink: '/market-we-serve/marketing',
         backLabel: 'Digital Marketing',
@@ -198,9 +209,9 @@ const CATEGORY_CONFIG = {
     'Web Development': {
         theme: {
             primary: 'purple-600', light: 'purple-50', dark: 'purple-900', border: 'purple-200', accent: 'purple-100',
-            gradient: 'from-purple-900/95 via-purple-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-purple-900/70',
             button: 'bg-purple-600 hover:bg-purple-700',
-            ctaBg: 'bg-purple-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-purple-900',
             ctaText: 'text-purple-600',
             ctaLight: 'text-purple-100',
             iconText: 'text-purple-600',
@@ -208,6 +219,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-purple-100',
             badgeText: 'text-purple-800',
             statBg: 'bg-purple-50',
+            formRing: 'focus:ring-purple-500',
+            ratings: '1,890',
+            projects: '185+',
         },
         backLink: '/market-we-serve/web',
         backLabel: 'Web Development',
@@ -257,9 +271,9 @@ const CATEGORY_CONFIG = {
     'Social Media': {
         theme: {
             primary: 'pink-600', light: 'pink-50', dark: 'pink-900', border: 'pink-200', accent: 'pink-100',
-            gradient: 'from-pink-900/95 via-pink-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-pink-900/70',
             button: 'bg-pink-600 hover:bg-pink-700',
-            ctaBg: 'bg-pink-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-pink-900',
             ctaText: 'text-pink-600',
             ctaLight: 'text-pink-100',
             iconText: 'text-pink-600',
@@ -267,6 +281,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-pink-100',
             badgeText: 'text-pink-800',
             statBg: 'bg-pink-50',
+            formRing: 'focus:ring-pink-500',
+            ratings: '2,750',
+            projects: '290+',
         },
         backLink: '/market-we-serve',
         backLabel: 'Markets We Serve',
@@ -306,9 +323,9 @@ const CATEGORY_CONFIG = {
     'Content Writing': {
         theme: {
             primary: 'teal-600', light: 'teal-50', dark: 'teal-900', border: 'teal-200', accent: 'teal-100',
-            gradient: 'from-teal-900/95 via-teal-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-teal-900/70',
             button: 'bg-teal-600 hover:bg-teal-700',
-            ctaBg: 'bg-teal-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-teal-900',
             ctaText: 'text-teal-600',
             ctaLight: 'text-teal-100',
             iconText: 'text-teal-600',
@@ -316,6 +333,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-teal-100',
             badgeText: 'text-teal-800',
             statBg: 'bg-teal-50',
+            formRing: 'focus:ring-teal-500',
+            ratings: '1,650',
+            projects: '210+',
         },
         backLink: '/market-we-serve',
         backLabel: 'Markets We Serve',
@@ -355,9 +375,9 @@ const CATEGORY_CONFIG = {
     'Wordpress Development': {
         theme: {
             primary: 'indigo-600', light: 'indigo-50', dark: 'indigo-900', border: 'indigo-200', accent: 'indigo-100',
-            gradient: 'from-indigo-900/95 via-indigo-800/90 to-transparent',
+            gradient: 'from-slate-900/95 via-slate-800/90 to-indigo-900/70',
             button: 'bg-indigo-600 hover:bg-indigo-700',
-            ctaBg: 'bg-indigo-600',
+            ctaBg: 'bg-linear-to-r from-slate-900 to-indigo-900',
             ctaText: 'text-indigo-600',
             ctaLight: 'text-indigo-100',
             iconText: 'text-indigo-600',
@@ -365,6 +385,9 @@ const CATEGORY_CONFIG = {
             badgeBg: 'bg-indigo-100',
             badgeText: 'text-indigo-800',
             statBg: 'bg-indigo-50',
+            formRing: 'focus:ring-indigo-500',
+            ratings: '2,080',
+            projects: '175+',
         },
         backLink: '/market-we-serve',
         backLabel: 'Markets We Serve',
@@ -412,6 +435,9 @@ export default function CityServicePage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openFaq, setOpenFaq] = useState(null);
+    const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+    const [formStatus, setFormStatus] = useState(null);
+    const [otherCities, setOtherCities] = useState([]);
 
     useEffect(() => {
         async function fetchCity() {
@@ -432,6 +458,40 @@ export default function CityServicePage() {
         }
         if (slug) fetchCity();
     }, [slug]);
+
+    useEffect(() => {
+        if (city && city.category_name) {
+            const marketMap = {
+                'Google Business': 'gmb',
+                'Digital Marketing': 'marketing',
+                'Web Development': 'web',
+                'Social Media': 'social-media',
+                'Content Writing': 'content-writing',
+                'Wordpress Development': 'wordpress',
+            };
+            const endpoint = marketMap[city.category_name];
+            if (endpoint) {
+                fetch(`${API_BASE}/market/${endpoint}`)
+                    .then(res => res.json())
+                    .then(json => {
+                        if (json.success) {
+                            const currentState = json.data.find(s => s.name === city.state_name);
+                            if (currentState) {
+                                setOtherCities(currentState.cities.filter(c => c.slug !== slug).slice(0, 12));
+                            }
+                        }
+                    })
+                    .catch(() => {});
+            }
+        }
+    }, [city, slug]);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setFormStatus('success');
+        setFormData({ name: '', phone: '', email: '', message: '' });
+        setTimeout(() => setFormStatus(null), 3000);
+    };
 
     /* ── Loading ── */
     if (loading) {
@@ -510,7 +570,7 @@ export default function CityServicePage() {
             />
 
             {/* Hero Section */}
-            <section className='relative min-h-[70vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>
+            <section className='relative min-h-[55vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-12 overflow-hidden'>
                 <div className='absolute inset-0 z-0'>
                     <div className={`absolute inset-0 bg-linear-to-r ${theme.gradient} z-10`} />
                     <img src={heroImage} alt={city.city_name} className='w-full h-full object-cover' />
@@ -541,10 +601,32 @@ export default function CityServicePage() {
                             Professional {city.category_name.toLowerCase()} services in {cityName}, {stateName}. DigitalSolution 360 helps local businesses grow their online presence.
                         </p>
 
-                        <div className='flex flex-wrap gap-4'>
-                            <Link href='/contact-us' className={`${theme.button} text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl`}>
+                        <div className='flex flex-wrap gap-4 mb-8'>
+                            <Link href='/contact-us' className='bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl inline-flex items-center gap-2'>
                                 Get Free Consultation
+                                <IconArrowRight className='w-5 h-5' />
                             </Link>
+                        </div>
+
+                        <div className='flex flex-wrap gap-6'>
+                            <div className='flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20'>
+                                <div className='flex items-center gap-1'>
+                                    {[...Array(5)].map((_, i) => (
+                                        <IconStarFilled key={i} className='w-4 h-4 text-amber-400' />
+                                    ))}
+                                </div>
+                                <div>
+                                    <div className='text-2xl font-bold text-white'>{theme.ratings}</div>
+                                    <div className='text-sm text-gray-300'>Ratings</div>
+                                </div>
+                            </div>
+                            <div className='flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20'>
+                                <IconChecks className='w-6 h-6 text-emerald-400' />
+                                <div>
+                                    <div className='text-2xl font-bold text-white'>{theme.projects}</div>
+                                    <div className='text-sm text-gray-300'>Projects Done</div>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
@@ -570,35 +652,107 @@ export default function CityServicePage() {
                 </div>
             </section>
 
-            {/* City Description (from DB) */}
+            {/* City Description with Sidebar */}
             {city.city_description && (
                 <section className='py-16 px-4 md:px-8 lg:px-16'>
                     <div className='max-w-7xl mx-auto'>
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8'>
-                                {city.category_name} in {cityName}
-                            </h2>
-                            <div
-                                className='prose prose-lg max-w-none text-gray-700 leading-relaxed
-                                    [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
-                                    [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-gray-800 [&_h3]:mt-6 [&_h3]:mb-3
-                                    [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-gray-800 [&_h4]:mt-5 [&_h4]:mb-2
-                                    [&_p]:mb-4 [&_p]:leading-relaxed
-                                    [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4
-                                    [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4
-                                    [&_li]:mb-2
-                                    [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800
-                                    [&_b]:font-semibold [&_b]:text-gray-900
-                                    [&_strong]:font-semibold [&_strong]:text-gray-900
-                                    [&_i]:italic'
-                                dangerouslySetInnerHTML={{ __html: city.city_description }}
-                            />
-                        </motion.div>
+                        <div className='flex flex-col lg:flex-row gap-8'>
+                            {/* Left: 70% - Description */}
+                            <div className='w-full lg:w-[70%]'>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8 }}
+                                >
+                                    <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8'>
+                                        {city.category_name} in {cityName}
+                                    </h2>
+                                    <div
+                                        className='prose prose-lg max-w-none text-gray-700 leading-relaxed
+                                            [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
+                                            [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-gray-800 [&_h3]:mt-6 [&_h3]:mb-3
+                                            [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-gray-800 [&_h4]:mt-5 [&_h4]:mb-2
+                                            [&_p]:mb-4 [&_p]:leading-relaxed
+                                            [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4
+                                            [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4
+                                            [&_li]:mb-2
+                                            [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800
+                                            [&_b]:font-semibold [&_b]:text-gray-900
+                                            [&_strong]:font-semibold [&_strong]:text-gray-900
+                                            [&_i]:italic'
+                                        dangerouslySetInnerHTML={{ __html: city.city_description }}
+                                    />
+                                </motion.div>
+                            </div>
+
+                            {/* Right: 30% - Contact Form + Other Cities */}
+                            <div className='w-full lg:w-[30%]'>
+                                <div className='lg:sticky lg:top-24 space-y-6'>
+                                    {/* Contact Form */}
+                                    <motion.div
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6 }}
+                                        className='bg-white border border-gray-200 rounded-xl shadow-lg p-6'
+                                    >
+                                        <h3 className='text-xl font-bold text-gray-900 mb-1'>Get Free Consultation</h3>
+                                        <p className='text-sm text-gray-500 mb-4'>Talk to our {city.category_name.toLowerCase()} experts today</p>
+                                        <form onSubmit={handleFormSubmit} className='space-y-3'>
+                                            <div className='relative'>
+                                                <IconUser className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                                <input type='text' placeholder='Your Name' required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.formRing} text-sm`} />
+                                            </div>
+                                            <div className='relative'>
+                                                <IconPhone className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                                <input type='tel' placeholder='Phone Number' required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.formRing} text-sm`} />
+                                            </div>
+                                            <div className='relative'>
+                                                <IconMail className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                                <input type='email' placeholder='Email Address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.formRing} text-sm`} />
+                                            </div>
+                                            <textarea placeholder='Tell us about your requirements...' rows={3} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.formRing} text-sm resize-none`} />
+                                            <button type='submit' className={`w-full ${theme.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2`}>
+                                                <IconSend className='w-4 h-4' />
+                                                Send Enquiry
+                                            </button>
+                                            {formStatus === 'success' && (
+                                                <p className='text-green-600 text-sm text-center font-medium'>Thank you! We&apos;ll contact you soon.</p>
+                                            )}
+                                        </form>
+                                    </motion.div>
+
+                                    {/* Other Cities in State */}
+                                    {otherCities.length > 0 && (
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.6, delay: 0.1 }}
+                                            className='bg-white border border-gray-200 rounded-xl shadow-lg p-6'
+                                        >
+                                            <h3 className='text-lg font-bold text-gray-900 mb-4 flex items-center gap-2'>
+                                                <IconMapPin className={`w-5 h-5 ${theme.iconText}`} />
+                                                Other Cities in {stateName}
+                                            </h3>
+                                            <div className='space-y-2'>
+                                                {otherCities.map((c, index) => (
+                                                    <Link
+                                                        key={index}
+                                                        href={`/${c.slug}`}
+                                                        className='flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors group'
+                                                    >
+                                                        <span className='text-sm font-medium text-gray-800 group-hover:text-gray-900'>{c.name}</span>
+                                                        <IconArrowRight className='w-3 h-3 text-gray-300 group-hover:text-gray-500 transition-colors' />
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             )}
@@ -924,12 +1078,12 @@ export default function CityServicePage() {
                         <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6'>
                             Ready to Grow Your Business in {cityName}?
                         </h2>
-                        <p className={`text-xl ${theme.ctaLight} mb-8`}>
+                        <p className='text-xl text-gray-300 mb-8'>
                             Let our {city.category_name.toLowerCase()} experts help you dominate the {cityName} market.
                         </p>
                         <Link
                             href='/contact-us'
-                            className={`inline-block bg-white ${theme.ctaText} px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-all duration-300 hover:scale-105 hover:shadow-xl`}
+                            className='inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl'
                         >
                             Get Started Today
                         </Link>
