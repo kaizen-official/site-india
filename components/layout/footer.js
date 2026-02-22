@@ -26,11 +26,12 @@ function Footer() {
 
     const services = [
         { name: 'Digital Marketing', href: '/digital-marketing' },
-        { name: 'Website Development', href: '/web-app-development' },
+        { name: 'Website Development', href: '/website-development' },
         { name: 'SEO Services', href: '/seo' },
-        { name: 'Brand & Creative', href: '/brand-creative' },
-        { name: 'Social Media Marketing', href: '/media-advertising' },
-        { name: 'Automation Solutions', href: '/automation-solution' },
+        { name: 'Branding', href: '/branding' },
+        { name: 'Social Media Marketing', href: '/social-media-marketing' },
+        { name: 'Automation Solutions', href: '/automation' },
+        { name: 'Managed Services', href: '/managed-services' },
     ];
 
     const quickLinks = [

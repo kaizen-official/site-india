@@ -1,0 +1,246 @@
+"use client";
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
+import { useParams, notFound } from 'next/navigation';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
+import serviceCategories from '@/app/services/serviceData';
+import {
+    IconArrowRight, IconArrowLeft, IconCheck, IconPlus, IconMinus,
+    IconStarFilled, IconChecks, IconSend, IconPhone, IconUser, IconMail
+} from '@tabler/icons-react';
+
+const COLOR_MAP = {
+    blue: { gradient: 'from-slate-900/95 via-slate-800/90 to-blue-900/70', ctaGrad: 'from-slate-900 to-blue-900', badge: 'bg-blue-100 text-blue-800', iconBg: 'bg-blue-100', iconText: 'text-blue-600', stat: 'bg-blue-50', ring: 'focus:ring-blue-500', btn: 'bg-blue-600 hover:bg-blue-700', lightBg: 'bg-blue-50', border: 'border-blue-200', hoverBg: 'hover:bg-blue-50' },
+    emerald: { gradient: 'from-slate-900/95 via-slate-800/90 to-emerald-900/70', ctaGrad: 'from-slate-900 to-emerald-900', badge: 'bg-emerald-100 text-emerald-800', iconBg: 'bg-emerald-100', iconText: 'text-emerald-600', stat: 'bg-emerald-50', ring: 'focus:ring-emerald-500', btn: 'bg-emerald-600 hover:bg-emerald-700', lightBg: 'bg-emerald-50', border: 'border-emerald-200', hoverBg: 'hover:bg-emerald-50' },
+    orange: { gradient: 'from-slate-900/95 via-slate-800/90 to-orange-900/70', ctaGrad: 'from-slate-900 to-orange-900', badge: 'bg-orange-100 text-orange-800', iconBg: 'bg-orange-100', iconText: 'text-orange-600', stat: 'bg-orange-50', ring: 'focus:ring-orange-500', btn: 'bg-orange-600 hover:bg-orange-700', lightBg: 'bg-orange-50', border: 'border-orange-200', hoverBg: 'hover:bg-orange-50' },
+    violet: { gradient: 'from-slate-900/95 via-slate-800/90 to-violet-900/70', ctaGrad: 'from-slate-900 to-violet-900', badge: 'bg-violet-100 text-violet-800', iconBg: 'bg-violet-100', iconText: 'text-violet-600', stat: 'bg-violet-50', ring: 'focus:ring-violet-500', btn: 'bg-violet-600 hover:bg-violet-700', lightBg: 'bg-violet-50', border: 'border-violet-200', hoverBg: 'hover:bg-violet-50' },
+    pink: { gradient: 'from-slate-900/95 via-slate-800/90 to-pink-900/70', ctaGrad: 'from-slate-900 to-pink-900', badge: 'bg-pink-100 text-pink-800', iconBg: 'bg-pink-100', iconText: 'text-pink-600', stat: 'bg-pink-50', ring: 'focus:ring-pink-500', btn: 'bg-pink-600 hover:bg-pink-700', lightBg: 'bg-pink-50', border: 'border-pink-200', hoverBg: 'hover:bg-pink-50' },
+    indigo: { gradient: 'from-slate-900/95 via-slate-800/90 to-indigo-900/70', ctaGrad: 'from-slate-900 to-indigo-900', badge: 'bg-indigo-100 text-indigo-800', iconBg: 'bg-indigo-100', iconText: 'text-indigo-600', stat: 'bg-indigo-50', ring: 'focus:ring-indigo-500', btn: 'bg-indigo-600 hover:bg-indigo-700', lightBg: 'bg-indigo-50', border: 'border-indigo-200', hoverBg: 'hover:bg-indigo-50' },
+    teal: { gradient: 'from-slate-900/95 via-slate-800/90 to-teal-900/70', ctaGrad: 'from-slate-900 to-teal-900', badge: 'bg-teal-100 text-teal-800', iconBg: 'bg-teal-100', iconText: 'text-teal-600', stat: 'bg-teal-50', ring: 'focus:ring-teal-500', btn: 'bg-teal-600 hover:bg-teal-700', lightBg: 'bg-teal-50', border: 'border-teal-200', hoverBg: 'hover:bg-teal-50' },
+};
+
+export default function ServiceDetailPage({ categorySlug }) {
+    const { service } = useParams();
+    const cat = serviceCategories.find(c => c.slug === categorySlug);
+    if (!cat) return notFound();
+    const sub = cat.subServices.find(s => s.slug === service);
+    if (!sub) return notFound();
+
+    const theme = COLOR_MAP[cat.color] || COLOR_MAP.blue;
+    const SubIcon = sub.icon;
+
+    const [openFaq, setOpenFaq] = useState(null);
+    const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+    const [formStatus, setFormStatus] = useState(null);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setFormStatus('success');
+        setFormData({ name: '', phone: '', email: '', message: '' });
+        setTimeout(() => setFormStatus(null), 3000);
+    };
+
+    const siblings = cat.subServices.filter(s => s.slug !== service);
+
+    const faqs = [
+        { q: `What is ${sub.name} and how can it help my business?`, a: `${sub.name} is a specialized service that helps businesses ${sub.description.toLowerCase().slice(0, 150)}. Our expert team uses proven strategies and the latest tools to deliver measurable results, whether you're a startup or an established enterprise.` },
+        { q: `How long does it take to see results from ${sub.name}?`, a: `Results timelines vary based on your industry, competition, and current setup. For most clients, initial improvements are visible within 2-4 weeks, with significant measurable results within 2-3 months. We provide regular reports so you can track progress from day one.` },
+        { q: `How much does ${sub.name} cost?`, a: `We offer customized pricing based on your specific needs, business size, and goals. We have packages starting from budget-friendly plans to comprehensive enterprise solutions. Contact us for a free consultation and custom quote tailored to your requirements.` },
+        { q: `What makes your ${sub.name} different from competitors?`, a: `We combine data-driven strategies with creative excellence, backed by years of experience across 50+ industries. Our dedicated team approach, transparent reporting, and focus on ROI over vanity metrics set us apart. Every strategy is customized — no cookie-cutter solutions.` },
+        { q: `Do you provide reports and analytics for ${sub.name}?`, a: `Absolutely. We provide detailed monthly reports covering all key metrics, performance insights, and recommendations. You'll also have access to real-time dashboards and regular strategy calls with your dedicated account manager.` },
+    ];
+
+    return (
+        <>
+            <Header />
+
+            {/* Hero */}
+            <section className='relative min-h-[55vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-12 overflow-hidden'>
+                <div className='absolute inset-0 z-0'>
+                    <div className={`absolute inset-0 bg-linear-to-r ${theme.gradient} z-10`} />
+                    <img src={sub.heroImage} alt={sub.name} className='w-full h-full object-cover' />
+                </div>
+                <div className='max-w-7xl mx-auto relative z-20 w-full'>
+                    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                        <Link href={`/${cat.slug}`} className='inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors'>
+                            <IconArrowLeft className='w-4 h-4' /> Back to {cat.shortName}
+                        </Link>
+                        <motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.2 }}
+                            className='inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-semibold mb-6 ml-4 border border-white/30'>
+                            <SubIcon className='w-4 h-4' /> {cat.shortName}
+                        </motion.span>
+                        <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl'>{sub.name}</h1>
+                        <p className='text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mb-8'>{sub.description}</p>
+                        <div className='flex flex-wrap gap-4 mb-8'>
+                            <Link href='/contact-us' className='bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl inline-flex items-center gap-2'>
+                                Get Free Consultation <IconArrowRight className='w-5 h-5' />
+                            </Link>
+                        </div>
+                        <div className='flex flex-wrap gap-6'>
+                            <div className='flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20'>
+                                <div className='flex items-center gap-1'>
+                                    {[...Array(5)].map((_, i) => (
+                                        <IconStarFilled key={i} className='w-4 h-4 text-amber-400' />
+                                    ))}
+                                </div>
+                                <div>
+                                    <div className='text-2xl font-bold text-white'>4.9/5</div>
+                                    <div className='text-sm text-gray-300'>Client Rating</div>
+                                </div>
+                            </div>
+                            <div className='flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20'>
+                                <IconChecks className='w-6 h-6 text-emerald-400' />
+                                <div>
+                                    <div className='text-2xl font-bold text-white'>500+</div>
+                                    <div className='text-sm text-gray-300'>Projects Delivered</div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Content: 70/30 layout */}
+            <section className='py-16 px-4 md:px-8 lg:px-16'>
+                <div className='max-w-7xl mx-auto'>
+                    <div className='flex flex-col lg:flex-row gap-8'>
+                        {/* Left: 70% */}
+                        <div className='w-full lg:w-[70%]'>
+                            {/* Features */}
+                            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className='mb-12'>
+                                <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8'>What&apos;s Included</h2>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                                    {sub.features.map((feature, i) => (
+                                        <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+                                            className={`flex items-start gap-3 p-4 ${theme.lightBg} rounded-xl border ${theme.border}`}>
+                                            <div className={`w-8 h-8 ${theme.iconBg} rounded-lg flex items-center justify-center shrink-0 mt-0.5`}>
+                                                <IconCheck className={`w-4 h-4 ${theme.iconText}`} stroke={2.5} />
+                                            </div>
+                                            <span className='text-gray-800 font-medium'>{feature}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Benefits */}
+                            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className='mb-12'>
+                                <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8'>Key Benefits</h2>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                                    {sub.benefits.map((benefit, i) => (
+                                        <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+                                            className='bg-white rounded-xl p-5 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300'>
+                                            <div className='flex items-center gap-3 mb-2'>
+                                                <div className='w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center'>
+                                                    <IconChecks className='w-4 h-4 text-emerald-600' stroke={2} />
+                                                </div>
+                                                <h3 className='text-lg font-bold text-gray-900'>{benefit}</h3>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* FAQs */}
+                            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                                <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8'>Frequently Asked Questions</h2>
+                                <div className='space-y-4'>
+                                    {faqs.map((faq, index) => (
+                                        <div key={index} className='bg-gray-50 rounded-2xl overflow-hidden'>
+                                            <button onClick={() => setOpenFaq(openFaq === index ? null : index)} className='w-full px-6 py-5 flex items-start justify-between gap-4 text-left hover:bg-gray-100 transition-colors'>
+                                                <span className='text-lg font-semibold text-gray-900 pr-4'>{faq.q}</span>
+                                                <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all ${openFaq === index ? `${theme.iconBg} ${theme.iconText}` : 'bg-gray-200 text-gray-600'}`}>
+                                                    {openFaq === index ? <IconMinus className='w-5 h-5' stroke={2.5} /> : <IconPlus className='w-5 h-5' stroke={2.5} />}
+                                                </div>
+                                            </button>
+                                            <AnimatePresence>
+                                                {openFaq === index && (
+                                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className='overflow-hidden'>
+                                                        <p className='px-6 pb-6 text-gray-600 leading-relaxed'>{faq.a}</p>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Right: 30% sidebar */}
+                        <div className='w-full lg:w-[30%]'>
+                            <div className='lg:sticky lg:top-24 space-y-6'>
+                                {/* Contact Form */}
+                                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+                                    className='bg-white border border-gray-200 rounded-xl shadow-lg p-6'>
+                                    <h3 className='text-xl font-bold text-gray-900 mb-1'>Get Free Consultation</h3>
+                                    <p className='text-sm text-gray-500 mb-4'>Talk to our {cat.shortName.toLowerCase()} experts today</p>
+                                    <form onSubmit={handleFormSubmit} className='space-y-3'>
+                                        <div className='relative'>
+                                            <IconUser className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                            <input type='text' placeholder='Your Name' required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.ring} text-sm`} />
+                                        </div>
+                                        <div className='relative'>
+                                            <IconPhone className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                            <input type='tel' placeholder='Phone Number' required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.ring} text-sm`} />
+                                        </div>
+                                        <div className='relative'>
+                                            <IconMail className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400' />
+                                            <input type='email' placeholder='Email Address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={`w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.ring} text-sm`} />
+                                        </div>
+                                        <textarea placeholder='Tell us about your requirements...' rows={3} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 ${theme.ring} text-sm resize-none`} />
+                                        <button type='submit' className={`w-full ${theme.btn} text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2`}>
+                                            <IconSend className='w-4 h-4' /> Send Enquiry
+                                        </button>
+                                        {formStatus === 'success' && (
+                                            <p className='text-green-600 text-sm text-center font-medium'>Thank you! We&apos;ll contact you soon.</p>
+                                        )}
+                                    </form>
+                                </motion.div>
+
+                                {/* Related services */}
+                                {siblings.length > 0 && (
+                                    <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
+                                        className='bg-white border border-gray-200 rounded-xl shadow-lg p-6'>
+                                        <h3 className='text-lg font-bold text-gray-900 mb-4'>Related Services</h3>
+                                        <div className='space-y-2'>
+                                            {siblings.slice(0, 8).map((sib, index) => {
+                                                const SibIcon = sib.icon;
+                                                return (
+                                                    <Link key={index} href={`/${cat.slug}/${sib.slug}`}
+                                                        className={`flex items-center justify-between px-3 py-2 rounded-lg ${theme.hoverBg} transition-colors group`}>
+                                                        <div className='flex items-center gap-2'>
+                                                            <SibIcon className={`w-4 h-4 ${theme.iconText}`} stroke={1.5} />
+                                                            <span className='text-sm font-medium text-gray-800 group-hover:text-gray-900'>{sib.name}</span>
+                                                        </div>
+                                                        <IconArrowRight className='w-3 h-3 text-gray-300 group-hover:text-gray-500 transition-colors' />
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className={`py-16 px-4 md:px-8 lg:px-16 bg-linear-to-r ${theme.ctaGrad}`}>
+                <div className='max-w-4xl mx-auto text-center'>
+                    <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                        <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6'>Ready to Get Started with {sub.name}?</h2>
+                        <p className='text-xl text-gray-300 mb-8'>Let our experts help you achieve your business goals with a customized strategy.</p>
+                        <Link href='/contact-us' className='inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl'>
+                            Get Started Today
+                        </Link>
+                    </motion.div>
+                </div>
+            </section>
+
+            <Footer />
+        </>
+    );
+}

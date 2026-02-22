@@ -27,7 +27,7 @@ function ServiceSection() {
       icon: IconDeviceLaptop,
       title: 'Website Development',
       description: 'Custom websites and web applications built with cutting-edge technology for optimal performance.',
-      link: '/web-app-development',
+      link: '/website-development',
       color: 'from-purple-500 to-pink-500',
       bgColor: 'bg-purple-50',
       iconColor: 'text-purple-600'
@@ -45,7 +45,7 @@ function ServiceSection() {
       icon: IconPalette,
       title: 'Brand & Creative',
       description: 'Create a memorable brand identity with stunning designs that resonate with your audience.',
-      link: '/brand-creative',
+      link: '/branding',
       color: 'from-orange-500 to-red-500',
       bgColor: 'bg-orange-50',
       iconColor: 'text-orange-600'
@@ -54,7 +54,7 @@ function ServiceSection() {
       icon: IconBrandInstagram,
       title: 'Social Media Marketing',
       description: 'Engage your audience and grow your brand across all major social media platforms.',
-      link: '/media-advertising',
+      link: '/social-media-marketing',
       color: 'from-pink-500 to-rose-500',
       bgColor: 'bg-pink-50',
       iconColor: 'text-pink-600'
@@ -63,7 +63,7 @@ function ServiceSection() {
       icon: IconSettings,
       title: 'Automation Solutions',
       description: 'Streamline your business processes with intelligent automation and workflow optimization.',
-      link: '/automation-solution',
+      link: '/automation',
       color: 'from-indigo-500 to-blue-500',
       bgColor: 'bg-indigo-50',
       iconColor: 'text-indigo-600'

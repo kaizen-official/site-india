@@ -4,28 +4,101 @@ import Link from 'next/link'
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import {
-    IconMenu2, IconX, IconChevronDown, IconPhone, IconArrowRight,
-    IconTargetArrow, IconFileDescription, IconCode, IconSearch,
-    IconBrandInstagram, IconDatabase
+    IconMenu2, IconX, IconChevronDown, IconChevronRight, IconPhone, IconArrowRight,
+    IconTargetArrow, IconCode, IconSearch,
+    IconBrandInstagram, IconBrush, IconSettingsAutomation, IconBriefcase
 } from '@tabler/icons-react'
 
 /* ─── Services data for mega menu ─── */
 const navServices = [
-    { name: 'Digital Marketing', href: '/services/digital-marketing', icon: IconTargetArrow, desc: 'Data-driven campaigns for growth', bg: 'bg-blue-50', text: 'text-blue-600' },
-    { name: 'Content Marketing', href: '/services/content-marketing', icon: IconFileDescription, desc: 'Content that drives conversions', bg: 'bg-violet-50', text: 'text-violet-600' },
-    { name: 'Website Development', href: '/services/web-development', icon: IconCode, desc: 'Custom websites & applications', bg: 'bg-emerald-50', text: 'text-emerald-600' },
-    { name: 'SEO Services', href: '/services/search-engine-optimization-seo', icon: IconSearch, desc: 'Rank higher on search engines', bg: 'bg-orange-50', text: 'text-orange-600' },
-    { name: 'Social Media', href: '/services/social-media', icon: IconBrandInstagram, desc: 'Build & engage your community', bg: 'bg-pink-50', text: 'text-pink-600' },
-    { name: 'CRM Development', href: '/services/crm-development', icon: IconDatabase, desc: 'Streamline customer management', bg: 'bg-indigo-50', text: 'text-indigo-600' },
+    {
+        name: 'Digital Marketing', href: '/digital-marketing', icon: IconTargetArrow, desc: 'Data-driven campaigns for growth', bg: 'bg-blue-50', text: 'text-blue-600',
+        subs: [
+            { name: 'Performance Marketing', href: '/digital-marketing/performance-marketing' },
+            { name: 'Growth Marketing', href: '/digital-marketing/growth-marketing' },
+            { name: 'Google Ads Management', href: '/digital-marketing/google-ads-management' },
+            { name: 'Facebook & Instagram Ads', href: '/digital-marketing/facebook-instagram-ads' },
+        ]
+    },
+    {
+        name: 'Website Development', href: '/website-development', icon: IconCode, desc: 'Custom websites & applications', bg: 'bg-emerald-50', text: 'text-emerald-600',
+        subs: [
+            { name: 'Web Design Services', href: '/website-development/web-design' },
+            { name: 'UI/UX Design', href: '/website-development/ui-ux-design' },
+            { name: 'WordPress Development', href: '/website-development/wordpress-development' },
+            { name: 'Shopify Development', href: '/website-development/shopify-development' },
+            { name: 'Landing Page Design', href: '/website-development/landing-page-design' },
+        ]
+    },
+    {
+        name: 'SEO Services', href: '/seo', icon: IconSearch, desc: 'Rank higher on search engines', bg: 'bg-orange-50', text: 'text-orange-600',
+        subs: [
+            { name: 'Local SEO', href: '/seo/local-seo' },
+            { name: 'Ecommerce SEO', href: '/seo/ecommerce-seo' },
+            { name: 'Technical SEO', href: '/seo/technical-seo' },
+            { name: 'On Page SEO', href: '/seo/on-page-seo' },
+            { name: 'Off Page SEO', href: '/seo/off-page-seo' },
+            { name: 'SEO Audit', href: '/seo/seo-audit' },
+            { name: 'AI SEO', href: '/seo/ai-seo' },
+        ]
+    },
+    {
+        name: 'Branding Services', href: '/branding', icon: IconBrush, desc: 'Build a powerful brand identity', bg: 'bg-violet-50', text: 'text-violet-600',
+        subs: [
+            { name: 'Brand Identity Design', href: '/branding/brand-identity-design' },
+            { name: 'Logo Design', href: '/branding/logo-design' },
+            { name: 'Graphic Design', href: '/branding/graphic-design' },
+            { name: 'Creative for Ads', href: '/branding/creative-for-ads' },
+            { name: 'Performance Creatives', href: '/branding/performance-creatives' },
+        ]
+    },
+    {
+        name: 'Social Media', href: '/social-media-marketing', icon: IconBrandInstagram, desc: 'Build & engage your community', bg: 'bg-pink-50', text: 'text-pink-600',
+        subs: [
+            { name: 'Social Media Management', href: '/social-media-marketing/social-media-management' },
+            { name: 'Instagram Marketing', href: '/social-media-marketing/instagram-marketing' },
+            { name: 'Facebook Marketing', href: '/social-media-marketing/facebook-marketing' },
+            { name: 'LinkedIn Marketing', href: '/social-media-marketing/linkedin-marketing' },
+            { name: 'YouTube Marketing', href: '/social-media-marketing/youtube-marketing' },
+            { name: 'Influencer Marketing', href: '/social-media-marketing/influencer-marketing' },
+            { name: 'Short Video Marketing', href: '/social-media-marketing/short-video-marketing' },
+        ]
+    },
+    {
+        name: 'Automation', href: '/automation', icon: IconSettingsAutomation, desc: 'Streamline your business operations', bg: 'bg-indigo-50', text: 'text-indigo-600',
+        subs: [
+            { name: 'Marketing Automation', href: '/automation/marketing-automation' },
+            { name: 'CRM Automation', href: '/automation/crm-automation' },
+            { name: 'Lead Automation', href: '/automation/lead-automation' },
+            { name: 'Email Automation', href: '/automation/email-automation' },
+            { name: 'Sales Funnel Automation', href: '/automation/sales-funnel-automation' },
+            { name: 'AI Marketing Automation', href: '/automation/ai-marketing-automation' },
+        ]
+    },
+    {
+        name: 'Managed Services', href: '/managed-services', icon: IconBriefcase, desc: 'End-to-end managed marketing', bg: 'bg-teal-50', text: 'text-teal-600',
+        subs: [
+            { name: 'Digital Marketing Managed', href: '/managed-services/digital-marketing-managed' },
+            { name: 'SEO Managed Services', href: '/managed-services/seo-managed' },
+            { name: 'PPC Managed Services', href: '/managed-services/ppc-managed' },
+            { name: 'Social Media Managed', href: '/managed-services/social-media-managed' },
+            { name: 'Startup Marketing', href: '/managed-services/startup-marketing' },
+            { name: 'SaaS Marketing', href: '/managed-services/saas-marketing' },
+            { name: 'Ecommerce Marketing', href: '/managed-services/ecommerce-marketing' },
+            { name: 'B2B Marketing', href: '/managed-services/b2b-marketing' },
+        ]
+    },
 ];
 
 function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [hovered, setHovered] = useState(null);
     const [servicesOpen, setServicesOpen] = useState(false);
+    const [hoveredService, setHoveredService] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
+    const [mobileExpandedCat, setMobileExpandedCat] = useState(null);
     const ref = useRef(null);
 
     const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -69,7 +142,7 @@ function Header() {
             <Link
                 href={href}
                 onMouseEnter={() => { setHovered(id); setServicesOpen(false); }}
-                className="relative px-4 py-2 text-[15px] font-medium text-gray-600 hover:text-gray-900 transition-colors inline-block"
+                className="relative px-4 py-2 text-xl font-medium text-gray-600 hover:text-gray-900 transition-colors inline-block"
             >
                 {hovered === id && (
                     <motion.div
@@ -87,14 +160,14 @@ function Header() {
         <header ref={ref}>
 
             {/* ━━━ Animated gradient accent bar ━━━ */}
-            <div className="fixed top-0 left-0 right-0 h-0.5 z-60 overflow-hidden">
+            {/* <div className="fixed top-0 left-0 right-0 h-0.5 z-60 overflow-hidden">
                 <motion.div
                     className="h-full w-[200%]"
                     style={{ background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6)' }}
                     animate={{ x: ['-50%', '0%'] }}
                     transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
                 />
-            </div>
+            </div> */}
 
             {/* ━━━━━━━━━━━━━━━ DESKTOP NAV ━━━━━━━━━━━━━━━ */}
             <motion.nav
@@ -132,7 +205,7 @@ function Header() {
                                     onMouseEnter={() => { setHovered('services'); setServicesOpen(true); }}
                                     onMouseLeave={() => setServicesOpen(false)}
                                 >
-                                    <button className="relative px-4 py-2 text-[15px] font-medium text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-1 cursor-pointer">
+                                    <button className="relative px-4 py-2 text-xl font-medium text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-1 cursor-pointer">
                                         {hovered === 'services' && (
                                             <motion.div
                                                 layoutId="navPill"
@@ -152,34 +225,64 @@ function Header() {
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                                 exit={{ opacity: 0, y: 8, scale: 0.98 }}
                                                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.04)] overflow-hidden"
+                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[720px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.04)] overflow-hidden"
                                                 onMouseEnter={() => setServicesOpen(true)}
-                                                onMouseLeave={() => setServicesOpen(false)}
+                                                onMouseLeave={() => { setServicesOpen(false); setHoveredService(null); }}
                                             >
                                                 {/* Gradient top accent */}
-                                                <div className="h-[3px] bg-linear-to-r from-blue-500 via-purple-500 to-pink-500" />
+                                                {/* <div className="h-[3px] bg-linear-to-r from-blue-500 via-purple-500 to-pink-500" /> */}
 
-                                                <div className="p-5">
-                                                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-3 px-1">Our Services</p>
-                                                    <div className="grid grid-cols-2 gap-1">
+                                                <div className="flex">
+                                                    {/* Left: Categories */}
+                                                    <div className="w-[280px] p-3 border-r border-gray-100">
+                                                        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-2 px-2">Our Services</p>
                                                         {navServices.map((svc) => {
                                                             const SvcIcon = svc.icon;
+                                                            const isActive = hoveredService === svc.name;
                                                             return (
                                                                 <Link
                                                                     key={svc.name}
                                                                     href={svc.href}
-                                                                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all duration-200 group/svc"
+                                                                    onMouseEnter={() => setHoveredService(svc.name)}
+                                                                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all duration-150 group/svc ${isActive ? 'bg-gray-50' : 'hover:bg-gray-50'}`}
                                                                 >
-                                                                    <div className={`${svc.bg} p-2.5 rounded-xl shrink-0 group-hover/svc:scale-110 transition-transform duration-200`}>
-                                                                        <SvcIcon size={18} className={svc.text} stroke={1.5} />
+                                                                    <div className={`${svc.bg} p-2 rounded-lg shrink-0 group-hover/svc:scale-105 transition-transform`}>
+                                                                        <SvcIcon size={16} className={svc.text} stroke={1.5} />
                                                                     </div>
-                                                                    <div className="pt-0.5">
-                                                                        <p className="text-sm font-semibold text-gray-900 group-hover/svc:text-blue-600 transition-colors">{svc.name}</p>
-                                                                        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{svc.desc}</p>
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <p className="text-sm font-semibold text-gray-900 truncate">{svc.name}</p>
                                                                     </div>
+                                                                    <IconChevronRight size={14} className={`shrink-0 transition-colors ${isActive ? 'text-gray-600' : 'text-gray-300'}`} />
                                                                 </Link>
                                                             );
                                                         })}
+                                                    </div>
+
+                                                    {/* Right: Sub-services */}
+                                                    <div className="flex-1 p-4">
+                                                        {navServices.map((svc) => (
+                                                            hoveredService === svc.name && (
+                                                                <div key={svc.name}>
+                                                                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-2 px-1">{svc.name}</p>
+                                                                    <div className="grid grid-cols-2 gap-1">
+                                                                        {svc.subs.map((sub) => (
+                                                                            <Link
+                                                                                key={sub.name}
+                                                                                href={sub.href}
+                                                                                className="px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors group/sub"
+                                                                            >
+                                                                                <p className="text-[13px] font-medium text-gray-700 group-hover/sub:text-blue-600 transition-colors">{sub.name}</p>
+                                                                            </Link>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        ))}
+                                                        {!hoveredService && (
+                                                            <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                                                                Hover a category to see sub-services
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
 
@@ -317,18 +420,44 @@ function Header() {
                                                             <div className="ml-2 py-2 space-y-0.5">
                                                                 {navServices.map((svc) => {
                                                                     const SIcon = svc.icon;
+                                                                    const isCatExpanded = mobileExpandedCat === svc.name;
                                                                     return (
-                                                                        <Link
-                                                                            key={svc.name}
-                                                                            href={svc.href}
-                                                                            onClick={() => setMobileOpen(false)}
-                                                                            className="flex items-center gap-3 py-2.5 px-3 rounded-xl hover:bg-gray-50 transition-colors"
-                                                                        >
-                                                                            <div className={`${svc.bg} p-2 rounded-lg`}>
-                                                                                <SIcon size={16} className={svc.text} stroke={1.5} />
-                                                                            </div>
-                                                                            <span className="text-gray-700 font-medium">{svc.name}</span>
-                                                                        </Link>
+                                                                        <div key={svc.name}>
+                                                                            <button
+                                                                                onClick={() => setMobileExpandedCat(isCatExpanded ? null : svc.name)}
+                                                                                className="w-full flex items-center justify-between gap-3 py-2.5 px-3 rounded-xl hover:bg-gray-50 transition-colors"
+                                                                            >
+                                                                                <div className="flex items-center gap-3">
+                                                                                    <div className={`${svc.bg} p-2 rounded-lg`}>
+                                                                                        <SIcon size={16} className={svc.text} stroke={1.5} />
+                                                                                    </div>
+                                                                                    <span className="text-gray-700 font-medium">{svc.name}</span>
+                                                                                </div>
+                                                                                <IconChevronDown size={14} className={`text-gray-400 transition-transform duration-300 ${isCatExpanded ? 'rotate-180' : ''}`} />
+                                                                            </button>
+                                                                            <AnimatePresence>
+                                                                                {isCatExpanded && (
+                                                                                    <motion.div
+                                                                                        initial={{ height: 0, opacity: 0 }}
+                                                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                                                        exit={{ height: 0, opacity: 0 }}
+                                                                                        transition={{ duration: 0.2 }}
+                                                                                        className="overflow-hidden"
+                                                                                    >
+                                                                                        <div className="ml-10 py-1 space-y-0.5">
+                                                                                            <Link href={svc.href} onClick={() => setMobileOpen(false)} className="block py-2 px-3 rounded-lg hover:bg-gray-50 text-sm text-gray-600 font-medium">
+                                                                                                View All {svc.name}
+                                                                                            </Link>
+                                                                                            {svc.subs.map((sub) => (
+                                                                                                <Link key={sub.name} href={sub.href} onClick={() => setMobileOpen(false)} className="block py-2 px-3 rounded-lg hover:bg-gray-50 text-sm text-gray-600">
+                                                                                                    {sub.name}
+                                                                                                </Link>
+                                                                                            ))}
+                                                                                        </div>
+                                                                                    </motion.div>
+                                                                                )}
+                                                                            </AnimatePresence>
+                                                                        </div>
                                                                     );
                                                                 })}
                                                             </div>
