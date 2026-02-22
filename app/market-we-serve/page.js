@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconMapPin,
     IconBuildingStore,
@@ -124,6 +125,7 @@ export default function MarketWeServePage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 10, name: 'India' }} locationType="country" serviceType="digital-marketing" />
+            <OGMetaTags serviceName="Digital Marketing" pageSlug="market-we-serve" />
 
             {/* Hero Section */}
             <section className='relative min-h-[60vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>

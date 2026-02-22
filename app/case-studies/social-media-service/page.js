@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import { IconChevronLeft, IconUsers, IconHeart, IconEye, IconPhoto, IconBrandInstagram, IconBrandFacebook, IconBrandYoutube } from '@tabler/icons-react'
 import data from './content.json'
 
@@ -25,6 +26,7 @@ export default function SocialMediaCaseStudiesPage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 24, name: 'India' }} locationType="country" serviceType="social-media-marketing" />
+            <OGMetaTags serviceName="Social Media Marketing" pageSlug="case-studies/social-media-service" />
 
             {/* Hero Section */}
             <section className='relative min-h-[60vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>

@@ -7,6 +7,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import ClientSection from '@/components/sections/clients'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconCode,
     IconDeviceDesktop,
@@ -156,6 +157,7 @@ export default function WebDevelopmentServicePage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 13, name: 'India' }} locationType="country" serviceType="web-development" />
+            <OGMetaTags serviceName="Web Development" pageSlug="web-development" />
 
             {/* Hero Section */}
             <section className='relative min-h-[90vh] flex items-center px-4 md:px-8 lg:px-16 pt-24 pb-10 overflow-hidden'>

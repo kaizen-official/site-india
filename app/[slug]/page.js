@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import LocationStructuredData from '@/components/seo/LocationStructuredData';
+import OGMetaTags from '@/components/seo/OGMetaTags';
 import {
     IconArrowLeft,
     IconArrowRight,
@@ -66,6 +67,15 @@ const CATEGORY_SERVICE_MAP = {
     'Social Media': 'social-media-marketing',
     'Content Writing': 'content-marketing',
     'Wordpress Development': 'wordpress-development',
+};
+
+const CATEGORY_DISPLAY_MAP = {
+    'Google Business': 'Google My Business',
+    'Digital Marketing': 'Digital Marketing',
+    'Web Development': 'Web Development',
+    'Social Media': 'Social Media Marketing',
+    'Content Writing': 'Content Writing',
+    'Wordpress Development': 'WordPress Development',
 };
 
 const CATEGORY_CONFIG = {
@@ -492,6 +502,11 @@ export default function CityServicePage() {
                 locationData={city}
                 locationType="city"
                 serviceType={CATEGORY_SERVICE_MAP[city.category_name] || 'digital-marketing'}
+            />
+            <OGMetaTags
+                cityName={city.city}
+                serviceName={CATEGORY_DISPLAY_MAP[city.category_name] || 'Digital Marketing'}
+                pageSlug={slug}
             />
 
             {/* Hero Section */}

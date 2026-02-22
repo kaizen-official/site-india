@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconMapPin,
     IconSearch,
@@ -59,6 +60,7 @@ export default function WordpressMarketPage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 6, name: 'India' }} locationType="country" serviceType="wordpress-development" />
+            <OGMetaTags serviceName="WordPress Development" pageSlug="market-we-serve/wordpress" />
 
             {loading ? (
                 <div className='min-h-screen flex items-center justify-center'>

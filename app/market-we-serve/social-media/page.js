@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconMapPin,
     IconSearch,
@@ -59,6 +60,7 @@ export default function SocialMediaMarketPage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 4, name: 'India' }} locationType="country" serviceType="social-media" />
+            <OGMetaTags serviceName="Social Media Marketing" pageSlug="market-we-serve/social-media" />
 
             {loading ? (
                 <div className='min-h-screen flex items-center justify-center'>

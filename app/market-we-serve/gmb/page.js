@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconBuildingStore,
     IconMapPin,
@@ -59,6 +60,7 @@ export default function GMBMarketPage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 1, name: 'India' }} locationType="country" serviceType="gmb" />
+            <OGMetaTags serviceName="Google My Business" pageSlug="market-we-serve/gmb" />
 
             {loading ? (
                 <div className='min-h-screen flex items-center justify-center'>

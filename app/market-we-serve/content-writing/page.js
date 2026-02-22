@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import LocationStructuredData from '@/components/seo/LocationStructuredData'
+import OGMetaTags from '@/components/seo/OGMetaTags'
 import {
     IconMapPin,
     IconSearch,
@@ -59,6 +60,7 @@ export default function ContentWritingMarketPage() {
         <>
             <Header />
             <LocationStructuredData locationData={{ id: 5, name: 'India' }} locationType="country" serviceType="content-writing" />
+            <OGMetaTags serviceName="Content Writing" pageSlug="market-we-serve/content-writing" />
 
             {loading ? (
                 <div className='min-h-screen flex items-center justify-center'>
