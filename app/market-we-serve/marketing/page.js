@@ -25,6 +25,8 @@ import {
     IconUser,
     IconMail
 } from '@tabler/icons-react'
+import MarketServiceCards from '@/components/sections/MarketServiceCards'
+import { SERVICE_CARDS } from '@/components/services/serviceContent'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -187,6 +189,13 @@ export default function DigitalMarketingMarketPage() {
                             </motion.div>
                         </div>
                     </section>
+
+                    <MarketServiceCards
+                        cards={SERVICE_CARDS['Digital Marketing']}
+                        title='Our Digital Marketing Services'
+                        subtitle='Comprehensive digital marketing solutions to grow your brand and drive results across India.'
+                        accentColor='orange'
+                    />
 
                     {/* Search & Directory - 70/30 Layout */}
                     <section className='py-16 px-4 md:px-8 lg:px-16'>

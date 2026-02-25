@@ -25,6 +25,8 @@ import {
     IconUser,
     IconMail
 } from '@tabler/icons-react'
+import MarketServiceCards from '@/components/sections/MarketServiceCards'
+import { SERVICE_CARDS } from '@/components/services/serviceContent'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -188,6 +190,13 @@ export default function WordpressMarketPage() {
                             </motion.div>
                         </div>
                     </section>
+
+                    <MarketServiceCards
+                        cards={SERVICE_CARDS['Wordpress Development']}
+                        title='Our WordPress Development Services'
+                        subtitle='Expert WordPress solutions from custom themes to complete e-commerce stores across India.'
+                        accentColor='indigo'
+                    />
 
                     {/* Search & Directory */}
                     <section className='py-16 px-4 md:px-8 lg:px-16'>

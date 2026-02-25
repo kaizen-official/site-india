@@ -25,6 +25,8 @@ import {
     IconUser,
     IconMail
 } from '@tabler/icons-react'
+import MarketServiceCards from '@/components/sections/MarketServiceCards'
+import { SERVICE_CARDS } from '@/components/services/serviceContent'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -188,6 +190,13 @@ export default function GMBMarketPage() {
                             </motion.div>
                         </div>
                     </section>
+
+                    <MarketServiceCards
+                        cards={SERVICE_CARDS['Google Business']}
+                        title='Our Google My Business Services'
+                        subtitle='Maximize your local visibility and customer engagement with expert GMB management across India.'
+                        accentColor='blue'
+                    />
 
                     {/* Search & Directory - 70/30 Layout */}
                     <section className='py-16 px-4 md:px-8 lg:px-16'>

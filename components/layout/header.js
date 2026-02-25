@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import {
@@ -8,6 +9,8 @@ import {
     IconTargetArrow, IconCode, IconSearch,
     IconBrandInstagram, IconBrush, IconSettingsAutomation, IconBriefcase
 } from '@tabler/icons-react'
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 /* ─── Services data for mega menu ─── */
 const navServices = [
@@ -91,6 +94,7 @@ const navServices = [
 ];
 
 function Header() {
+    const router = useRouter();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [hovered, setHovered] = useState(null);
     const [servicesOpen, setServicesOpen] = useState(false);
@@ -99,6 +103,14 @@ function Header() {
     const [showForm, setShowForm] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
     const [mobileExpandedCat, setMobileExpandedCat] = useState(null);
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchServices, setSearchServices] = useState([]);
+    const [searchStates, setSearchStates] = useState([]);
+    const [searchCities, setSearchCities] = useState([]);
+    const [selectedService, setSelectedService] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
+    const [citiesLoading, setCitiesLoading] = useState(false);
     const ref = useRef(null);
 
     const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -109,9 +121,9 @@ function Header() {
 
     /* Prevent body scroll when overlay is open */
     useEffect(() => {
-        document.body.style.overflow = (showForm || showThankYou || mobileOpen) ? 'hidden' : 'unset';
+        document.body.style.overflow = (showForm || showThankYou || mobileOpen || showSearch) ? 'hidden' : 'unset';
         return () => { document.body.style.overflow = 'unset'; };
-    }, [showForm, showThankYou, mobileOpen]);
+    }, [showForm, showThankYou, mobileOpen, showSearch]);
 
     /* Auto-close thank you modal */
     useEffect(() => {
@@ -120,6 +132,61 @@ function Header() {
             return () => clearTimeout(t);
         }
     }, [showThankYou]);
+
+    /* Fetch search dropdown options when search opens */
+    useEffect(() => {
+        if (showSearch && searchServices.length === 0) {
+            fetch(`${API_BASE}/search/options`)
+                .then(res => res.json())
+                .then(json => {
+                    if (json.success) {
+                        setSearchServices(json.data.services || []);
+                        setSearchStates(json.data.states || []);
+                    }
+                })
+                .catch(() => {});
+        }
+    }, [showSearch]);
+
+    /* Fetch cities when state changes */
+    useEffect(() => {
+        if (selectedState) {
+            setCitiesLoading(true);
+            setSearchCities([]);
+            setSelectedCity('');
+            fetch(`${API_BASE}/search/cities/${selectedState}`)
+                .then(res => res.json())
+                .then(json => {
+                    if (json.success) {
+                        let cities = json.data || [];
+                        if (selectedService) {
+                            cities = cities.filter(c => c.category_name === selectedService);
+                        }
+                        // Deduplicate by city name
+                        const seen = new Set();
+                        cities = cities.filter(c => {
+                            const k = c.city + '_' + c.category_name;
+                            if (seen.has(k)) return false;
+                            seen.add(k);
+                            return true;
+                        });
+                        setSearchCities(cities);
+                    }
+                })
+                .catch(() => {})
+                .finally(() => setCitiesLoading(false));
+        } else {
+            setSearchCities([]);
+            setSelectedCity('');
+        }
+    }, [selectedState, selectedService]);
+
+    const handleSearch = () => {
+        if (selectedCity) {
+            setShowSearch(false);
+            router.push(`/${selectedCity}`);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -308,6 +375,14 @@ function Header() {
 
                         {/* Right Actions */}
                         <div className="flex items-center gap-3 shrink-0">
+                            <button
+                                onClick={() => setShowSearch(true)}
+                                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                                aria-label="Search"
+                            >
+                                <IconSearch size={16} className="text-gray-600" stroke={1.8} />
+                            </button>
+
                             <Link
                                 href="tel:+919990556217"
                                 className="hidden xl:flex items-center gap-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors group/phone"
@@ -352,23 +427,32 @@ function Header() {
                     <Link href="/">
                         <img src="/logo.png" alt="Digital Solution 360" className="h-9" />
                     </Link>
-                    <button
-                        onClick={() => setMobileOpen(!mobileOpen)}
-                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
-                        aria-label="Toggle menu"
-                    >
-                        <AnimatePresence mode="wait">
-                            {mobileOpen ? (
-                                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                                    <IconX size={20} />
-                                </motion.div>
-                            ) : (
-                                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                                    <IconMenu2 size={20} />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setShowSearch(true)}
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                            aria-label="Search"
+                        >
+                            <IconSearch size={18} className="text-gray-600" />
+                        </button>
+                        <button
+                            onClick={() => setMobileOpen(!mobileOpen)}
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                            aria-label="Toggle menu"
+                        >
+                            <AnimatePresence mode="wait">
+                                {mobileOpen ? (
+                                    <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                        <IconX size={20} />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                        <IconMenu2 size={20} />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </button>
+                    </div>
                 </div>
             </motion.div>
 
@@ -636,6 +720,106 @@ function Header() {
                                 />
                             </div>
                             <p className="text-gray-400 text-xs mt-2">Closing automatically...</p>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ━━━━━━━━━━━━━━━ SEARCH MODAL ━━━━━━━━━━━━━━━ */}
+            <AnimatePresence>
+                {showSearch && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start justify-center z-60 p-4 pt-24 md:pt-32"
+                        onClick={(e) => { if (e.target === e.currentTarget) setShowSearch(false); }}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative overflow-hidden"
+                        >
+                            <div className="h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500" />
+
+                            <button
+                                onClick={() => setShowSearch(false)}
+                                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-all hover:rotate-90 duration-200 cursor-pointer z-10"
+                            >
+                                <IconX size={15} />
+                            </button>
+
+                            <div className="p-6 md:p-8">
+                                <h2 className="text-2xl font-bold text-gray-900 mb-1">Find Services in Your City</h2>
+                                <p className="text-gray-500 text-sm mb-6">Select a service, state, and city to find our local solutions.</p>
+
+                                <div className="flex flex-col md:flex-row gap-4 mb-6">
+                                    {/* Service Dropdown */}
+                                    <div className="flex-1">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Service</label>
+                                        <select
+                                            value={selectedService}
+                                            onChange={(e) => setSelectedService(e.target.value)}
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm cursor-pointer"
+                                        >
+                                            <option value="">All Services</option>
+                                            {searchServices.map((svc) => (
+                                                <option key={svc.category_name} value={svc.category_name}>
+                                                    {svc.category_name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    {/* State Dropdown */}
+                                    <div className="flex-1">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">State</label>
+                                        <select
+                                            value={selectedState}
+                                            onChange={(e) => setSelectedState(e.target.value)}
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm cursor-pointer"
+                                        >
+                                            <option value="">Select State</option>
+                                            {searchStates.map((st) => (
+                                                <option key={st.state_id} value={st.state_id}>
+                                                    {st.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    {/* City Dropdown */}
+                                    <div className="flex-1">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">City</label>
+                                        <select
+                                            value={selectedCity}
+                                            onChange={(e) => setSelectedCity(e.target.value)}
+                                            disabled={!selectedState || citiesLoading}
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            <option value="">
+                                                {citiesLoading ? 'Loading...' : !selectedState ? 'Select state first' : 'Select City'}
+                                            </option>
+                                            {searchCities.map((city, i) => (
+                                                <option key={i} value={city.city_slug}>
+                                                    {city.city}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button
+                                    onClick={handleSearch}
+                                    disabled={!selectedCity}
+                                    className="w-full cursor-pointer bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-600/25 hover:-translate-y-px active:translate-y-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                                >
+                                    <IconSearch size={18} />
+                                    Search
+                                </button>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}

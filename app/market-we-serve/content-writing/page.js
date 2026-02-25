@@ -25,6 +25,8 @@ import {
     IconUser,
     IconMail
 } from '@tabler/icons-react'
+import MarketServiceCards from '@/components/sections/MarketServiceCards'
+import { SERVICE_CARDS } from '@/components/services/serviceContent'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -188,6 +190,13 @@ export default function ContentWritingMarketPage() {
                             </motion.div>
                         </div>
                     </section>
+
+                    <MarketServiceCards
+                        cards={SERVICE_CARDS['Content Writing']}
+                        title='Our Content Writing Services'
+                        subtitle='Professional content writing solutions that drive traffic, engage audiences, and boost conversions.'
+                        accentColor='teal'
+                    />
 
                     {/* Search & Directory */}
                     <section className='py-16 px-4 md:px-8 lg:px-16'>

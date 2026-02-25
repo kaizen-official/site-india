@@ -25,6 +25,8 @@ import {
     IconUser,
     IconMail
 } from '@tabler/icons-react'
+import MarketServiceCards from '@/components/sections/MarketServiceCards'
+import { SERVICE_CARDS } from '@/components/services/serviceContent'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -187,6 +189,13 @@ export default function WebDevelopmentMarketPage() {
                             </motion.div>
                         </div>
                     </section>
+
+                    <MarketServiceCards
+                        cards={SERVICE_CARDS['Web Development']}
+                        title='Our Web Development Services'
+                        subtitle='From stunning websites to powerful web applications — we build digital solutions that deliver results.'
+                        accentColor='purple'
+                    />
 
                     {/* Search & Directory */}
                     <section className='py-16 px-4 md:px-8 lg:px-16'>

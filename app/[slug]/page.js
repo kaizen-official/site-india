@@ -61,6 +61,7 @@ import {
     IconPhone,
     IconUser
 } from '@tabler/icons-react';
+import { SERVICE_CARDS, SERVICE_FAQS } from '@/components/services/serviceContent';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -780,6 +781,46 @@ export default function CityServicePage() {
                                 />
                             </div>
                         </motion.div>
+                    </div>
+                </section>
+            )}
+
+            {/* Service Cards from Content */}
+            {SERVICE_CARDS[city.category_name] && (
+                <section className='py-20 px-4 md:px-8 lg:px-16 bg-slate-900'>
+                    <div className='max-w-7xl mx-auto'>
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className='text-center mb-16'
+                        >
+                            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4'>
+                                {city.category_name} Services in {cityName}
+                            </h2>
+                            <p className='text-lg text-gray-300 max-w-3xl mx-auto'>
+                                Explore our comprehensive {city.category_name.toLowerCase()} solutions designed for {cityName} businesses.
+                            </p>
+                            <div className='mx-auto mt-4 h-1 w-24 rounded-full bg-linear-to-r from-teal-500 to-cyan-500' />
+                        </motion.div>
+
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                            {SERVICE_CARDS[city.category_name].map((card, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                                    className='group rounded-xl bg-white/5 backdrop-blur-sm p-6 text-white ring-1 ring-white/10 hover:ring-teal-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl'
+                                >
+                                    <div className='h-0.5 w-12 bg-linear-to-r from-teal-400 to-cyan-400 rounded-full mb-4' />
+                                    <h3 className='text-lg font-semibold mb-3'>{card.title}</h3>
+                                    <p className='text-slate-300 text-sm leading-relaxed'>{card.desc}</p>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </section>
             )}
