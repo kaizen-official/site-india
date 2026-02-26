@@ -33,14 +33,6 @@ const SIDEBAR_GROUPS = [
         ]
     },
     {
-        label: 'Global',
-        items: [
-            { key: 'global_countries', href: '/admin/global_countries', label: 'Countries', icon: 'globe' },
-            { key: 'global_states', href: '/admin/global_states', label: 'Global States', icon: 'map2' },
-            { key: 'global_cities', href: '/admin/global_cities', label: 'Global Cities', icon: 'city' },
-        ]
-    },
-    {
         label: 'Leads',
         items: [
             { key: 'contacts', href: '/admin/contacts', label: 'Contacts', icon: 'mail' },

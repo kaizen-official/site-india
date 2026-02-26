@@ -18,9 +18,6 @@ const TABLE_META = {
     schedule_meetings: { displayName: 'Meetings', pk: 'id' },
     comments: { displayName: 'Comments', pk: 'id' },
     metrocitys: { displayName: 'Metro Cities', pk: 'metrocity_id' },
-    global_countries: { displayName: 'Global Countries', pk: 'id' },
-    global_states: { displayName: 'Global States', pk: 'state_id' },
-    global_cities: { displayName: 'Global Cities', pk: 'city_id' },
     settings: { displayName: 'Settings', pk: 'id' },
     users: { displayName: 'Users', pk: 'id' },
 };
