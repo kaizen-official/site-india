@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { Editor, EditorProvider, Toolbar, BtnBold, BtnItalic, BtnUnderline, BtnStrikeThrough, BtnBulletList, BtnNumberedList, BtnLink, BtnClearFormatting } from 'react-simple-wysiwyg';
+import { Editor, EditorProvider, Toolbar, BtnBold, BtnItalic, BtnUnderline, BtnStrikeThrough, BtnBulletList, BtnNumberedList, BtnLink, BtnClearFormatting, HtmlButton } from 'react-simple-wysiwyg';
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -567,6 +567,7 @@ export default function CrudTablePage() {
                                                     <BtnNumberedList />
                                                     <BtnLink />
                                                     <BtnClearFormatting />
+                                                    <HtmlButton />
                                                 </Toolbar>
                                             </Editor>
                                         </EditorProvider>
@@ -643,6 +644,7 @@ export default function CrudTablePage() {
                                                 <BtnNumberedList />
                                                 <BtnLink />
                                                 <BtnClearFormatting />
+                                                <HtmlButton />
                                             </Toolbar>
                                         </Editor>
                                     </EditorProvider>

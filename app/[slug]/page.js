@@ -584,7 +584,7 @@ export default function CityServicePage() {
 
     // Dynamic ratings & projects based on city_id
     const dynamicRatings = (city.city_id + theme.ratingsBase).toLocaleString('en-IN');
-    const dynamicProjects = `${city.city_id + theme.projectsBase}+`;
+    const dynamicProjects = `${Math.floor((city.city_id + theme.projectsBase)/4)}+`;
 
     // Build breadcrumb chain
     const breadcrumbItems = [
