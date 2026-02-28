@@ -583,7 +583,7 @@ export default function CityServicePage() {
     const stateName = city.state_name;
 
     // Dynamic ratings & projects based on city_id
-    const dynamicRatings = (city.city_id + theme.ratingsBase).toLocaleString('en-IN');
+    const dynamicRatings = (city.city_id + 1000).toLocaleString('en-IN');
     const dynamicProjects = `${Math.floor((city.city_id + theme.projectsBase)/4)}+`;
 
     // Build breadcrumb chain
