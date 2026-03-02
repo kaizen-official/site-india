@@ -203,7 +203,7 @@ function Footer() {
                             <Link href='/terms-conditions' className='text-gray-400 hover:text-blue-500 transition-colors duration-300'>
                                 Terms & Conditions
                             </Link>
-                            <Link href='/sitemap' className='text-gray-400 hover:text-blue-500 transition-colors duration-300'>
+                            <Link href='/sitemap.xml' className='text-gray-400 hover:text-blue-500 transition-colors duration-300'>
                                 Sitemap
                             </Link>
                         </div>
