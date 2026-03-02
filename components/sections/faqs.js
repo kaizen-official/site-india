@@ -9,44 +9,52 @@ function FaqSection() {
 
   const faqs = [
     {
-      question: "What is SEO and why is it important?",
-      answer: "SEO (Search Engine Optimization) is the practice of optimizing your website to rank higher in search engine results. It's crucial because higher rankings lead to more visibility, organic traffic, and potential customers. Good SEO helps your target audience find you when they're searching for products or services you offer, making it one of the most cost-effective marketing strategies."
+      question: "What does a website development company do?",
+      answer: "A website development company designs and develops professional websites that help businesses grow online."
     },
     {
-      question: "How does SEO differ from PPC?",
-      answer: "SEO focuses on earning organic (free) traffic through optimizing your website and content, while PPC (Pay-Per-Click) involves paying for ads to appear in search results. SEO takes longer to show results but provides long-term benefits, whereas PPC delivers immediate visibility but requires ongoing investment. The best strategy often combines both approaches."
+      question: "Why should I hire a website development company?",
+      answer: "A professional website development company creates high-quality websites that improve credibility and attract customers."
     },
     {
-      question: "What is local SEO and who needs it?",
-      answer: "Local SEO optimizes your online presence to attract customers from specific geographic areas. It's essential for businesses with physical locations or those serving specific regions, like restaurants, dental clinics, retail stores, or service providers. Local SEO includes optimizing Google Business Profile, local citations, and location-specific content."
+      question: "Do you create SEO friendly websites?",
+      answer: "Yes, Digitalsolution360 specializes in SEO friendly website development designed for better search rankings."
     },
     {
-      question: "How does voice search impact SEO?",
-      answer: "Voice search is changing how people find information online. It typically involves longer, more conversational queries. To optimize for voice search, focus on natural language, question-based content, featured snippets, and local SEO. Voice search users often seek immediate, specific answers, so providing clear, concise information is key."
+      question: "How long does website development take?",
+      answer: "Most websites take 1 to 3 weeks depending on project requirements."
     },
     {
-      question: "What are the key components of a successful SEO strategy?",
-      answer: "A successful SEO strategy includes: quality content creation, keyword research and optimization, technical SEO (site speed, mobile-friendliness), link building, user experience optimization, regular content updates, and performance monitoring. It's also important to stay updated with search engine algorithm changes and industry trends."
+      question: "Do you develop ecommerce websites?",
+      answer: "Yes, we develop complete ecommerce websites with payment integration."
     },
     {
-      question: "How can I measure the success of my digital marketing efforts?",
-      answer: "Success can be measured through various metrics including website traffic, conversion rates, ROI, engagement rates, lead generation, customer acquisition cost, and revenue growth. Tools like Google Analytics, social media insights, and marketing automation platforms help track these metrics. The specific KPIs depend on your business goals."
+      question: "Do you redesign websites?",
+      answer: "Yes, we redesign existing websites to improve performance and design."
     },
     {
-      question: "What are some common SEO mistakes to avoid?",
-      answer: "Common SEO mistakes include: keyword stuffing, ignoring mobile optimization, poor site structure, slow page speed, duplicate content, neglecting technical SEO, using poor quality backlinks, not optimizing for local search, ignoring analytics data, and failing to update content regularly. Avoiding these pitfalls will significantly improve your SEO performance."
+      question: "Do you provide SEO services?",
+      answer: "Yes, we provide professional SEO services for businesses."
     },
     {
-      question: "How long does it take to see results from digital marketing?",
-      answer: "The timeline varies by strategy. PPC ads can show results within days, while SEO typically takes 3-6 months for significant improvements. Social media marketing may show engagement within weeks, but building a strong following takes months. Content marketing usually shows results in 6-12 months. Consistency and patience are key to long-term success."
+      question: "Is Digitalsolution360 a digital marketing company?",
+      answer: "Yes, Digitalsolution360 is a complete digital marketing company."
     },
     {
-      question: "What platforms should I use for social media marketing?",
-      answer: "The best platforms depend on your target audience and business type. Facebook and Instagram work well for B2C businesses, LinkedIn is ideal for B2B, TikTok and Instagram Reels for younger audiences, Twitter for real-time engagement, and Pinterest for lifestyle and DIY content. Focus on platforms where your target audience is most active rather than trying to be everywhere."
+      question: "Are websites mobile friendly?",
+      answer: "Yes, all websites are fully mobile responsive."
     },
     {
-      question: "Do I need a custom website or can I use a template?",
-      answer: "It depends on your needs and budget. Templates are cost-effective and quick to deploy, suitable for small businesses with straightforward requirements. Custom websites offer unique designs, specific functionality, better scalability, and competitive advantage. Consider factors like budget, timeline, uniqueness requirements, and long-term growth plans when deciding."
+      question: "Do you provide support after website launch?",
+      answer: "Yes, we provide long-term website support."
+    },
+    {
+      question: "Is website development affordable?",
+      answer: "Yes, we offer affordable website development services for businesses."
+    },
+    {
+      question: "Why choose Digitalsolution360 website development company?",
+      answer: "Digitalsolution360 provides professional website development with SEO-friendly design and reliable support."
     }
   ];
 

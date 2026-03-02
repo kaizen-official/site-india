@@ -4,66 +4,66 @@ import React from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import {
-  IconBrandGoogle,
+  IconBuildingStore,
   IconDeviceLaptop,
-  IconBrandInstagram,
-  IconPalette,
-  IconRocket,
-  IconSettings
+  IconBrandWordpress,
+  IconCode,
+  IconFileDescription,
+  IconRefresh
 } from '@tabler/icons-react'
 
 function ServiceSection() {
   const services = [
     {
-      icon: IconBrandGoogle,
-      title: 'Digital Marketing',
-      description: 'Boost your online presence with data-driven marketing strategies that deliver measurable results.',
-      link: '/digital-marketing',
+      icon: IconDeviceLaptop,
+      title: 'Business Website Development',
+      description: 'Professional business websites designed to improve credibility, attract customers, and deliver excellent user experience with fast-loading, secure pages.',
+      link: '/website-development',
       color: 'from-blue-500 to-cyan-500',
       bgColor: 'bg-blue-50',
       iconColor: 'text-blue-600'
     },
     {
-      icon: IconDeviceLaptop,
-      title: 'Website Development',
-      description: 'Custom websites and web applications built with cutting-edge technology for optimal performance.',
-      link: '/website-development',
+      icon: IconBuildingStore,
+      title: 'Ecommerce Website Development',
+      description: 'Complete ecommerce websites with payment integration, product management, and optimized checkout flows to help you sell products and services online.',
+      link: '/website-development/ecommerce-website-development',
       color: 'from-purple-500 to-pink-500',
       bgColor: 'bg-purple-50',
       iconColor: 'text-purple-600'
     },
     {
-      icon: IconRocket,
-      title: 'SEO Services',
-      description: 'Improve your search rankings and drive organic traffic with our comprehensive SEO solutions.',
-      link: '/seo',
+      icon: IconBrandWordpress,
+      title: 'WordPress Website Development',
+      description: 'Custom WordPress websites built with modern themes and plugins for easy content management, scalability, and SEO-friendly performance.',
+      link: '/website-development/wordpress-website-development',
       color: 'from-green-500 to-emerald-500',
       bgColor: 'bg-green-50',
       iconColor: 'text-green-600'
     },
     {
-      icon: IconPalette,
-      title: 'Brand & Creative',
-      description: 'Create a memorable brand identity with stunning designs that resonate with your audience.',
-      link: '/branding',
+      icon: IconCode,
+      title: 'Custom Website Development',
+      description: 'Tailored website solutions built from scratch to meet unique business requirements with custom functionality, design, and performance optimization.',
+      link: '/website-development/custom-website-development',
       color: 'from-orange-500 to-red-500',
       bgColor: 'bg-orange-50',
       iconColor: 'text-orange-600'
     },
     {
-      icon: IconBrandInstagram,
-      title: 'Social Media Marketing',
-      description: 'Engage your audience and grow your brand across all major social media platforms.',
-      link: '/social-media-marketing',
+      icon: IconFileDescription,
+      title: 'Landing Page Development',
+      description: 'High-converting landing pages designed to capture leads, promote services, and drive specific business actions with compelling design and clear CTAs.',
+      link: '/website-development/landing-page-development',
       color: 'from-pink-500 to-rose-500',
       bgColor: 'bg-pink-50',
       iconColor: 'text-pink-600'
     },
     {
-      icon: IconSettings,
-      title: 'Automation Solutions',
-      description: 'Streamline your business processes with intelligent automation and workflow optimization.',
-      link: '/automation',
+      icon: IconRefresh,
+      title: 'Website Redesign Services',
+      description: 'Redesign existing websites to improve performance, modernize design, enhance user experience, and boost search engine rankings.',
+      link: '/website-development/website-redesign-services',
       color: 'from-indigo-500 to-blue-500',
       bgColor: 'bg-indigo-50',
       iconColor: 'text-indigo-600'
@@ -114,11 +114,11 @@ function ServiceSection() {
           </motion.span>
 
           <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6'>
-            What We Do Best
+            Our Website Development Services
           </h2>
 
           <p className='text-lg md:text-xl text-gray-600 max-w-3xl mx-auto'>
-            Comprehensive digital solutions tailored to elevate your business and drive sustainable growth
+            Digitalsolution360 provides complete website development services designed to meet modern business requirements. Our website development company builds websites that are fast, secure, and optimized for search engines.
           </p>
         </motion.div>
 
@@ -196,7 +196,7 @@ function ServiceSection() {
           className='text-center mt-16'
         >
           <p className='text-lg text-gray-600 mb-6'>
-            Need a custom solution? We're here to help!
+            Our website development services include responsive design, SEO optimization, and fast loading speed to ensure the best performance.
           </p>
           <Link
             href='/contact'

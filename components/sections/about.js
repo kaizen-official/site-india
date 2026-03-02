@@ -4,35 +4,38 @@ import React from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import {
-  IconTarget,
-  IconBulb,
+  IconCode,
+  IconSeo,
   IconUsers,
   IconTrophy,
   IconChartBar,
-  IconShieldCheck
+  IconTarget,
+  IconBulb,
+  IconDeviceMobile,
+  IconCoin
 } from '@tabler/icons-react'
 
 function AboutSection() {
   const features = [
     {
-      icon: IconTarget,
-      title: 'Result-Driven',
-      description: 'We focus on delivering measurable outcomes that matter to your business'
+      icon: IconCode,
+      title: 'Professional Developers',
+      description: 'Experienced website developers delivering high-quality, conversion-focused websites'
     },
     {
-      icon: IconBulb,
-      title: 'Innovative Solutions',
-      description: 'Cutting-edge strategies and technologies to keep you ahead of the curve'
+      icon: IconSeo,
+      title: 'SEO Friendly Websites',
+      description: 'Every website optimized for search engines with proper structure and fast loading'
     },
     {
-      icon: IconUsers,
-      title: 'Expert Team',
-      description: 'Seasoned professionals with years of experience across industries'
+      icon: IconCoin,
+      title: 'Affordable Services',
+      description: 'Competitive website development pricing designed for startups and growing businesses'
     },
     {
-      icon: IconShieldCheck,
-      title: 'Trusted Partner',
-      description: 'Reliable support and transparent communication every step of the way'
+      icon: IconDeviceMobile,
+      title: 'Mobile Responsive Design',
+      description: 'Fully responsive websites that work flawlessly on all devices and screen sizes'
     }
   ];
 
@@ -92,17 +95,17 @@ function AboutSection() {
 
             {/* Heading */}
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 leading-tight'>
-              Your Partner in
-              <span className='block text-blue-600 mt-2'>Digital Success</span>
+              Professional Website
+              <span className='block text-blue-600 mt-2'>Development Company</span>
             </h2>
 
             {/* Description */}
             <div className='space-y-4 text-gray-600 text-lg leading-relaxed'>
               <p>
-                At <span className='font-semibold text-gray-900'>Digital Solution 360</span>, we're more than just a digital agency—we're your strategic partner in achieving online excellence. With over a decade of experience, we've helped hundreds of businesses transform their digital presence and achieve remarkable growth.
+                <span className='font-semibold text-gray-900'>Digitalsolution360</span> is a trusted website development company focused on building professional and conversion-focused websites. We provide customized website development services for startups, small businesses, and growing companies. A professionally developed website improves business credibility and helps attract potential customers.
               </p>
               <p>
-                Our team of passionate experts combines creativity with data-driven strategies to deliver solutions that don't just look good, but perform exceptionally. From startups to established enterprises, we tailor our approach to meet your unique needs and goals.
+                Our business website development services focus on performance, user experience, and search engine optimization. Every website created by our website development company is optimized for speed, security, and usability. We ensure that websites are easy to navigate and designed to convert visitors into customers.
               </p>
             </div>
 
@@ -256,7 +259,7 @@ function AboutSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-16'
         >
-          {/* Mission */}
+          {/* Why Choose Us */}
           <motion.div
             whileHover={{ y: -5 }}
             className='bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300'
@@ -264,13 +267,13 @@ function AboutSection() {
             <div className='w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6'>
               <IconTarget className='w-8 h-8 text-blue-600' stroke={1.5} />
             </div>
-            <h3 className='text-2xl font-bold text-gray-900 mb-4'>Our Mission</h3>
+            <h3 className='text-2xl font-bold text-gray-900 mb-4'>Why Choose Us</h3>
             <p className='text-gray-600 leading-relaxed'>
-              To empower businesses of all sizes with innovative digital solutions that drive growth, enhance user experiences, and create lasting value in an ever-evolving digital landscape.
+              Our website development company focuses on delivering high-quality websites and reliable digital marketing services that help businesses grow online. We provide fast website delivery, digital marketing support, and long-term assistance.
             </p>
           </motion.div>
 
-          {/* Vision */}
+          {/* SEO Friendly Approach */}
           <motion.div
             whileHover={{ y: -5 }}
             className='bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300'
@@ -278,9 +281,9 @@ function AboutSection() {
             <div className='w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6'>
               <IconBulb className='w-8 h-8 text-purple-600' stroke={1.5} />
             </div>
-            <h3 className='text-2xl font-bold text-gray-900 mb-4'>Our Vision</h3>
+            <h3 className='text-2xl font-bold text-gray-900 mb-4'>SEO Friendly Development</h3>
             <p className='text-gray-600 leading-relaxed'>
-              To be the most trusted digital partner for businesses worldwide, recognized for our excellence, innovation, and unwavering commitment to client success in the digital realm.
+              Digitalsolution360 specializes in SEO friendly website development that helps websites rank better on search engines. We follow the latest SEO standards including optimized page structure, mobile responsiveness, schema-ready coding, and fast loading speed.
             </p>
           </motion.div>
         </motion.div>

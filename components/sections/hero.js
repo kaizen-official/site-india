@@ -54,7 +54,7 @@ function HeroSection() {
               className='inline-block'
             >
               <span className='bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold'>
-                Digital Solutions for Modern Business
+                Website Development & Digital Marketing Company
               </span>
             </motion.div>
 
@@ -65,9 +65,9 @@ function HeroSection() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight'
             >
-              Transform Your
+              Website Development Company Offering
               <span className='block text-blue-600 mt-2'>
-                Digital Presence
+                Complete Digital Marketing Services
               </span>
             </motion.h1>
 
@@ -78,7 +78,7 @@ function HeroSection() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className='text-lg md:text-xl text-gray-600 max-w-2xl'
             >
-              We craft innovative digital solutions that drive growth, enhance user experience, and elevate your brand to new heights.
+              Digitalsolution360 is a professional website development company providing high-quality website development services and complete digital marketing services for businesses looking to grow online. We specialize in building SEO friendly websites that improve online visibility and generate consistent business leads.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -111,7 +111,7 @@ function HeroSection() {
             >
               <div className='text-center lg:text-left'>
                 <h3 className='text-3xl md:text-4xl font-bold text-blue-600'>500+</h3>
-                <p className='text-gray-600 text-sm md:text-base'>Projects Done</p>
+                <p className='text-gray-600 text-sm md:text-base'>Websites Delivered</p>
               </div>
               <div className='text-center lg:text-left'>
                 <h3 className='text-3xl md:text-4xl font-bold text-blue-600'>300+</h3>

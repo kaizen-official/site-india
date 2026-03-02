@@ -141,21 +141,21 @@ function CTASection() {
 
             {/* Heading */}
             <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              Ready to Transform Your Business?
+              Start Your Website Project Today
             </h2>
 
             {/* Description */}
             <p className='text-lg md:text-xl text-blue-100 leading-relaxed'>
-              Let's discuss how we can help you achieve your digital goals. Get a free consultation and discover the perfect solution for your business.
+              Ready to build a professional business website that generates leads and grows your brand online? Digitalsolution360 is a trusted website development company offering SEO friendly website development and digital marketing services designed to help businesses succeed online.
             </p>
 
             {/* Benefits List */}
             <div className='space-y-4 pt-4'>
               {[
-                'Free consultation with our experts',
-                'Custom solutions tailored to your needs',
-                'Transparent pricing with no hidden costs',
-                'Dedicated support throughout your journey'
+                'Business website, ecommerce, or custom website solutions',
+                'SEO friendly development for better search rankings',
+                'Complete digital marketing strategy and support',
+                'Fast, conversion-focused website delivery'
               ].map((benefit, index) => (
                 <motion.div
                   key={index}
@@ -171,6 +171,16 @@ function CTASection() {
                   <span className='text-blue-50'>{benefit}</span>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Contact Info */}
+            <div className='space-y-3 pt-4'>
+              <a href='tel:+919990556217' className='flex items-center gap-3 text-blue-50 hover:text-white transition-colors'>
+                <span className='font-semibold'>Call:</span> +91 9990556217
+              </a>
+              <a href='mailto:info@digitalsolution360.in' className='flex items-center gap-3 text-blue-50 hover:text-white transition-colors'>
+                <span className='font-semibold'>Email:</span> info@digitalsolution360.in
+              </a>
             </div>
           </motion.div>
 
