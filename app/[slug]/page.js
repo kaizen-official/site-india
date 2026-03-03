@@ -1,22 +1,82 @@
 import CityClient from "./cityClient";
 
-export default function Page() {
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api";
+
+/* Minimal per-category data needed for JSON-LD */
+const CATEGORY_SCHEMA = {
+  "Google Business": {
+    serviceName: "Google My Business Optimization",
+    image: `${API_BASE}/gmb-og.webp`,
+    ratingsBase: 2540,
+  },
+  "Digital Marketing": {
+    serviceName: "Digital Marketing Services",
+    image: `${API_BASE}/digital-marketing-og.webp`,
+    ratingsBase: 3120,
+  },
+  "Web Development": {
+    serviceName: "Web Development Services",
+    image: `${API_BASE}/home/images/og-home.webp`,
+    ratingsBase: 1890,
+  },
+  "Social Media": {
+    serviceName: "Social Media Marketing Services",
+    image: `${API_BASE}/social-media-og.webp`,
+    ratingsBase: 2750,
+  },
+  "Content Writing": {
+    serviceName: "Content Writing Services",
+    image: `${API_BASE}/content-writing-og.webp`,
+    ratingsBase: 1650,
+  },
+  "Wordpress Development": {
+    serviceName: "WordPress Development Services",
+    image: `${API_BASE}/wordpress-og.webp`,
+    ratingsBase: 2080,
+  },
+};
+
+async function fetchCity(slug) {
+  try {
+    const res = await fetch(`${API_BASE}/cities/${slug}`, {
+      next: { revalidate: 3600 },
+    });
+    const json = await res.json();
+    if (json.success && json.data) return json.data;
+  } catch {}
+  return null;
+}
+
+export default async function Page({ params }) {
+  const { slug } = await params;
+  const city = await fetchCity(slug);
+
+  const catSchema = city
+    ? CATEGORY_SCHEMA[city.category_name] || CATEGORY_SCHEMA["Digital Marketing"]
+    : CATEGORY_SCHEMA["Digital Marketing"];
+
+  const cityName = city?.city || "";
+  const reviewCount = city ? city.city_id + 1000 : 1483;
+  const name = city?.meta_title || `${catSchema.serviceName} in ${cityName}`;
+  const description =
+    city?.meta_description ||
+    `Professional ${catSchema.serviceName.toLowerCase()} tailored to your local business needs in ${cityName}. Reach our experts at +91 99905 56217.`;
 
   const jsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "Digital Solution",
-    "image": "https://www.digitalsolution360.in/public/frontend/img/logo.png",
-    "description": "Discover professional website development services tailored to your business needs. Reach our experts at +91 99905 56217 and ensure top-notch web solutions.",
+    "name": name,
+    "image": catSchema.image,
+    "description": description,
     "brand": {
       "@type": "Brand",
-      "name": "Digital Solution"
+      "name": "Digital Solution 360",
     },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.5",
-      "reviewCount": "1483"
-    }
+      "reviewCount": String(reviewCount),
+    },
   };
 
   return (
@@ -25,8 +85,8 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
       <CityClient />
     </>
   );
 }
+

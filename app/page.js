@@ -10,6 +10,7 @@ import ClientSection from "@/components/sections/clients";
 import WebDevSection from "@/components/sections/web";
 import FaqSection from "@/components/sections/faqs";
 import Script from "next/script";
+import FloatCta from "@/components/sections/floatCta";
 
 export const metadata = {
   title: "Website Development Company | Digital Marketing Services - Digitalsolution360",
@@ -171,6 +172,7 @@ export default function Home() {
       <TestimonialSection/>
       <BlogSection/>
       <FaqSection/>
+      <FloatCta/>
       <Footer/>
     </>
   );
