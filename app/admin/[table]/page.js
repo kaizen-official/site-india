@@ -346,6 +346,17 @@ export default function CrudTablePage() {
     };
 
     const isImageField = (col) => col === 'image';
+    const isResumeField = (col) => col === 'resume';
+
+    const isPdfUrl = (value) => {
+        if (!value || typeof value !== 'string') return false;
+        try {
+            const url = new URL(value);
+            return url.pathname.toLowerCase().endsWith('.pdf');
+        } catch {
+            return value.toLowerCase().includes('.pdf');
+        }
+    };
 
     const handleImageUpload = async (file, col, dataObj, setDataFn) => {
         if (!file) return;
@@ -597,9 +608,31 @@ export default function CrudTablePage() {
                         {Object.entries(viewData).map(([key, val]) => (
                             <div key={key} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-2 border-b border-white/5 last:border-none">
                                 <span className="text-white/40 text-xs uppercase tracking-wider font-medium w-40 shrink-0">{key.replace(/_/g, ' ')}</span>
-                                <span className="text-white/80 text-sm break-all flex-1">
-                                    {val === null ? <span className="text-white/20">null</span> : String(val)}
-                                </span>
+                                <div className="text-white/80 text-sm break-all flex-1">
+                                    {val === null ? (
+                                        <span className="text-white/20">null</span>
+                                    ) : isResumeField(key) && isPdfUrl(String(val)) ? (
+                                        <div className="space-y-2">
+                                            <div className="w-full h-[420px] border border-white/10 rounded-xl overflow-hidden bg-white">
+                                                <iframe
+                                                    src={String(val)}
+                                                    title="Resume PDF"
+                                                    className="w-full h-full"
+                                                />
+                                            </div>
+                                            <a
+                                                href={String(val)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex text-blue-400 hover:text-blue-300 transition"
+                                            >
+                                                Open PDF in new tab
+                                            </a>
+                                        </div>
+                                    ) : (
+                                        String(val)
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>

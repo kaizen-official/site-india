@@ -780,7 +780,7 @@ export default function CareersPage() {
                                 </div>
 
                                 <div>
-                                    <label className='block text-sm font-semibold text-gray-700 mb-2'>Upload Resume (PDF, DOC, DOCX) *</label>
+                                    <label className='block text-sm font-semibold text-gray-700 mb-2'>Upload Resume (PDF only) *</label>
                                     <label className='flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all'>
                                         <div className='flex flex-col items-center justify-center pt-5 pb-6'>
                                             <IconUpload className='w-8 h-8 text-gray-400 mb-2' />
@@ -792,16 +792,23 @@ export default function CareersPage() {
                                             ) : (
                                                 <>
                                                     <p className='text-sm text-gray-500'><span className='font-semibold text-blue-600'>Click to upload</span> or drag and drop</p>
-                                                    <p className='text-xs text-gray-400 mt-1'>PDF, DOC, DOCX up to 10MB</p>
+                                                    <p className='text-xs text-gray-400 mt-1'>PDF up to 10MB</p>
                                                 </>
                                             )}
                                         </div>
                                         <input
                                             type='file'
                                             className='hidden'
-                                            accept='.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                            accept='.pdf,application/pdf'
                                             onChange={(e) => {
                                                 const file = e.target.files[0];
+                                                if (file) {
+                                                    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+                                                    if (!isPdf) {
+                                                        alert('Only PDF files are allowed');
+                                                        return;
+                                                    }
+                                                }
                                                 if (file && file.size > 10 * 1024 * 1024) {
                                                     alert('File size must be under 10MB');
                                                     return;
