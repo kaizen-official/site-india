@@ -56,7 +56,7 @@ export default async function Page({ params }) {
     : CATEGORY_SCHEMA["Digital Marketing"];
 
   const cityName = city?.city || "";
-  const reviewCount = city ? city.city_id + 1000 : 1483;
+  const reviewCount =  city.city_id + 1000;
   const name = city?.meta_title || `${catSchema.serviceName} in ${cityName}`;
   const description =
     city?.meta_description ||
