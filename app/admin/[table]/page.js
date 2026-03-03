@@ -158,6 +158,7 @@ export default function CrudTablePage() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const [imageUploading, setImageUploading] = useState(false);
 
     // Table columns info from first fetch
     const [tableCols, setTableCols] = useState([]);
@@ -343,6 +344,72 @@ export default function CrudTablePage() {
     const isLongText = (col) => {
         return col.includes('meta_');
     };
+
+    const isImageField = (col) => col === 'image';
+
+    const handleImageUpload = async (file, col, dataObj, setDataFn) => {
+        if (!file) return;
+        setImageUploading(true);
+        try {
+            const fd = new FormData();
+            fd.append('image', file);
+            const res = await fetch(`${API}/upload/blog-image`, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}` },
+                body: fd,
+            });
+            const json = await res.json();
+            if (json.success) {
+                setDataFn({ ...dataObj, [col]: json.url });
+            } else {
+                alert('Upload failed: ' + (json.message || 'Unknown error'));
+            }
+        } catch (err) {
+            console.error('Image upload error:', err);
+            alert('Image upload failed');
+        } finally {
+            setImageUploading(false);
+        }
+    };
+
+    const ImageUploadField = ({ col, value, dataObj, setDataFn }) => (
+        <div className="space-y-2">
+            {value && (
+                <div className="relative group w-full h-32 rounded-lg overflow-hidden border border-white/10 bg-white/5">
+                    <img src={value} alt="Preview" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <button
+                            type="button"
+                            onClick={() => setDataFn({ ...dataObj, [col]: '' })}
+                            className="text-white text-xs bg-red-600 px-2 py-1 rounded cursor-pointer"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            )}
+            <label className="flex items-center gap-2 px-3 py-2.5 bg-white/5 border border-white/10 border-dashed rounded-xl cursor-pointer hover:bg-white/10 transition">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/40 shrink-0">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span className="text-white/40 text-sm">{imageUploading ? 'Uploading...' : 'Upload image'}</span>
+                <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    disabled={imageUploading}
+                    onChange={(e) => handleImageUpload(e.target.files[0], col, dataObj, setDataFn)}
+                />
+            </label>
+            <input
+                type="text"
+                value={value || ''}
+                onChange={e => setDataFn({ ...dataObj, [col]: e.target.value })}
+                placeholder="Or paste image URL"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+            />
+        </div>
+    );
 
     return (
         <div className="space-y-5">
@@ -550,7 +617,9 @@ export default function CrudTablePage() {
                         {editableCols.map(col => (
                             <div key={col}>
                                 <label className="block text-white/50 text-xs font-medium uppercase tracking-wider mb-1.5">{col.replace(/_/g, ' ')}</label>
-                                {isRichText(col) && !isLongText(col) ? (
+                                {isImageField(col) ? (
+                                    <ImageUploadField col={col} value={editData[col]} dataObj={editData} setDataFn={setEditData} />
+                                ) : isRichText(col) && !isLongText(col) ? (
                                     <div className="bg-white text-black rounded-lg overflow-hidden border border-white/10">
                                         <EditorProvider>
                                             <Editor
@@ -611,7 +680,7 @@ export default function CrudTablePage() {
                             <button onClick={() => setEditModal(false)} className="flex-1 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white/70 hover:bg-white/10 transition text-sm cursor-pointer">Cancel</button>
                             <button
                                 onClick={handleEditSubmit}
-                                disabled={editLoading}
+                                disabled={editLoading || imageUploading}
                                 className="flex-1 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 rounded-xl text-white hover:from-blue-500 hover:to-indigo-500 transition text-sm disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 {editLoading ? <><Spinner size={14} /> Saving...</> : 'Save Changes'}
@@ -627,7 +696,9 @@ export default function CrudTablePage() {
                     {editableCols.map(col => (
                         <div key={col}>
                             <label className="block text-white/50 text-xs font-medium uppercase tracking-wider mb-1.5">{col.replace(/_/g, ' ')}</label>
-                            {isRichText(col) && !isLongText(col) ? (
+                            {isImageField(col) ? (
+                                <ImageUploadField col={col} value={createData[col]} dataObj={createData} setDataFn={setCreateData} />
+                            ) : isRichText(col) && !isLongText(col) ? (
                                 <div className="bg-white text-black rounded-lg overflow-hidden border border-white/10">
                                     <EditorProvider>
                                         <Editor
@@ -688,7 +759,7 @@ export default function CrudTablePage() {
                         <button onClick={() => setCreateModal(false)} className="flex-1 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white/70 hover:bg-white/10 transition text-sm cursor-pointer">Cancel</button>
                         <button
                             onClick={handleCreateSubmit}
-                            disabled={createLoading}
+                            disabled={createLoading || imageUploading}
                             className="flex-1 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 rounded-xl text-white hover:from-blue-500 hover:to-indigo-500 transition text-sm disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                         >
                             {createLoading ? <><Spinner size={14} /> Creating...</> : 'Create Record'}

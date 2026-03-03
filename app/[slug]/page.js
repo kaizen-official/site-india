@@ -6,39 +6,39 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api";
 const CATEGORY_SCHEMA = {
   "Google Business": {
     serviceName: "Google My Business Optimization",
-    image: `${API_BASE}/gmb-og.webp`,
+    image: `https://digitalsolution360.in/gmb-og.webp`,
     ratingsBase: 2540,
   },
   "Digital Marketing": {
     serviceName: "Digital Marketing Services",
-    image: `${API_BASE}/digital-marketing-og.webp`,
+    image: `https://digitalsolution360.in/digital-marketing-og.webp`,
     ratingsBase: 3120,
   },
   "Web Development": {
     serviceName: "Web Development Services",
-    image: `${API_BASE}/home/images/og-home.webp`,
+    image: `https://digitalsolution360.in/home/images/og-home.webp`,
     ratingsBase: 1890,
   },
   "Social Media": {
     serviceName: "Social Media Marketing Services",
-    image: `${API_BASE}/social-media-og.webp`,
+    image: `https://digitalsolution360.in/social-media-og.webp`,
     ratingsBase: 2750,
   },
   "Content Writing": {
     serviceName: "Content Writing Services",
-    image: `${API_BASE}/content-writing-og.webp`,
+    image: `https://digitalsolution360.in/content-writing-og.webp`,
     ratingsBase: 1650,
   },
   "Wordpress Development": {
     serviceName: "WordPress Development Services",
-    image: `${API_BASE}/wordpress-og.webp`,
+    image: `https://digitalsolution360.in/wordpress-og.webp`,
     ratingsBase: 2080,
   },
 };
 
 async function fetchCity(slug) {
   try {
-    const res = await fetch(`${API_BASE}/cities/${slug}`, {
+    const res = await fetch(`https://digitalsolution360.in/cities/${slug}`, {
       next: { revalidate: 3600 },
     });
     const json = await res.json();

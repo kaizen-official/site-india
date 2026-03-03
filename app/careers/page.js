@@ -32,6 +32,8 @@ export default function CareersPage() {
     const [selectedJob, setSelectedJob] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [resumeFile, setResumeFile] = useState(null);
+    const [resumeUploading, setResumeUploading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -40,6 +42,8 @@ export default function CareersPage() {
         currentCompany: '',
         coverLetter: ''
     });
+
+    const API = process.env.NEXT_PUBLIC_API_URL ;
 
     const { jobOpenings } = data;
 
@@ -61,6 +65,7 @@ export default function CareersPage() {
             currentCompany: '',
             coverLetter: ''
         });
+        setResumeFile(null);
         document.body.style.overflow = 'auto';
     };
 
@@ -73,6 +78,27 @@ export default function CareersPage() {
         setIsSubmitting(true);
 
         try {
+            // Upload resume to R2 first if a file was selected
+            let resumeUrl = '';
+            if (resumeFile) {
+                setResumeUploading(true);
+                const fd = new FormData();
+                fd.append('resume', resumeFile);
+                const uploadRes = await fetch(`${API}/upload/resume`, {
+                    method: 'POST',
+                    body: fd,
+                });
+                const uploadJson = await uploadRes.json();
+                setResumeUploading(false);
+                if (uploadJson.success) {
+                    resumeUrl = uploadJson.url;
+                } else {
+                    setSubmitStatus('error');
+                    setIsSubmitting(false);
+                    return;
+                }
+            }
+
             const response = await fetch('https://formsubmit.co/ajax/info@digitalsolution360.in', {
                 method: 'POST',
                 headers: {
@@ -83,6 +109,7 @@ export default function CareersPage() {
                     ...formData,
                     position: selectedJob.title,
                     department: selectedJob.department,
+                    resumeUrl: resumeUrl || 'Not attached',
                     _subject: `New Job Application for ${selectedJob.title}`,
                     _template: 'table'
                 })
@@ -736,25 +763,51 @@ export default function CareersPage() {
                                     />
                                 </div>
 
-                                <div className='bg-blue-50 border border-blue-200 rounded-lg p-4'>
-                                    <div className='flex items-start gap-3'>
-                                        <IconUpload className='w-5 h-5 text-blue-600 mt-0.5 shrink-0' />
-                                        <div className='text-sm'>
-                                            <p className='text-gray-700 font-medium mb-1'>Resume Submission</p>
-                                            <p className='text-gray-600'>
-                                                Please send your resume to{' '}
-                                                <a href='mailto:info@digitalsolution360.in' className='text-blue-600 hover:text-blue-700 font-semibold'>
-                                                    info@digitalsolution360.in
-                                                </a>
-                                                {' '}with subject line: "Application for {selectedJob.title}"
-                                            </p>
+                                <div>
+                                    <label className='block text-sm font-semibold text-gray-700 mb-2'>Upload Resume (PDF, DOC, DOCX) *</label>
+                                    <label className='flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all'>
+                                        <div className='flex flex-col items-center justify-center pt-5 pb-6'>
+                                            <IconUpload className='w-8 h-8 text-gray-400 mb-2' />
+                                            {resumeFile ? (
+                                                <>
+                                                    <p className='text-sm font-medium text-blue-600'>{resumeFile.name}</p>
+                                                    <p className='text-xs text-gray-500 mt-1'>{(resumeFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p className='text-sm text-gray-500'><span className='font-semibold text-blue-600'>Click to upload</span> or drag and drop</p>
+                                                    <p className='text-xs text-gray-400 mt-1'>PDF, DOC, DOCX up to 10MB</p>
+                                                </>
+                                            )}
                                         </div>
-                                    </div>
+                                        <input
+                                            type='file'
+                                            className='hidden'
+                                            accept='.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                            onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                if (file && file.size > 10 * 1024 * 1024) {
+                                                    alert('File size must be under 10MB');
+                                                    return;
+                                                }
+                                                setResumeFile(file || null);
+                                            }}
+                                        />
+                                    </label>
+                                    {resumeFile && (
+                                        <button
+                                            type='button'
+                                            onClick={() => setResumeFile(null)}
+                                            className='mt-2 text-xs text-red-500 hover:text-red-700 transition'
+                                        >
+                                            Remove file
+                                        </button>
+                                    )}
                                 </div>
 
                                 <button
                                     type='submit'
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || resumeUploading}
                                     className='w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed'
                                 >
                                     {isSubmitting ? (
