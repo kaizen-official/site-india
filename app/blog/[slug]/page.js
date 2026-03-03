@@ -320,7 +320,7 @@ export default function BlogDetailPage() {
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {related.map((rp) => (
-                      <Link key={rp.post_id} href={`/blog/${rp.post_slug}`} className="group block">
+                      <Link key={rp.post_id} href={`/${rp.post_slug}`} className="group block">
                         <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg hover:border-teal-200 transition-all duration-300 h-full flex flex-col">
                           <div className="relative h-40 overflow-hidden bg-linear-to-br from-gray-100 to-gray-200">
                             {rp.image ? (
@@ -450,7 +450,7 @@ export default function BlogDetailPage() {
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Other Posts</h3>
                     <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
                       {allPosts.filter(p => p.post_slug !== slug).slice(0, 10).map((op) => (
-                        <Link key={op.post_id} href={`/blog/${op.post_slug}`} className="group flex gap-3">
+                        <Link key={op.post_id} href={`/${op.post_slug}`} className="group flex gap-3">
                           <div className="shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-gray-100">
                             {op.image ? (
                               <img

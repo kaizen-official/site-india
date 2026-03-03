@@ -219,7 +219,7 @@ export default function BlogPage() {
                     key={post.post_id}
                     variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
                   >
-                    <Link href={`/blog/${post.post_slug}`} className="group block h-full">
+                    <Link href={`/${post.post_slug}`} className="group block h-full">
                       <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-teal-200 transition-all duration-300 h-full flex flex-col">
                         {/* Image */}
                         <div className="relative h-52 overflow-hidden bg-linear-to-br from-gray-100 to-gray-200">

@@ -1,4 +1,6 @@
 import CityClient from "./cityClient";
+import BlogDetailPage from "../blog/[slug]/page";
+import { notFound } from "next/navigation";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api";
 
@@ -38,7 +40,18 @@ const CATEGORY_SCHEMA = {
 
 async function fetchCity(slug) {
   try {
-    const res = await fetch(`https://digitalsolution360.in/cities/${slug}`, {
+    const res = await fetch(`${API_BASE}/cities/${slug}`, {
+      next: { revalidate: 3600 },
+    });
+    const json = await res.json();
+    if (json.success && json.data) return json.data;
+  } catch {}
+  return null;
+}
+
+async function fetchBlog(slug) {
+  try {
+    const res = await fetch(`${API_BASE}/posts/${slug}`, {
       next: { revalidate: 3600 },
     });
     const json = await res.json();
@@ -50,6 +63,14 @@ async function fetchCity(slug) {
 export default async function Page({ params }) {
   const { slug } = await params;
   const city = await fetchCity(slug);
+
+  if (!city) {
+    const post = await fetchBlog(slug);
+    if (post) {
+      return <BlogDetailPage />;
+    }
+    notFound();
+  }
 
   const catSchema = city
     ? CATEGORY_SCHEMA[city.category_name] || CATEGORY_SCHEMA["Digital Marketing"]

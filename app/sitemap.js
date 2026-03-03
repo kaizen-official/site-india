@@ -96,7 +96,6 @@ function getPriority(path) {
 /* ── Helper: changefreq based on type ── */
 function getChangeFreq(path) {
   if (path === "/" || path === "/blog") return "daily";
-  if (path.startsWith("/blog/")) return "weekly";
   return "weekly";
 }
 
@@ -191,7 +190,7 @@ export default async function sitemap() {
 
   // Blog post routes
   const blogEntries = blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
+    url: `${BASE_URL}/${post.slug}`,
     lastModified: post.updatedAt
       ? new Date(post.updatedAt).toISOString()
       : now,
