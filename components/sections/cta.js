@@ -26,7 +26,7 @@ function CTASection() {
 
     try {
       // Save to database
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
       await fetch(`${API_URL}/contacts`, {
         method: 'POST',
         headers: {
@@ -42,18 +42,14 @@ function CTASection() {
       }).catch(() => {});
 
       // Send email notification using FormSubmit
-      const formSubmitData = new FormData();
-      formSubmitData.append('name', formData.name);
-      formSubmitData.append('email', formData.email);
-      formSubmitData.append('phone', formData.phone);
-      formSubmitData.append('_subject', 'New Lead - Digital Solution 360');
-      formSubmitData.append('_captcha', 'false');
-      formSubmitData.append('_template', 'table');
-
-      await fetch('https://formsubmit.co/globalweb3600@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/globalweb3600@gmail.com', {
         method: 'POST',
-        body: formSubmitData
-      });
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name, email: formData.email, phone: formData.phone,
+          _subject: 'New Lead - Digital Solution 360', _captcha: 'false', _template: 'table'
+        })
+      }).catch(() => {});
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', phone: '' });

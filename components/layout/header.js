@@ -207,7 +207,14 @@ function Header() {
             }).catch(() => {});
 
             // Send email via FormSubmit
-            await fetch('https://formsubmit.co/globalweb3600@gmail.com', { method: 'POST', body: formData });
+            await fetch('https://formsubmit.co/ajax/globalweb3600@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone'),
+                    _subject: 'New Lead - Header Quote', _captcha: 'false', _template: 'table'
+                })
+            }).catch(() => {});
             setShowForm(false);
             setShowThankYou(true);
             form.reset();

@@ -72,7 +72,7 @@ function FloatCta() {
 
     try {
       // Save to database
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
       await fetch(`${API_URL}/contacts`, {
         method: 'POST',
         headers: {
@@ -88,10 +88,14 @@ function FloatCta() {
       }).catch(() => {});
 
       // Send email notification
-      await fetch('https://formsubmit.co/globalweb3600@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/globalweb3600@gmail.com', {
         method: 'POST',
-        body: formData
-      })
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone'),
+          _subject: 'New Lead - Float CTA', _captcha: 'false', _template: 'table'
+        })
+      }).catch(() => {})
 
       setShowForm(false)
       setShowThankYou(true)

@@ -73,7 +73,7 @@ export default function BlogDetailPage() {
     e.preventDefault();
     setFormSubmitting(true);
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+      const API_URL = process.env.NEXT_PUBLIC_API_URL ;
       await fetch(`${API_URL}/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -83,14 +83,14 @@ export default function BlogDetailPage() {
           pageurl: typeof window !== 'undefined' ? window.location.pathname : ''
         })
       }).catch(() => {});
-      const formData = new FormData();
-      formData.append('name', contactForm.name);
-      formData.append('email', contactForm.email);
-      formData.append('phone', contactForm.phone);
-      formData.append('_subject', 'New Lead - Blog Sidebar');
-      formData.append('_captcha', 'false');
-      formData.append('_template', 'table');
-      await fetch('https://formsubmit.co/globalweb3600@gmail.com', { method: 'POST', body: formData });
+      await fetch('https://formsubmit.co/ajax/globalweb3600@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: contactForm.name, email: contactForm.email, phone: contactForm.phone,
+          _subject: 'New Lead - Blog Sidebar', _captcha: 'false', _template: 'table'
+        })
+      }).catch(() => {});
       setFormSuccess(true);
       setContactForm({ name: '', phone: '', email: '' });
       setTimeout(() => setFormSuccess(false), 5000);

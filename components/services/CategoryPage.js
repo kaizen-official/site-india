@@ -203,7 +203,7 @@ export default function CategoryPage({ categorySlug }) {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+            const API_URL = process.env.NEXT_PUBLIC_API_URL;
             await fetch(`${API_URL}/contacts`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -215,15 +215,14 @@ export default function CategoryPage({ categorySlug }) {
                     pageurl: typeof window !== 'undefined' ? window.location.pathname : '',
                 })
             }).catch(() => {});
-            const fd = new FormData();
-            fd.append('name', formData.name);
-            fd.append('email', formData.email);
-            fd.append('phone', formData.phone);
-            fd.append('message', formData.message || '');
-            fd.append('_subject', `New Enquiry - ${cat.name}`);
-            fd.append('_captcha', 'false');
-            fd.append('_template', 'table');
-            await fetch('https://formsubmit.co/globalweb3600@gmail.com', { method: 'POST', body: fd }).catch(() => {});
+            await fetch('https://formsubmit.co/ajax/globalweb3600@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name, email: formData.email, phone: formData.phone, message: formData.message || '',
+                    _subject: `New Enquiry - ${cat.name}`, _captcha: 'false', _template: 'table'
+                })
+            }).catch(() => {});
         } catch (err) { console.error('Form error:', err); }
         setFormStatus('success');
         setFormData({ name: '', phone: '', email: '', message: '' });
