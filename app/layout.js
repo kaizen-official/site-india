@@ -1,5 +1,6 @@
 import { Figtree } from "next/font/google";
 import "./globals.css";
+import FloatCta from "@/components/sections/floatCta";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -176,6 +177,7 @@ export default function RootLayout({ children }) {
         className={`${figtree.variable} antialiased`}
       >
         {children}
+        <FloatCta/>
       </body>
     </html>
   );

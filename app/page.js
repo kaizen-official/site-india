@@ -172,7 +172,7 @@ export default function Home() {
       <TestimonialSection/>
       <BlogSection/>
       <FaqSection/>
-      <FloatCta/>
+      {/* <FloatCta/> */}
       <Footer/>
     </>
   );
