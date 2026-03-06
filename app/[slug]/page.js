@@ -4,6 +4,7 @@ import BlogDetailPage from "../blog/[slug]/page";
 import { notFound } from "next/navigation";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api";
+const SITE_URL = "https://www.digitalsolution360.in";
 
 /* Minimal per-category data needed for JSON-LD */
 const CATEGORY_SCHEMA = {
@@ -70,6 +71,97 @@ async function fetchState(slug) {
     if (json.success && json.data) return json.data;
   } catch {}
   return null;
+}
+
+/* ── Dynamic metadata for city / state / blog pages ── */
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  // City page
+  const city = await fetchCity(slug);
+  if (city) {
+    const catSchema = CATEGORY_SCHEMA[city.category_name] || CATEGORY_SCHEMA["Digital Marketing"];
+    const cityName = city.city || "";
+    const title = city.meta_title || `${catSchema.serviceName} in ${cityName}`;
+    const description = city.meta_description || `Professional ${catSchema.serviceName.toLowerCase()} tailored to your local business needs in ${cityName}. Reach our experts at +91 99905 56217.`;
+    const keywords = city.meta_keyword || `${catSchema.serviceName}, ${cityName}, digital marketing ${cityName}`;
+    const ogImage = city.image || catSchema.image;
+
+    return {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        title,
+        description,
+        url: `${SITE_URL}/${slug}`,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImage],
+      },
+    };
+  }
+
+  // State page
+  const state = await fetchState(slug);
+  if (state) {
+    const title = state.meta_title || `Digital Services in ${state.name} - Digital Solution 360`;
+    const description = state.meta_description || `Professional digital marketing, web development, SEO, and branding services across all major cities in ${state.name}. Contact us for a free consultation.`;
+    const keywords = state.meta_keywords || `digital marketing ${state.name}, SEO ${state.name}, web development ${state.name}`;
+    const ogImage = state.image || '/logo.png';
+
+    return {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        title,
+        description,
+        url: `${SITE_URL}/${slug}`,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImage],
+      },
+    };
+  }
+
+  // Blog page
+  const post = await fetchBlog(slug);
+  if (post) {
+    const title = post.meta_title || post.title;
+    const description = post.meta_description || (post.content ? post.content.replace(/<[^>]*>/g, '').slice(0, 160) : '');
+    const ogImage = post.featured_image || '/logo.png';
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        url: `${SITE_URL}/${slug}`,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+        type: 'article',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImage],
+      },
+    };
+  }
+
+  return {};
 }
 
 export default async function Page({ params }) {
