@@ -1,4 +1,5 @@
 import CityClient from "./cityClient";
+import StateClient from "./stateClient";
 import BlogDetailPage from "../blog/[slug]/page";
 import { notFound } from "next/navigation";
 
@@ -60,11 +61,29 @@ async function fetchBlog(slug) {
   return null;
 }
 
+async function fetchState(slug) {
+  try {
+    const res = await fetch(`${API_BASE}/states/${slug}`, {
+      next: { revalidate: 3600 },
+    });
+    const json = await res.json();
+    if (json.success && json.data) return json.data;
+  } catch {}
+  return null;
+}
+
 export default async function Page({ params }) {
   const { slug } = await params;
   const city = await fetchCity(slug);
 
   if (!city) {
+    // Check if it's a state page
+    const state = await fetchState(slug);
+    if (state) {
+      return <StateClient />;
+    }
+
+    // Check if it's a blog post
     const post = await fetchBlog(slug);
     if (post) {
       return <BlogDetailPage />;

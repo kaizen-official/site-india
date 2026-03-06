@@ -126,7 +126,7 @@ function BlogSection() {
                   {/* Blog Image */}
                   <div className='relative h-56 overflow-hidden bg-gray-200'>
                     <img
-                      src={blog.featured_image || '/blogs/blog-1.jpg'}
+                      src={blog.image || '/blogs/blog-img1.png'}
                       alt={blog.title}
                       className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
                       onError={(e) => {
@@ -159,12 +159,12 @@ function BlogSection() {
 
                     {/* Title */}
                     <h3 className='text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2'>
-                      {blog.title}
+                      {blog.post_name}
                     </h3>
 
                     {/* Excerpt */}
                     <p className='text-gray-600 mb-6 leading-relaxed line-clamp-3 grow'>
-                      {getExcerpt(blog.content)}
+                      {getExcerpt(blog.post_description)}
                     </p>
 
                     {/* Footer */}
