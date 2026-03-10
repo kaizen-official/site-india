@@ -16,7 +16,7 @@ export const viewport = {
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#ffffff' },
   ],
-}; 
+};
 
 export const metadata = {
   metadataBase: new URL('https://www.digitalsolution360.in'),
@@ -161,6 +161,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta property="og:site_name" content="Digital Solution 360" />
+        <meta property="og:url" content="https://www.digitalsolution360.in" />
+        <meta property="og:title" content="Digital Solution 360 - Expert SEO, Digital Marketing & Web Development" />
+        <meta property="og:description" content="Elevate your brand with tailored digital marketing, SEO services, and web development solutions. Expert team delivering proven results." />
+        <meta property="og:image" content="https://www.digitalsolution360.in/og-default.webp" />
+        <meta property="og:image:secure_url" content="https://www.digitalsolution360.in/og-default.webp"></meta>
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -177,7 +183,7 @@ export default function RootLayout({ children }) {
         className={`${figtree.variable} antialiased`}
       >
         {children}
-        <FloatCta/>
+        <FloatCta />
       </body>
     </html>
   );
