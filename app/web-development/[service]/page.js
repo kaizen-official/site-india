@@ -1,3 +1,3 @@
 "use client";
 import ServiceDetailPage from '@/components/services/ServiceDetailPage';
-export default function Page() { return <ServiceDetailPage categorySlug="website-development" />; }
+export default function Page() { return <ServiceDetailPage categorySlug="web-development" />; }
