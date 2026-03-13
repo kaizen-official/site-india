@@ -84,7 +84,7 @@ export default function WebDevelopmentClientPage() {
             <Header />
 
             {/* New Hero Section from provided HTML - adapted */}
-            <section className="relative isolate overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-900">
+            <section className="relative isolate overflow-hidden bg-linear-to-br from-slate-900 via-indigo-900 to-sky-900">
                 {/* Decorative Blurred Blobs */}
                 <span className="pointer-events-none absolute -top-16 -left-16 h-60 w-60 rounded-full bg-indigo-500/20 blur-3xl"></span>
                 <span className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl"></span>
@@ -128,7 +128,7 @@ export default function WebDevelopmentClientPage() {
             </section>
 
             {/* New Why Choose Us Section */}
-            <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+            <section className="py-20 bg-linear-to-br from-gray-50 to-gray-100">
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -137,7 +137,7 @@ export default function WebDevelopmentClientPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-12"
                     >
-                        <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                        <h2 className="text-4xl sm:text-5xl font-extrabold bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
                             The reason why to choose US?
                         </h2>
                         <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-lg">Why businesses worldwide prefer India for web development.</p>
@@ -172,7 +172,7 @@ export default function WebDevelopmentClientPage() {
                                     'Massive experience in international projects'
                                 ].map((item, index) => (
                                     <li key={index} className="flex items-start gap-4 group">
-                                        <span className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-md group-hover:scale-110 transition-transform">
+                                        <span className="flex items-center justify-center h-10 w-10 rounded-xl bg-linear-to-br from-indigo-600 to-purple-600 text-white shadow-md group-hover:scale-110 transition-transform">
                                             <IconCheck className="w-6 h-6" stroke={2} />
                                         </span>
                                         <span className="group-hover:text-indigo-700 transition">{item}</span>
@@ -195,7 +195,7 @@ export default function WebDevelopmentClientPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-14"
                     >
-                        <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                        <h2 className="text-4xl sm:text-5xl font-extrabold bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
                             The Ride With Indian Web Development Teams
                         </h2>
                     </motion.div>
@@ -225,7 +225,7 @@ export default function WebDevelopmentClientPage() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 whileHover={{ y: -5 }}
-                                className="rounded-3xl p-8 shadow-xl border border-white/40 bg-gradient-to-br from-white via-indigo-50 to-purple-50 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300"
+                                className="rounded-3xl p-8 shadow-xl border border-white/40 bg-linear-to-br from-white via-indigo-50 to-purple-50 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300"
                             >
                                 <h3 className="text-2xl font-semibold text-indigo-700 mb-4">{card.title}</h3>
                                 <p className="text-gray-700 leading-relaxed">{card.desc}</p>
@@ -246,7 +246,7 @@ export default function WebDevelopmentClientPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-14"
                     >
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text">
                             What Is it that DigitalSolution360 in India does?
                         </h2>
                         <p className="text-gray-300 text-lg max-w-3xl mx-auto">
@@ -275,7 +275,7 @@ export default function WebDevelopmentClientPage() {
                                     className="group bg-white/10 border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:bg-white/20 hover:-translate-y-1 transition duration-300 shadow-xl"
                                 >
                                     <div className="mb-4 flex justify-center">
-                                        <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 shadow-md">
+                                        <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-cyan-400 shadow-md">
                                             <Icon className="h-7 w-7 text-white" stroke={1.5} />
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@ export default function WebDevelopmentClientPage() {
                             className="group bg-white/10 border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:bg-white/20 hover:-translate-y-1 transition duration-300 shadow-xl md:col-span-2 lg:col-span-3"
                         >
                             <div className="mb-4 flex justify-center">
-                                <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-rose-400 shadow-md">
+                                <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-linear-to-br from-pink-500 to-rose-400 shadow-md">
                                     <IconHeadphones className="h-7 w-7 text-white" stroke={1.5} />
                                 </div>
                             </div>
@@ -313,7 +313,7 @@ export default function WebDevelopmentClientPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="text-4xl md:text-5xl font-extrabold text-center mb-14 bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
+                        className="text-4xl md:text-5xl font-extrabold text-center mb-14 bg-linear-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
                     >
                         Innovative Design Freedom that Makes Your Website Special.
                     </motion.h2>
@@ -342,7 +342,7 @@ export default function WebDevelopmentClientPage() {
                                     whileHover={{ y: -5 }}
                                     className="group rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.05)] p-8 border border-gray-100 hover:shadow-[0_10px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition"
                                 >
-                                    <div className="h-14 w-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-400 text-white shadow-md mb-6">
+                                    <div className="h-14 w-14 flex items-center justify-center rounded-2xl bg-linear-to-br from-purple-500 to-pink-400 text-white shadow-md mb-6">
                                         <Icon className="h-8 w-8" stroke={1.5} />
                                     </div>
                                     <h3 className="text-2xl font-semibold text-gray-900 mb-3">{card.title}</h3>
@@ -362,7 +362,7 @@ export default function WebDevelopmentClientPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="text-4xl md:text-5xl font-extrabold text-center mb-14 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent pb-6"
+                        className="text-4xl md:text-5xl font-extrabold text-center mb-14 bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent pb-6"
                     >
                         Web Design and Development AT Digitalsolution360
                     </motion.h2>
@@ -396,7 +396,7 @@ export default function WebDevelopmentClientPage() {
                                     whileHover={{ y: -5 }}
                                     className="rounded-3xl p-8 bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] hover:-translate-y-1 transition duration-300"
                                 >
-                                    <div className="h-14 w-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-400 text-white shadow-md mb-6">
+                                    <div className="h-14 w-14 flex items-center justify-center rounded-2xl bg-linear-to-br from-indigo-500 to-cyan-400 text-white shadow-md mb-6">
                                         <Icon className="h-8 w-8" stroke={1.5} />
                                     </div>
                                     <h3 className="text-2xl font-semibold mb-4 text-gray-900">{card.title}</h3>
@@ -409,7 +409,7 @@ export default function WebDevelopmentClientPage() {
             </section>
 
             {/* New The Design Part Section */}
-            <section className="w-full bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-900 py-20 px-6">
+            <section className="w-full bg-linear-to-br from-slate-900 via-indigo-900 to-sky-900 py-20 px-6">
                 <div className="max-w-7xl mx-auto text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
@@ -446,7 +446,7 @@ export default function WebDevelopmentClientPage() {
                                     whileHover={{ scale: 1.05 }}
                                     className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-all p-5 rounded-2xl border border-white/10 group"
                                 >
-                                    <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-red-400 shadow-lg group-hover:scale-110 transition">
+                                    <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-linear-to-br from-pink-500 to-red-400 shadow-lg group-hover:scale-110 transition">
                                         <IconCheck className="h-6 w-6 text-white" stroke={2} />
                                     </div>
                                     <span className="text-white text-lg font-semibold">{item}</span>
@@ -558,7 +558,7 @@ export default function WebDevelopmentClientPage() {
             </section>
 
             {/* New Popular Features Section */}
-            <section className="w-full bg-gradient-to-r from-slate-900 via-indigo-900 to-sky-900 py-20 px-6 text-white">
+            <section className="w-full bg-linear-to-r from-slate-900 via-indigo-900 to-sky-900 py-20 px-6 text-white">
                 <div className="max-w-7xl mx-auto space-y-12">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
@@ -633,7 +633,7 @@ export default function WebDevelopmentClientPage() {
                         <ul className="space-y-3 text-gray-700 text-lg">
                             {['Clean code', 'Fast loading', 'Mobile-friendly', 'Structured data', 'Optimized images', 'Indexable pages', 'Proper heading structure', 'Sitemap integration'].map((item, idx) => (
                                 <li key={idx} className="flex items-center gap-3">
-                                    <IconCheck className="w-6 h-6 text-green-500 flex-shrink-0" stroke={2} />
+                                    <IconCheck className="w-6 h-6 text-green-500 shrink-0" stroke={2} />
                                     {item}
                                 </li>
                             ))}
@@ -699,7 +699,7 @@ export default function WebDevelopmentClientPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
-                            className="bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-900 text-white rounded-3xl p-10 shadow-lg"
+                            className="bg-linear-to-br from-slate-900 via-indigo-900 to-sky-900 text-white rounded-3xl p-10 shadow-lg"
                         >
                             <h3 className="text-2xl font-semibold text-sky-400 mb-4">Checklist to Follow</h3>
                             <ul className="space-y-3 text-lg">
@@ -716,7 +716,7 @@ export default function WebDevelopmentClientPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
-                            className="bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-900 text-white rounded-3xl p-10 shadow-lg"
+                            className="bg-linear-to-br from-slate-900 via-indigo-900 to-sky-900 text-white rounded-3xl p-10 shadow-lg"
                         >
                             <h3 className="text-2xl font-semibold text-sky-400 mb-4">Our Personal Opinion</h3>
                             <p className="text-lg leading-relaxed mb-4">Once a company is open right at the very beginning, they are most likely to be a good choice.</p>
@@ -763,7 +763,7 @@ export default function WebDevelopmentClientPage() {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 className="bg-gray-50 rounded-3xl p-8 shadow-lg flex items-start gap-4"
                             >
-                                <IconCheck className="w-8 h-8 text-indigo-600 flex-shrink-0" stroke={2} />
+                                <IconCheck className="w-8 h-8 text-indigo-600 shrink-0" stroke={2} />
                                 <div>
                                     <h3 className="text-xl font-semibold text-gray-800">{step.title}</h3>
                                     <p className="text-gray-700 mt-1">{step.desc}</p>
@@ -953,7 +953,7 @@ export default function WebDevelopmentClientPage() {
                                 whileHover={{ y: -5 }}
                                 className="bg-gray-900/90 text-white backdrop-blur-md rounded-2xl p-6 flex items-center gap-3 shadow-lg"
                             >
-                                <IconCheck className="w-6 h-6 text-indigo-400 flex-shrink-0" stroke={2} />
+                                <IconCheck className="w-6 h-6 text-indigo-400 shrink-0" stroke={2} />
                                 {item}
                             </motion.div>
                         ))}
