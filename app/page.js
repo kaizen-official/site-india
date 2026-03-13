@@ -13,16 +13,16 @@ import Script from "next/script";
 import FloatCta from "@/components/sections/floatCta";
 
 export const metadata = {
-  title: "Website Development Company | Digital Marketing Services - Digitalsolution360",
-  description: "Digitalsolution360 is a professional website development company providing SEO friendly website development and complete digital marketing services including SEO, Google Ads, GMB optimization, and social media marketing.",
-  keywords: "website development company, web design company, website development services, SEO friendly website, digital marketing company, SEO services, Google Ads management, social media marketing, ecommerce website development, WordPress website development, custom website development, landing page development, website redesign, Google Business Profile optimization, lead generation services",
+  title: "Digital Solution 360 | Best Digital Marketing & SEO Company in India",
+  description: "Digital Solution 360 is a leading digital marketing company in India offering SEO, website development, Google My Business optimization, social media marketing, and app development services to grow your business online.",
+  keywords: "digital marketing company india, seo services india, website development company, gmb optimization service, social media marketing agency, digital marketing agency india, online marketing services",
   robots: "index, follow",
   alternates: {
     canonical: "https://www.digitalsolution360.in",
   },
   openGraph: {
-    title: "Website Development Company | Digital Marketing Services - Digitalsolution360",
-    description: "Professional website development company providing high-quality SEO friendly websites and complete digital marketing services for businesses looking to grow online.",
+    title: "Digital Solution 360 | Best Digital Marketing & SEO Company in India",
+    description: "Digital Solution 360 is a leading digital marketing company in India offering SEO, website development, Google My Business optimization, social media marketing, and app development services to grow your business online.",
     url: "https://www.digitalsolution360.in",
     siteName: "Digitalsolution360",
     type: "website",
@@ -38,8 +38,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Website Development Company | Digital Marketing Services",
-    description: "Professional website development and digital marketing services by Digitalsolution360.",
+    title: "Digital Solution 360 | Best Digital Marketing & SEO Company in India",
+    description: "Digital Solution 360 is a leading digital marketing company in India offering SEO, website development, Google My Business optimization, social media marketing, and app development services to grow your business online.",
   },
 };
 
