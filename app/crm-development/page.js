@@ -1,6 +1,4 @@
-import Link from 'next/link';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+import ContentLandingPageTemplate from '@/components/services/ContentLandingPageTemplate';
 
 export const metadata = {
     title: 'CRM Development Company | Custom CRM Solutions by Digital Solution 360',
@@ -13,77 +11,58 @@ export const metadata = {
     },
 };
 
-const offerings = [
+const includedItems = [
+    'Custom CRM development for your workflows',
+    'Enterprise CRM implementation and customization',
+    'CRM integration with ERP, HRMS, and third-party tools',
+    'CRM support, maintenance, and optimization',
+];
+
+const benefitsItems = [
+    'Centralized customer data and team visibility',
+    'Process automation for sales and support teams',
+    'Scalable architecture for long-term growth',
+    'Actionable reporting and operational intelligence',
+];
+
+const sidebarItems = [
+    'Custom CRM modules by department',
+    'Role-based access and security controls',
+    'API integrations and workflow automation',
+    'Continuous product and process improvements',
+];
+
+const faqs = [
     {
-        title: 'Custom CRM Development',
-        desc: 'Build CRM systems around your exact sales, support, and operations workflows.',
+        q: 'Can you build a fully custom CRM?',
+        a: 'Yes. We design and develop CRM systems around your specific business processes, user roles, and reporting requirements.',
     },
     {
-        title: 'Enterprise CRM Solutions',
-        desc: 'Implement and customize enterprise platforms with role-based controls and scalable architecture.',
+        q: 'Do you also work with existing CRM platforms?',
+        a: 'Yes. We handle implementation, customization, migration, and integration for enterprise and cloud CRM platforms.',
     },
     {
-        title: 'CRM Integration Services',
-        desc: 'Connect CRM with ERP, HRMS, accounting tools, and third-party APIs for a unified data flow.',
-    },
-    {
-        title: 'CRM Support and Optimization',
-        desc: 'Continuous improvements, maintenance, and process automation to maximize ROI.',
+        q: 'Do you provide post-launch support?',
+        a: 'Absolutely. We offer maintenance, performance optimization, feature enhancement, and technical support after deployment.',
     },
 ];
 
 export default function CrmDevelopmentPage() {
     return (
-        <>
-            <Header />
-            <main className='bg-white pt-24'>
-                <section className='px-4 py-14 md:px-8 lg:px-16 bg-linear-to-r from-slate-900 via-indigo-900 to-blue-800 text-white'>
-                    <div className='mx-auto max-w-7xl'>
-                        <h1 className='text-4xl md:text-5xl font-bold'>CRM Development Company</h1>
-                        <p className='mt-5 max-w-3xl text-lg text-blue-100'>
-                            We design and develop custom CRM solutions that centralize customer data, automate sales operations, and improve business decision-making.
-                        </p>
-                        <div className='mt-8 flex flex-wrap gap-4'>
-                            <Link href='/contact-us' className='rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 hover:bg-slate-100'>
-                                Talk to CRM Expert
-                            </Link>
-                            <a href='tel:+919990556217' className='rounded-xl border border-white/30 px-6 py-3 font-semibold hover:bg-white/10'>
-                                Call +91 99905 56217
-                            </a>
-                        </div>
-                    </div>
-                </section>
-
-                <section className='px-4 py-14 md:px-8 lg:px-16'>
-                    <div className='mx-auto max-w-7xl'>
-                        <h2 className='text-3xl font-bold text-slate-900'>Our CRM Offerings</h2>
-                        <p className='mt-4 max-w-4xl text-slate-700 leading-8'>
-                            From strategy and implementation to automation and analytics, we deliver CRM platforms that align technology with business outcomes.
-                        </p>
-                        <div className='mt-8 grid gap-6 md:grid-cols-2'>
-                            {offerings.map((item) => (
-                                <div key={item.title} className='rounded-2xl border border-slate-200 bg-slate-50 p-6'>
-                                    <h3 className='text-xl font-bold text-slate-900'>{item.title}</h3>
-                                    <p className='mt-3 text-slate-700'>{item.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                <section className='px-4 pb-16 md:px-8 lg:px-16'>
-                    <div className='mx-auto max-w-7xl rounded-2xl border border-slate-200 p-8 bg-slate-900 text-white'>
-                        <h2 className='text-3xl font-bold'>Why Choose Digital Solution 360 for CRM</h2>
-                        <ul className='mt-5 space-y-3 text-slate-200'>
-                            <li>Process-first development approach with measurable KPIs</li>
-                            <li>Secure architecture, role management, and data protection</li>
-                            <li>Scalable modules for sales, support, and reporting</li>
-                            <li>Long-term technical support and performance optimization</li>
-                        </ul>
-                    </div>
-                </section>
-            </main>
-            <Footer />
-        </>
+        <ContentLandingPageTemplate
+            theme='orange'
+            title='CRM Development Company'
+            description='We design and develop custom CRM solutions that centralize customer data, automate sales operations, and improve business decision-making.'
+            badge='Custom CRM Solutions'
+            heroImage='/og-default.webp'
+            includedTitle='Our CRM Offerings'
+            includedItems={includedItems}
+            benefitsTitle='Why Choose Digital Solution 360 for CRM'
+            benefitsItems={benefitsItems}
+            sidebarTitle='Implementation Focus'
+            sidebarItems={sidebarItems}
+            faqs={faqs}
+            ctaText='Talk to CRM Expert'
+        />
     );
 }
